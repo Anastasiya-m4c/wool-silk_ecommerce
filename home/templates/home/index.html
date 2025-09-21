@@ -1,7 +1,35 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% load static %}
 
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block content %}
-    <h1 class="display-4 text-success">It works!</h1>
+<!-- HERO -->
+<section class="hero py-5 py-lg-6">
+    <div class="container py-4">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <span class="pill mb-3">New workshops added</span>
+                <h1 class="display-5 display-serif fw-bold mb-3">Join us in the studio</h1>
+                <p class="lead mb-4">Craft, connect, and create with Wool & Silk — from cozy in-person classes to
+                    step-by-step video tutorials.</p>
+                <div class="d-flex flex-wrap gap-2">
+                    <a class="btn btn-ws-primary btn-lg" href="#classes">View Classes</a>
+                    <a class="btn btn-ws-soft btn-lg" href="#tutorials">Explore Tutorials</a>
+                </div>
+            </div>
+            <div class="col-lg-5 text-center">
+                <img src="" alt="Wool & Silk logo" class="img-fluid"
+                    style="max-width:320px;">
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
