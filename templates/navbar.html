@@ -4,11 +4,11 @@
 
 {% block navbar %}
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-lg fixed-top row">
     <div class="container-fluid px-4 px-lg-5">
         <!-- Brand -->
-        <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'home' %}">
-            <img src="{% static 'images/cinnamon_cloud_logo.jpg' %}" alt="Wool & Silk LOGO" width="44" height="44" class="rounded-circle">
+        <a class="navbar-logo d-flex align-items-center gap-2 sticky-top" href="{% url 'home' %}">
+            <img src="{% static 'images/w_s_shape_logo.jpg' %}" alt="Wool & Silk LOGO" class="img-fluid" style="max-width:75px;">
         </a>
         <!-- Toggler -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
@@ -20,16 +20,16 @@
             <!-- LEFT side -->
             <ul class="navbar-nav mb-2 mb-lg-0 align-items-lg-center me-auto">
                 <li class="nav-item"><a class="nav-link px-3" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="#testimonials">Testimonials</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="#classes">Classes</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="#tutorials">Tutorials</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="#shop">Shop</a></li>
             </ul>
 
             <!-- RIGHT side -->
-            <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-                <li class="nav-item"><a class="btn btn-sm btn-ws-primary px-3" href="#classes">Book a Class</a></li>
-                <li class="nav-item"><a class="nav-link px-3" href="#testimonials">Testimonials</a></li>
-                <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
+            <ul class="navbar-nav mb-2 mb-lg-0 align-items-center ms-auto">
+                <li class="nav-item"><a class="nav-btn btn btn-sm btn-ws-primary px-lg-4" href="#classes">Book a Class</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link text-black" href="#" id="user-options" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
