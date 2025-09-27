@@ -1,11 +1,11 @@
 :root {
     --ws-beige: #E5DED5;
-    --ws-orange: #FD8636;
-    --ws-blue: #0F2964;
-    --ws-light-blue: #47A7C0;
-    --ws-cinnamon: #FC6344;
+    --ws-orange: #FF8120;
+    --ws-blue: #002b68;
+    --ws-light-blue: #3ea8c2;
+    --ws-cinnamon: #FF5B3c;
     --ws-pink: #FD8F7E;
-    --ws-yellow: #FCC044;
+    --ws-yellow: #Ffbd28;
     --ws-white: #FFFFFF;
     --ws-font: #0c1d43;
 }
@@ -54,7 +54,7 @@ body {
     font-size: 1.2rem;
     font-weight: 500;
     padding: 0.5rem 1rem;
-    color: var(--ws-font);
+    color: var(--ws-font); !important;
     transition: color 0.2s ease, transform 0.2s ease;
     border-bottom: 2px solid transparent;
 }
@@ -107,7 +107,8 @@ body {
     transition: color 0.2s ease;
 }
 
-/* From Bulma
+/* 
+From Bulma
 .icon {
     align-items: center;
     display: inline-flex;
@@ -128,3 +129,31 @@ body {
     margin-right: 1rem;
 }
 
+/* Media Queries */
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 80%;
+    }
+}
+
+@media (min-width: 992px) {
+    .fixed-top-desktop-only {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+
+    .header-container {
+        padding-top: 164px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .navbar-nav.ms-auto {
+        margin-left: 0 !important;
+        justify-content: center;
+    }
+}
