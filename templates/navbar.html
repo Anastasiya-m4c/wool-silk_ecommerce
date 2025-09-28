@@ -1,77 +1,102 @@
 {% load static %}
 
-<body class="d-flex flex-column min-vh-100">
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg custom-navbar">
-        <div class="container">
-            <!-- Brand -->
-            <a class="navbar-logo d-flex align-items-center gap-2 sticky-top" href="{% url 'home' %}">
-                <img src="{% static 'images/w_s_shape_logo.jpg' %}" alt="Wool & Silk LOGO" class="img-fluid" style="max-width:75px;">
+<nav class="navbar navbar-expand-lg custom-navbar sticky-top">
+    <div class="container align-items-center">
+        <!-- Brand -->
+        <a class="navbar-logo d-flex align-items-center gap-2" href="{% url 'home' %}">
+            <img src="{% static 'images/w_s_shape_logo.jpg' %}" alt="Wool & Silk LOGO" class="img-fluid"
+                style="max-width:75px;">
+        </a>
+
+        <!-- Mobile -->
+        <div class="d-flex align-items-center ms-auto d-lg-none">
+            <!-- Profile dropdown -->
+            <div class="dropdown me-2">
+                <a class="dropdown-toggle nav-link p-2 " id="user-options-sm" href="#" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user fa-lg"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-options-sm">
+                    {% if request.user.is_authenticated %}
+                    {% if request.user.is_superuser %}<li><a class="dropdown-item" href="#">Product Management</a></li>
+                    {% endif %}
+                    <li><a class="dropdown-item" href="#">My Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Testimonials</a></li>
+                    <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
+                    <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <!-- Bag -->
+            <a class="nav-link p-2 position-relative" href="">
+                <i class="fas fa-shopping-bag fa-lg"></i>
+                {% if grand_total %}
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+                    £{{ grand_total|floatformat:0 }}
+                </span>
+                {% endif %}
             </a>
 
             <!-- Toggler -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler ms-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="fas fa-bars fa-lg"></span>
             </button>
-
-            <!-- Collapsible content -->
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <!-- LEFT -->
-                <ul class="navbar-nav mb-2 mb-lg-0 align-items-lg-center me-auto">
-                    <li class="nav-item"><a class="nav-link px-3" href="{% url 'home' %}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#classes">Classes</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#tutorials">Tutorials</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#shop">Shop</a></li>
-                </ul>
-
-                <!-- RIGHT -->
-                <ul class="navbar-nav mb-2 mb-lg-0 align-items-center ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-btn btn btn-sm btn-ws-primary px-lg-4" href="#classes">Book a Class</a>
-                    </li>
-
-                    <li class="nav-item dropdown mx-3">
-                        <a class="nav-link" id="user-options" data-bs-toggle="dropdown" href="#"
-                            role="button" aria-expanded="false">
-                            <div class="text-center">
-                                <div><i class="fas fa-user fa-lg"></i></div>
-                                <p class="my-0 dropdown-toggle">My Account</p>
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="user-options">
-                            {% if request.user.is_authenticated %}
-                            {% if request.user.is_superuser %}
-                            <li><a class="dropdown-item" href="#">Product Management</a></li>
-                            {% endif %}
-                            <li><a class="dropdown-item" href="#">My Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Testimonials</a></li>
-                            <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
-                            {% else %}
-                            <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
-                            <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
-                            {% endif %}
-                        </ul>
-                    </li>
-
-                    <!-- Shopping bag -->
-                    <li class="nav-item">
-                        <a class="{% if grand_total %}text-info fw-bold{% else %}text-black{% endif %} nav-link"
-                            href="">
-                            <div class="text-center">
-                                <div><i class="fas fa-shopping-bag fa-lg"></i></div>
-                                <p class="my-0">
-                                    {% if grand_total %}
-                                    ${{ grand_total|floatformat:2 }}
-                                    {% else %}
-                                    £0.00
-                                    {% endif %}
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
         </div>
-    </nav>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <!-- LEFT menu -->
+            <ul class="navbar-nav mb-2 mb-lg-0 align-items-lg-center me-auto">
+                <li class="nav-item"><a class="nav-link px-3" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="#classes">Classes</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="#tutorials">Tutorials</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="#shop">Shop</a></li>
+            </ul>
+
+            <!-- Large screens -->
+            <ul class="navbar-nav mb-2 mb-lg-0 align-items-center ms-auto d-none d-lg-flex flex-lg-nowrap align-items-center">
+                <li class="nav-item">
+                    <a class="nav-btn btn btn-sm btn-ws-primary px-lg-4" href="#classes">Book a Class</a>
+                </li>
+
+                <li class="nav-item dropdown mx-3">
+                    <a class="nav-link d-flex align-items-center flex-row flex-lg-column 
+                                        text-start text-lg-center gap-2 " id="user-options" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="icon fas fa-user fa-lg me-2 me-lg-0"></i>
+                        <span>My Account</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-options">
+                        {% if request.user.is_authenticated %}
+                        {% if request.user.is_superuser %}<li><a class="dropdown-item" href="#">Product Management</a>
+                        </li>{% endif %}
+                        <li><a class="dropdown-item" href="#">My Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Testimonials</a></li>
+                        <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
+                        <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="{% if grand_total %}text-info fw-bold{% else %}text-black{% endif %} nav-link" href="">
+                        <div class="text-center">
+                            <div><i class=" icon fas fa-shopping-bag fa-lg"></i></div>
+                            <p class="my-0">
+                                {% if grand_total %}£{{ grand_total|floatformat:2 }}{% else %}£0.00{% endif %}
+                            </p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
