@@ -1,11 +1,10 @@
 {% load static %}
 
 <nav class="navbar navbar-expand-lg custom-navbar sticky-top">
-    <div class="container-fluid align-items-center">
+    <div class="container-fluid align-items-center position-relative">
         <!-- Brand -->
         <a class="navbar-logo d-flex align-items-center gap-2" href="{% url 'home' %}">
-            <img src="{% static 'images/w_s_shape_logo.jpg' %}" alt="Wool & Silk LOGO" class="img-fluid"
-                style="max-width:75px;">
+            <img src="{% static 'images/full_logo.jpg' %}" alt="Wool & Silk LOGO" class="img-fluid" style="max-height: 65px;">
         </a>
 
         <!-- Mobile -->
@@ -54,7 +53,7 @@
                 <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="#classes">Classes</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="#tutorials">Tutorials</a></li>
-                <li class="nav-item"><a class="nav-link px-3" href="#shop">Shop</a></li>
+                <!-- <li class="nav-item"><a class="nav-link px-3" href="#shop">Shop</a></li> -->
             </ul>
 
             <!-- Large screens -->
@@ -98,3 +97,4 @@
         </div>
     </div>
 </nav>
+

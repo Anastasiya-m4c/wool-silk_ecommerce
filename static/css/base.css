@@ -143,7 +143,7 @@ p {
 /* Media queries */
 
 @media (min-width: 1200px) {
-    .container-fluid { max-width: 95%; }
+    .container-fluid { max-width: 100%; }
     .container { max-width: 80%; }
 }
 
@@ -154,4 +154,17 @@ p {
 
 @media (max-width: 991.98px) {
     .navbar-nav.ms-auto { margin-left: 0 !important; justify-content: center; } 
+}
+
+/* Logo */
+@media (min-width: 992px) {
+    .navbar-logo {
+        position: absolute;
+        left: 50%;
+        z-index: 2;
+    }
+    .navbar .navbar-collapse {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
 }

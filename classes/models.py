@@ -25,4 +25,5 @@ class Product(models.Model):
     location = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
-        return f"self.name" ({self.start_time.strftime('%d/%m/%Y')}) 
+        return self.name
+        # return f"self.name" ({self.start_time.strftime('%d/%m/%Y')}) 
