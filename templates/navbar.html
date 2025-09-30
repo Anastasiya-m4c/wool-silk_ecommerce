@@ -1,7 +1,7 @@
 {% load static %}
 
 <nav class="navbar navbar-expand-lg custom-navbar sticky-top">
-    <div class="container align-items-center">
+    <div class="container-fluid align-items-center">
         <!-- Brand -->
         <a class="navbar-logo d-flex align-items-center gap-2" href="{% url 'home' %}">
             <img src="{% static 'images/w_s_shape_logo.jpg' %}" alt="Wool & Silk LOGO" class="img-fluid"
@@ -33,11 +33,9 @@
             <!-- Bag -->
             <a class="nav-link p-2 position-relative" href="">
                 <i class="fas fa-shopping-bag fa-lg"></i>
-                {% if grand_total %}
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
-                    £{{ grand_total|floatformat:0 }}
-                </span>
-                {% endif %}
+                <p class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+                    {% if grand_total %}£{{ grand_total|floatformat:2 }}{% else %}£0.00{% endif %}
+                </p>
             </a>
 
             <!-- Toggler -->
@@ -62,12 +60,12 @@
             <!-- Large screens -->
             <ul class="navbar-nav mb-2 mb-lg-0 align-items-center ms-auto d-none d-lg-flex flex-lg-nowrap align-items-center">
                 <li class="nav-item">
-                    <a class="nav-btn btn btn-sm btn-ws-primary px-lg-4" href="#classes">Book a Class</a>
+                    <a class="nav-btn btn btn-ws-primary px-lg-4" href="#classes">Book a Class</a>
                 </li>
 
                 <li class="nav-item dropdown mx-3">
                     <a class="nav-link d-flex align-items-center flex-row flex-lg-column 
-                                        text-start text-lg-center gap-2 " id="user-options" href="#" role="button" data-bs-toggle="dropdown"
+                                        text-start text-lg-center" id="user-options" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <i class="icon fas fa-user fa-lg me-2 me-lg-0"></i>
                         <span>My Account</span>
@@ -90,7 +88,7 @@
                     <a class="{% if grand_total %}text-info fw-bold{% else %}text-black{% endif %} nav-link" href="">
                         <div class="text-center">
                             <div><i class=" icon fas fa-shopping-bag fa-lg"></i></div>
-                            <p class="my-0">
+                            <p class="price my-0">
                                 {% if grand_total %}£{{ grand_total|floatformat:2 }}{% else %}£0.00{% endif %}
                             </p>
                         </div>

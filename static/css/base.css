@@ -50,6 +50,12 @@ p {
     border-bottom: 2px solid transparent;
 }
 
+.price {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--ws-text);
+}
+
 .navbar-nav .nav-link:hover {
     color: var(--ws-cinnamon);
     transform: translateY(-2px);
@@ -122,7 +128,7 @@ p {
 /* Media queries */
 
 @media (min-width: 1200px) {
-    .page-container { max-width: 80%; }
+    .container-fluid { max-width: 90%; }
 }
 
 @media (min-width: 992px) {
