@@ -68,7 +68,7 @@
                                         text-start text-lg-center" id="user-options" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <i class="icon fas fa-user fa-lg me-2 me-lg-0"></i>
-                        <span>My Account</span>
+                        <span class="sml-txt">My Account</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-options">
                         {% if request.user.is_authenticated %}
@@ -88,7 +88,7 @@
                     <a class="{% if grand_total %}text-info fw-bold{% else %}text-black{% endif %} nav-link" href="">
                         <div class="text-center">
                             <div><i class=" icon fas fa-shopping-bag fa-lg"></i></div>
-                            <p class="price my-0">
+                            <p class="sml-txt my-0">
                                 {% if grand_total %}£{{ grand_total|floatformat:2 }}{% else %}£0.00{% endif %}
                             </p>
                         </div>
