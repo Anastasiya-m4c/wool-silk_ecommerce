@@ -19,8 +19,17 @@ body {
     color: var(--ws-font);
     margin: 0;
     padding: 0;
-    font-family: 'Lato', sans-serif;
+    font-family: "Merriweather", sans-serif;
 }
+
+
+/* .merriweather {
+    font-family: "Merriweather", serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+} */
 
 h1 {
     font-size: 2.5rem;
@@ -72,7 +81,8 @@ p {
 /* CTA button */
 .nav-btn {
     margin-left: 1rem;
-    margin-right: 2rem;
+    margin-right: 1rem;
+    margin-top: 0.5rem;
 }
 
 .btn-ws-primary {
@@ -81,7 +91,7 @@ p {
     font-weight: 600;
     padding: 0.5rem 1.5rem;
     transition: background-color .3s ease;
-    border-radius: 0.5rem;
+    border-radius: 1.5rem;
 }
 
 .btn-ws-primary:hover {
@@ -130,7 +140,7 @@ p {
 /* Media queries */
 
 @media (min-width: 1200px) {
-    .container-fluid { max-width: 90%; }
+    .container-fluid { max-width: 95%; }
 }
 
 @media (min-width: 992px) {
