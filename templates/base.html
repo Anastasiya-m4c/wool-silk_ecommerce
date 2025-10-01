@@ -65,14 +65,13 @@
     {% block page_header %}
     {% endblock %}
 
-    <!-- Main content -->
     <main class="container flex-grow-1 py-4">
         <section>
             {% block content %}
-            <!-- Content will be injected here -->
             {% endblock %}
         </section>
     </main>
+
 
     {% block footer %}
         {% include "footer.html" %}
