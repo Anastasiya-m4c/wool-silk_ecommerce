@@ -10,5 +10,17 @@ def all_classes(request):
     context = {
         'classes': classes,
     }
+
+    return render(request, 'classes/classes.html', context)
+
+
+
+def class_detail(request, class_id):
+    """ A view to show individual class details """
+
+    classes = get_object_or_404(Class, pk=class_id)
+    context = {
+        'classes': classes,
+    }
     
     return render(request, 'classes/classes.html', context)

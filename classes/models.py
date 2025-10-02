@@ -12,6 +12,7 @@ class Class(models.Model):
     start_time = models.TimeField(null=True, blank=True)
     duration = models.IntegerField(null=True, blank=True)
     location = models.CharField(max_length=200, null=True, blank=True)
+    # fully_booked = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

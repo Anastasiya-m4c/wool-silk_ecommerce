@@ -11,11 +11,79 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col">
-                <h2 class="text-center my-4">Classes</h2>
-                {{ classes.html }}
+            <div class="col text-center mt-3">
+                <h2>In Person Classes</h2>
+                <hr class="w-50 mb-1">
+            </div>
+        </div>
+        <div class="row">
+            <div class="product-container col-10 offset-1">
+                <div class="row mt-1 mb-2"></div>
+                <div class="row">
+                    {% for class in classes %}
+                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                            <div class="card h-100 border-0">
+                                {% if class.image %}
+                                <a href="">
+                                    <img class="card-img-top img-fluid" src="{{ class.image.url }}" alt="{{ class.name }}">
+                                </a>
+                                {% else %}
+                                <a href="">
+                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ class.name }}">
+                                </a>
+                                {% endif %}
+                                <div class="card-body pb-0">
+                                    <p class="mb-0">{{ class.name }}</p>
+                                </div>
+                                <div class="card-footer bg-white pt-0 border-0 text-left">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="lead mb-0 text-left font-weight-bold">Date: {{ class.start_date }}</p>
+                                            <p class="lead mb-0 text-left font-weight-bold">Time: {{ class.start_time }}</p>
+                                            <p class="lead mb-0 text-left font-weight-bold">Price: £{{ class.price }}</p>
+                                            <p class="lead mb-0 text-left font-weight-bold">Time: {{ class.location }}</p>
+                                            {% if class_instance.fully_booked %}
+                                            <span class="text-danger font-weight-bold">Fully Booked</span>
+                                            <a href="" class="btn btn-primary btn-sm">Join Waiting list</a>
+                                            {% else %}
+                                                <a href="" class="btn btn-primary btn-sm">View Details</a>
+                                                <a href="" class="btn btn-primary btn-sm">Book Now</a>
+                                            {% endif %}
+                                            <!-- {% if class.special_offer %}
+                                                <span class="badge badge-success">Special Offer</span>
+                                            {% endif %}
+                                            {% if class.new_arrival %}
+                                                <span class="badge badge-info">New Arrival</span>
+                                            {% endif %} -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if forloop.counter|divisibleby:1 %}
+                            <div class="col-12 d-sm-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}                        
+                        {% if forloop.counter|divisibleby:2 %}
+                            <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                        {% if forloop.counter|divisibleby:3 %}
+                            <div class="col-12 d-none d-lg-block d-xl-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                        <!-- {% if forloop.counter|divisibleby:4 %}
+                            <div class="col-12 d-none d-xl-block mb-5">
+                                <hr>
+                            </div>
+                        {% endif %} -->
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
