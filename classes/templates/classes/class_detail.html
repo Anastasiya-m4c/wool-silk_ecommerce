@@ -16,7 +16,7 @@
             <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
                 <div class="image-container my-5">
                     {% if class.image %}
-                        <a href="{{ class.image.url }}" target="_blank">
+                        <a href="" target="_blank">
                             <img class="card-img-top img-fluid" src="{{ class.image.url }}" alt="{{ class.name }}">
                         </a>
                         {% else %}
@@ -32,13 +32,13 @@
                     <p class="lead mb-0 text-left font-weight-bold">Time: {{ class.start_time }}</p>
                     <p class="lead mb-0 text-left font-weight-bold">Duration: {{ class.duration }}</p>
                     <p class="lead mb-0 text-left font-weight-bold">Price: £{{ class.price }}</p>
-                    <p class="lead mb-0 text-left font-weight-bold">Deposit: £{{ class.location }}</p>
+                    <p class="lead mb-0 text-left font-weight-bold">Deposit: £{{ class.deposit }}</p>
+                    <p class="lead mb-0 text-left font-weight-bold">location: £{{ class.location }}</p>
                     <p class="mt-3">{{ class.description }}</p>
                     {% if class_instance.fully_booked %}
                     <span class="text-danger font-weight-bold">Fully Booked</span>
                     <a href="" class="btn btn-primary btn-sm">Join Waiting list</a>
                     {% else %}
-                        <a href="" class="btn btn-primary btn-sm">View Details</a>
                         <a href="" class="btn btn-primary btn-sm">Book Now</a>
                     {% endif %}
                 </div>

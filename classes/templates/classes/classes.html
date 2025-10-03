@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col text-center mt-3">
                 <h2>In Person Classes</h2>
-                <hr class="w-50 mb-1">
+                <hr class="w-100 mb-1">
             </div>
         </div>
         <div class="row">
@@ -26,7 +26,7 @@
                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                             <div class="card h-100 border-0">
                                 {% if class.image %}
-                                <a href="">
+                                <a href="{% url 'class_detail' class.id %}">
                                     <img class="card-img-top img-fluid" src="{{ class.image.url }}" alt="{{ class.name }}">
                                 </a>
                                 {% else %}
@@ -48,7 +48,7 @@
                                             <span class="text-danger font-weight-bold">Fully Booked</span>
                                             <a href="" class="btn btn-primary btn-sm">Join Waiting list</a>
                                             {% else %}
-                                                <a href="" class="btn btn-primary btn-sm">View Details</a>
+                                                <a href="{% url 'class_detail' class.id %}" class="btn btn-primary btn-sm">View Details</a>
                                                 <a href="" class="btn btn-primary btn-sm">Book Now</a>
                                             {% endif %}
                                             <!-- {% if class.special_offer %}

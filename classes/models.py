@@ -1,11 +1,12 @@
 from django.db import models
 
-# Create your models here.
+
 class Class(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    deposit = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+    deposit = models.DecimalField(max_digits=6, decimal_places=2,
+                                  null=True, blank=True)
     # rating = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     start_date = models.DateField(null=True, blank=True)
