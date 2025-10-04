@@ -41,7 +41,7 @@ h2 {
 }
 
 p {
-    font-size: 1.05rem;
+    font-size: 1.2rem;
 }
 
 /* Navbar */
@@ -103,8 +103,7 @@ p {
 }
 
 .btn-two {
-    background-color: var(--ws-yell
-    ow);
+    background-color: var(--ws-yellow);
     color: var(--ws-font);
     font-weight: 600;
     padding: 0.5rem 1.5rem;
@@ -113,10 +112,10 @@ p {
 }
 
 .btn-two:hover {
-    background-color: var(--ws-yellow);
+    background-color: var(--ws-cinnamon);
     color: var(--ws-font);
     transform: translateY(-2px);
-    border-bottom-color: var(--ws-yellow);
+    border-bottom-color: var(--ws-cinnamon);
 }
 
 /* Dropdown */
@@ -154,7 +153,6 @@ p {
     height: auto;
     width: auto;
     object-fit: contain;
-    margin-right: 1rem;
 }
 
 /* Class cards */
@@ -174,7 +172,7 @@ p {
 /* Media queries */
 
 @media (min-width: 1200px) {
-    .container-fluid { max-width: 70%; }
+    .container-fluid { max-width: 90%; }
     .container { max-width: 80%; }
 }
 
@@ -191,7 +189,7 @@ p {
 @media (min-width: 992px) {
     .navbar-logo {
         position: absolute;
-        left: 50%;
+        left: 47%;
         z-index: 2;
     }
     .navbar .navbar-collapse {
