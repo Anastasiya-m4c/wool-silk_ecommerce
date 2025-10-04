@@ -30,7 +30,7 @@
             </div>
 
             <!-- Bag -->
-            <a class="nav-link p-2 position-relative" href="">
+            <a class="nav-link p-2 position-relative" href="{% url 'view_bag' %}">
                 <i class="fas fa-shopping-bag fa-lg"></i>
                 <p class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
                     {% if grand_total %}£{{ grand_total|floatformat:2 }}{% else %}£0.00{% endif %}
@@ -84,7 +84,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="{% if grand_total %}text-info fw-bold{% else %}text-black{% endif %} nav-link" href="">
+                    <a class="{% if grand_total %}text-info fw-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_bag' %}">
                         <div class="text-center">
                             <div><i class=" icon fas fa-shopping-bag fa-lg"></i></div>
                             <p class="sml-txt my-0">

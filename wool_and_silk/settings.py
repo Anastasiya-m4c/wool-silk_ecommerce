@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'home',
     'classes',
+    'bag',
 ]
 
 MIDDLEWARE = [
