@@ -10,6 +10,13 @@
 {% endblock %}
 
 {% block content %}
+<section>
+    <div class="row">
+        <div class="col-12 text-center my-4">
+            <h2 class="mb-0">Classes</h2>
+        </div>
+    </div>
+
 <div class="row g-4">
     {% for class in classes %}
     <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
@@ -32,12 +39,12 @@
             <div class="card-footer bg-white pt-0 border-0 text-left mt-auto">
                 <p class="mb-1 fw-bold">Date: {{ class.start_date }}</p>
                 <p class="mb-1 fw-bold">Time: {{ class.start_time }}</p>
-                <li class="mb-2">
+                <p class="mb-2">
                     <strong>Price:</strong> £{{ class.price }}
                     {% if class.deposit %}
                     <span class="text-muted">(Deposit: £{{ class.deposit }})</span>
                     {% endif %}
-                </li>
+                </p>
                 <p class="mb-3 fw-bold">Location: {{ class.location }}</p>
 
                 {% if class.fully_booked %}
@@ -52,4 +59,5 @@
     </div>
     {% endfor %}
 </div>
+
 {% endblock %}
