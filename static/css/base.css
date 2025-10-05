@@ -118,12 +118,6 @@ p {
     border-bottom-color: var(--ws-cinnamon);
 }
 
-.btn-outline-black {
-    background:var(--ws-white);
-    color:var(--ws-font); !important;
-    border:1px solid var(--ws-font);
-}
-
 /* Dropdown */
 .dropdown-menu {
     border-radius: 0.5rem;
@@ -160,6 +154,8 @@ p {
     width: auto;
     object-fit: contain;
 }
+
+
 
 /* Class cards */
 
