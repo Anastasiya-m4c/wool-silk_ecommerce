@@ -25,7 +25,7 @@
 
     <div class="row equal-row g-4 ">
         <div class="col-12 col-xl-6 mb-4">
-            <div class="card h-100 d-flex flex-column justify-center">
+            <div class="card h-100 d-flex flex-column justify-center border-0">
                 <div class="card-body p-3 p-md-4">
                     {% if class.image %}
                     <div class="ratio ratio-1x1">
@@ -42,7 +42,7 @@
         </div>
 
         <div class="col-12 col-xl-6 mb-4">
-            <div class="card h-100 d-flex flex-column">
+            <div class="card h-100 d-flex flex-column border-0">
                 <div class="card-body p-4 p-md-5">
                     <ul class="list-unstyled mb-3">
                         <li class="mb-2"><strong>Date:</strong> {{ class.start_date }}</li>
@@ -72,16 +72,16 @@
                     <form class="form" action="{% url 'add_to_bag' class.id %}" method="POST">
                         {% csrf_token %}
                         <div class="form-row">
-                            <div class="col-12">
-                                <p class="mt-3"><strong>Quantity:</strong></p>
+                            <div class="col-12 text-start">
+                                <p class="mt-3"><strong>Places:</strong></p>
                                 <div class="form-group w-50">
                                     <div class="input-group">
                                         <input class="form-control qty_input" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <a href="{% url 'classes' %}" class="btn btn-one  mt-5">
+                            <div class="col-12 d-flex flex-wrap gap-2 justify-content-left">
+                                <a href="{% url 'classes' %}" class="btn btn-one mt-5">
                                     <span class="icon">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
