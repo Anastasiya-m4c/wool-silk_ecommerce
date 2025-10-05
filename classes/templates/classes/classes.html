@@ -55,10 +55,10 @@
 
                 {% if class.fully_booked %}
                 <span class="text-danger fw-bold d-block mb-2">Fully Booked</span>
-                <a href="#" class="btn btn-outline-primary btn-sm">Join Waiting List</a>
+                <a href="#" class="btn btn-outline-primary btn-sm btn-one">Join Waiting List</a>
                 {% else %}
-                <a href="{% url 'class_detail' class_id=class.id %}" class="btn btn-primary btn-sm">View Details</a>
-                <a href="#" class="btn btn-outline-primary btn-sm">Book Now</a>
+                <a href="{% url 'class_detail' class_id=class.id %}" class="btn btn-primary btn-sm btn-one">View Details</a>
+                <a href="#" class="btn btn-outline-primary btn-sm btn-two">Book Now</a>
                 {% endif %}
             </div>
         </div>

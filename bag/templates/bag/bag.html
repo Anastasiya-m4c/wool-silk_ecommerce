@@ -23,7 +23,7 @@
                 {% if bag_items %}
                     <div class="table-responsive rounded">
                         <table class="table table-sm table-borderless">
-                            <thead class="text-black">
+                            <thead class="text-black fs-5">
                                 <tr>
                                     <th scope="col">Product Info</th>
                                     <th scope="col"></th>
@@ -54,18 +54,18 @@
                             {% endfor %}
                             <tr>
                                 <td colspan="5" class="text-end border-top pt-3">
-                                    <h6 class="text-end"><strong>Bag Total: £{{ total|floatformat:2 }}</strong></h6>
+                                    <h6 class="text-end fs-4"><strong>Bag Total: £{{ total|floatformat:2 }}</strong></h6>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="5" class="pt-3 text-end">
-                                    <a href="{% url 'classes' %}" class="btn btn-one btn-lg">
+                                    <a href="{% url 'classes' %}" class="btn btn-one btn-lg me-3 mb-3">
                                         <span class="icon">
                                             <i class="fas fa-chevron-left"></i>
                                         </span>
                                         <span class="text-uppercase">Keep Shopping</span>
                                     </a>
-                                    <a href="" class="btn btn-two btn-lg">
+                                    <a href="" class="btn btn-two btn-lg mb-3">
                                         <span class="text-uppercase">Secure Checkout</span>
                                         <span class="icon">
                                             <i class="fas fa-lock"></i>
@@ -77,7 +77,7 @@
                     </div>
                 {% else %}
                     <p class="lead mb-5">Your bag is empty.</p>
-                    <a href="{% url 'classes' %}" class="btn rounded-0 btn-lg">
+                    <a href="{% url 'classes' %}" class="btn btn-one btn-lg">
                         <span class="icon">
                             <i class="fas fa-chevron-left"></i>
                         </span>
