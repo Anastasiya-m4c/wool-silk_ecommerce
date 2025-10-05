@@ -45,19 +45,18 @@
             <div class="card h-100 d-flex flex-column border-0">
                 <div class="card-body p-4 p-md-5">
                     <ul class="list-unstyled mb-3">
-                        <li class="mb-2"><strong>Date:</strong> {{ class.start_date }}</li>
-                        <li class="mb-2"><strong>Time:</strong> {{ class.start_time }}</li>
+                        <li class="mb-2 fs-5"><strong>Date:</strong> {{ class.start_date }}</li>
+                        <li class="mb-2 fs-5"><strong>Time:</strong> {{ class.start_time }}</li>
                         {% if class.duration %}
-                        <li class="mb-2"><strong>Duration:</strong> {{ class.duration }}</li>
+                        <li class="mb-2 fs-5"><strong>Duration:</strong> {{ class.duration }} hours</li>
                         {% endif %}
-                        <li class="mb-2"><strong>Location:</strong> {{ class.location }}</li>
-                        <li class="mb-2"><strong>Price:</strong> £{{ class.price }}
+                        <li class="mb-2 fs-5"><strong>Location:</strong> {{ class.location }}</li>
+                        <li class="mb-2 fs-5"><strong>Price:</strong> £{{ class.price }}
                             {% if class.deposit %}
                             <span class="text-muted">(Deposit: £{{ class.deposit }})</span>
                             {% endif %}
                         </li>
                     </ul>
-                    <h5 class="mb-3">Class Description</h5>
                     <p class="mb-0">{{ class.description }}</p>
                 </div>
 
@@ -75,23 +74,23 @@
                         <div class="form-row">
 
                             <div class="col-12 text-start">
-                                <p class="mt-3"><strong>Places:</strong></p>
+                                <p class="mt-3"><strong>Quantity:</strong></p>
                                 <div class="form-group w-50">
                                     <div class="input-group input-group-{{ class.id}}">
                                         <div class="input-group-prepend">
-                                            <button type="button" class="decrement-qty btn btn-outline-primary decrement-qty_{{ class.id }}" 
+                                            <button type="button" class="decrement-qty btn btn-outline-secondary decrement-qty_{{ class.id }}" 
                                                 data-item_id="{{ class.id }}">
                                                 <span class="icon">
                                                     <i class="fas fa-minus"></i>
                                                 </span>
                                             </button>
                                         </div>
-                                        <input class="form-control qty_input  id_qty_{{ class.id }}" 
+                                        <input class="form-control qty_input btn-outline-secondary id_qty_{{ class.id }}" 
                                             name="quantity" value="1" min="1" max="99"   
-                                            data-item_id="{{ class.id }}">
+                                            data-item_id="{{ class.id }}" style="max-width: 40px;">
 
                                         <div class="input-group-append">
-                                            <button type="button" class="increment-qty btn btn-outline-primary increment-qty_{{ class.id }}" 
+                                            <button type="button" class="increment-qty btn btn-outline-secondary increment-qty_{{ class.id }}" 
                                             data-item_id="{{ class.id }}">
                                                 <span class="icon">
                                                     <i class="fas fa-plus"></i>
