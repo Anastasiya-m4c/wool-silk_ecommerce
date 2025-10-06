@@ -39,26 +39,26 @@
             </a>
 
             <div class="card-body">
-                <p class="mb-2 h5">{{ class.name }}</p>
+                <p class="mb-2 h4 fw-bold text-decoration">{{ class.name }}</p>
             </div>
 
             <div class="card-footer bg-white pt-0 border-0 text-left mt-auto">
-                <p class="mb-1 fw-bold">Date: {{ class.start_date }}</p>
-                <p class="mb-1 fw-bold">Time: {{ class.start_time }}</p>
+                <p class="mb-1"><strong>Date:</strong> {{ class.start_date }}</p>
+                <p class="mb-1"><strong>Time:</strong> {{ class.start_time }}</p>
                 <p class="mb-2">
                     <strong>Price:</strong> £{{ class.price }}
                     {% if class.deposit %}
                     <span class="text-muted">(Deposit: £{{ class.deposit }})</span>
                     {% endif %}
                 </p>
-                <p class="mb-3 fw-bold">Location: {{ class.location }}</p>
+                <p class="mb-3"><strong>Location:</strong> {{ class.location }}</p>
 
                 {% if class.fully_booked %}
                 <span class="text-danger fw-bold d-block mb-2">Fully Booked</span>
                 <a href="#" class="btn btn-outline-primary btn-sm btn-one">Join Waiting List</a>
                 {% else %}
-                <a href="{% url 'class_detail' class_id=class.id %}" class="btn btn-primary btn-sm btn-one">View Details</a>
-                <a href="#" class="btn btn-outline-primary btn-sm btn-two">Book Now</a>
+                <a href="{% url 'class_detail' class_id=class.id %}" class="btn btn-sm btn-one">View Details</a>
+                <a href="#" class="btn btn-sm btn-two">Book Now</a>
                 {% endif %}
             </div>
         </div>
