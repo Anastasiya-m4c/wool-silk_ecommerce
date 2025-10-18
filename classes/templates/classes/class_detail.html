@@ -51,11 +51,7 @@
                         <li class="mb-2 fs-5"><strong>Duration:</strong> {{ class.duration }} hours</li>
                         {% endif %}
                         <li class="mb-2 fs-5"><strong>Location:</strong> {{ class.location }}</li>
-                        <li class="mb-2 fs-5"><strong>Price:</strong> £{{ class.price }}
-                            {% if class.deposit %}
-                            <span class="text-muted">(Deposit: £{{ class.deposit }})</span>
-                            {% endif %}
-                        </li>
+                        <li class="mb-2 fs-5"><strong>Price:</strong> £{{ class.price }}</li>
                     </ul>
                     <p class="mb-0">{{ class.description }}</p>
                 </div>

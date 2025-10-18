@@ -190,6 +190,23 @@ p {
     border: 0.5px solid var(--ws-blue);
 }
 
+.message-container {
+    position: fixed;
+    top: 72px;
+    right: inherit;
+    z-index: 99999999999;
+}
+
+.custom-toast {
+    overflow: visible;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+}
+
+.toasr-capper {
+    height: 2px;
+}
+
 /* Equal heights only on lg+ */
 @media (min-width: 992px) {
     .equal-row > [class*="col-"] { display: flex; }                 /* columns become flex containers */
