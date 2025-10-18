@@ -33,7 +33,7 @@ body::before {
     right: 0;
     bottom: 0;
     opacity: 0.1; 
-    background-image: url('../images/sheep_blue.jpg'); 
+    background-image: url('../images/sheep_black.png'); 
     background-repeat: repeat; 
     background-size: 70px;
     z-index: -1; 
@@ -153,6 +153,7 @@ p {
     color: var(--ws-beige);
     transition: color var(--ws-transition-fast);
     padding-top: 5px;
+    padding: 0 5px;!important;
 }
 
 .navbar .nav-link:hover i {
@@ -186,27 +187,16 @@ p {
 
 @media (min-width: 1200px) {
     .container-fluid { max-width: 90%; }
-    .container { max-width: 80%; }
+    .container { max-width: 90%; }
 }
 
 @media (min-width: 992px) {
-    /* .fixed-top-desktop-only { position: fixed; inset: 0 0 auto 0; z-index: 1030; } */
-    /* .header-container { padding-top: 164px; } */
+
+
 }
 
 @media (max-width: 991.98px) {
     .navbar-nav.ms-auto { margin-left: 0 !important; justify-content: center; } 
 }
 
-/* Logo */
-/* @media (min-width: 992px) {
-    .navbar-logo {
-        position: absolute;
-        left: 47%;
-        z-index: 2;
-    } */
 
-    .navbar .navbar-collapse {
-        padding-left: 4rem;
-        padding-right: 4rem;
-    }
