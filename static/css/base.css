@@ -67,7 +67,7 @@ p {
     font-size: 1.2rem;
     font-weight: 500;
     padding: 0.5rem 1rem;
-    color: var(--ws-beige);
+    color: var(--ws-white);
     border-bottom: 2px solid transparent;
 }
 
@@ -170,13 +170,32 @@ p {
 
 
 /* Class cards */
+.card {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, .15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Bag */
+.update-link {
+    color: var(--ws-blue);
+    font-weight: 600;
+}
+.remove-link {
+    color: var(--ws-cinnamon);
+    font-weight: 600;
+}
+
+.btn-outline {
+    border: 0.5px solid var(--ws-blue);
+}
 
 /* Equal heights only on lg+ */
 @media (min-width: 992px) {
     .equal-row > [class*="col-"] { display: flex; }                 /* columns become flex containers */
     .equal-row .card { display: flex; flex-direction: column; height: 100%; width: 100%; }
     .equal-row .card-body { flex: 1 1 auto; }                       /* body stretches */
-    .equal-row .card-footer { margin-top: auto; }                   /* footer pins to bottom */
+    /* .equal-row .card-footer { margin-top: auto; }                   footer pins to bottom */
 }
 
 /* Image helper */

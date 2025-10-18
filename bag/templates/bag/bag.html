@@ -23,7 +23,7 @@
                 {% if bag_items %}
                     <div class="table-responsive rounded">
                         <table class="table table-sm table-borderless">
-                            <thead class="text-black fs-5">
+                            <thead class="fs-4">
                                 <tr>
                                     <th scope="col">Product Info</th>
                                     <th scope="col"></th>
@@ -48,19 +48,19 @@
                                         <form class="form update-form" method="POST" action="{% url 'adjust_bag' item.product.id %}">
                                             {% csrf_token %}
                                             <div class="input-group input-group-sm input-group-{{ item.product.id }}">
-                                                <button class="btn btn-sm btn-outline-secondary decrement-qty decrement-qty_{{ item.product.id }}" 
+                                                <button class="btn btn-sm btn-outline decrement-qty decrement-qty_{{ item.product.id }}" 
                                                     type="button" data-item_id="{{ item.product.id }}">
                                                     <i class="fas fa-minus"></i>
                                                 </button>
                                                 <input name="quantity" min="1" max="99" value="{{ item.quantity }}" 
-                                                    class="form-control text-center btn-outline-secondary qty_input id_qty_{{ item.product.id }}" 
+                                                    class="form-control text-center btn-outline btn qty_input id_qty_{{ item.product.id }}" 
                                                     data-item_id="{{ item.product.id }}" style="max-width: 60px;">
-                                                <button class="btn btn-outline-secondary increment-qty increment-qty_{{ item.product.id }}" 
+                                                <button class="btn btn-outline increment-qty increment-qty_{{ item.product.id }}" 
                                                     type="button" data-item_id="{{ item.product.id }}">
                                                     <i class="fas fa-plus"></i>
                                                 </button>
                                             </div>
-                                            <a class="update-link text-info me-2" href=""><small>Update</small></a>
+                                            <a class="update-link me-2" href=""><small>Update</small></a>
                                             <a class="remove-link text-danger float-right" id="remove_{{ item.item_id}}" href=""><small>Remove</small></a>
                                             <!-- <input type="hidden" name="product_id" value="{{ item.product.id }}"> -->
                                         </form>

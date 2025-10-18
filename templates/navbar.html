@@ -33,7 +33,7 @@
             <a class="nav-link p-2 position-relative" href="{% url 'view_bag' %}">
                 <i class="fas fa-shopping-bag fa-lg"></i>
                 <p class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
-                    {% if grand_total %}£{{ grand_total|floatformat:2 }}{% else %}£0.00{% endif %}
+                    {% if total %}£{{ total|floatformat:2 }}{% else %}£0.00{% endif %}
                 </p>
             </a>
 
