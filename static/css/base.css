@@ -74,7 +74,7 @@ p {
 .sml-txt {
     font-size: 1rem;
     font-weight: 500;
-    color: var(--ws-text);
+    color: var(--ws-font);
 }
 
 
@@ -151,9 +151,8 @@ p {
     line-height: 1;
     vertical-align: middle;
     color: var(--ws-beige);
-    transition: color var(--ws-transition-fast);
     padding-top: 5px;
-    padding: 0 5px;!important;
+    padding: 0 5px !important;
 }
 
 .navbar .nav-link:hover i {
@@ -203,9 +202,6 @@ p {
     box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
 }
 
-.toasr-capper {
-    height: 2px;
-}
 
 /* Equal heights only on lg+ */
 @media (min-width: 992px) {
@@ -227,7 +223,6 @@ p {
 }
 
 @media (min-width: 992px) {
-
 
 }
 
