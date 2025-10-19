@@ -5,7 +5,9 @@ charset-normalizer==3.4.3
 cryptography==46.0.1
 Django==5.2.6
 django-allauth==65.11.2
+django-crispy-forms==2.4
 idna==3.10
+pillow==11.3.0
 pycparser==2.23
 PyJWT==2.10.1
 pytz==2025.2
