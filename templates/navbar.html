@@ -2,22 +2,26 @@
 
 <nav class="navbar navbar-expand-lg custom-navbar sticky-top">
     <div class="container-fluid align-items-center position-relative">
+
         <!-- Brand -->
-        <a class="navbar-logo d-flex align-items-center gap-2" href="{% url 'home' %}">
-            <img src="{% static 'images/full_logo_blue.jpg' %}" alt="Wool & Silk LOGO" class="img-fluid" style="max-height: 55px; border-radius: 20%;">
+        <a class="navbar-brand navbar-logo d-flex align-items-center gap-2" href="{% url 'home' %}">
+            <img src="{% static 'images/full_logo_blue.jpg' %}" alt="Wool & Silk logo" class="img-fluid"
+                style="max-height:55px; border-radius:20%;">
         </a>
 
-        <!-- Mobile -->
+        <!-- Mobile controls (right side) -->
         <div class="d-flex align-items-center ms-auto d-lg-none">
+
             <!-- Profile dropdown -->
             <div class="dropdown me-2">
-                <a class="nav-link p-2 " id="user-options-sm" href="#" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link p-2" id="user-options-sm" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false" aria-label="Account menu">
                     <i class="fas fa-user fa-lg"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-options-sm">
                     {% if request.user.is_authenticated %}
-                    {% if request.user.is_superuser %}<li><a class="dropdown-item" href="#">Product Management</a></li>
+                    {% if request.user.is_superuser %}
+                    <li><a class="dropdown-item" href="#">Product Management</a></li>
                     {% endif %}
                     <li><a class="dropdown-item" href="#">My Profile</a></li>
                     <li><a class="dropdown-item" href="#">Testimonials</a></li>
@@ -29,12 +33,13 @@
                 </ul>
             </div>
 
-            <!-- Bag -->
-            <a class="nav-link p-2 position-relative" href="{% url 'view_bag' %}">
+            <!-- Bag (mobile) -->
+            <a class="nav-link p-2 position-relative" href="{% url 'view_bag' %}" aria-label="Shopping bag">
                 <i class="fas fa-shopping-bag fa-lg"></i>
-                <p class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
                     {% if total %}£{{ total|floatformat:2 }}{% else %}£0.00{% endif %}
-                </p>
+                    <span class="visually-hidden">Current bag total</span>
+                </span>
             </a>
 
             <!-- Toggler -->
@@ -47,32 +52,34 @@
 
         <!-- Collapsible content -->
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <!-- LEFT menu -->
+            <!-- Left menu -->
             <ul class="navbar-nav mb-2 mb-lg-0 align-items-lg-center me-auto">
                 <li class="nav-item"><a class="nav-link px-3" href="{% url 'home' %}">Home</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="{% url 'classes' %}">Classes</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="#tutorials">Tutorials</a></li>
-                <!-- <li class="nav-item"><a class="nav-link px-3" href="#shop">Shop</a></li> -->
+                {# <li class="nav-item"><a class="nav-link px-3" href="#shop">Shop</a></li> #}
             </ul>
 
-            <!-- Large screens -->
-            <ul class="navbar-nav mb-2 mb-lg-0 align-items-center ms-auto d-none d-lg-flex flex-lg-nowrap align-items-center">
+            <!-- Right actions (lg+) -->
+            <ul class="navbar-nav mb-2 mb-lg-0 ms-auto d-none d-lg-flex flex-lg-nowrap align-items-center">
                 <li class="nav-item">
-                    <a class="nav-btn btn btn-ws-primary px-lg-4 btn-one" href="{% url 'classes' %}">Book a Class</a>
+                    <a class="nav-btn btn btn-ws-primary px-lg-4 btn-one" href="{% url 'classes' %}">
+                        Book a Class
+                    </a>
                 </li>
 
                 <li class="nav-item dropdown mx-3">
-                    <a class="nav-link d-flex align-items-center flex-row flex-lg-column 
-                                        text-start text-lg-center" id="user-options" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <a class="nav-link d-flex align-items-center flex-row flex-lg-column text-start text-lg-center"
+                        id="user-options" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="icon fas fa-user fa-lg me-2 me-lg-0"></i>
                         <span class="sml-txt">My Account</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-options">
                         {% if request.user.is_authenticated %}
-                        {% if request.user.is_superuser %}<li><a class="dropdown-item" href="#">Product Management</a>
-                        </li>{% endif %}
+                        {% if request.user.is_superuser %}
+                        <li><a class="dropdown-item" href="#">Product Management</a></li>
+                        {% endif %}
                         <li><a class="dropdown-item" href="#">My Profile</a></li>
                         <li><a class="dropdown-item" href="#">Testimonials</a></li>
                         <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
@@ -84,9 +91,10 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="{% if grand_total %}text-info fw-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_bag' %}">
+                    <a class="{% if grand_total %}text-info fw-bold{% else %}text-dark{% endif %} nav-link"
+                        href="{% url 'view_bag' %}">
                         <div class="text-center">
-                            <div><i class=" icon fas fa-shopping-bag fa-lg"></i></div>
+                            <div><i class="icon fas fa-shopping-bag fa-lg"></i></div>
                             <p class="sml-txt my-0">
                                 {% if total %}£{{ total|floatformat:2 }}{% else %}£0.00{% endif %}
                             </p>
@@ -95,6 +103,8 @@
                 </li>
             </ul>
         </div>
+
     </div>
 </nav>
+
 

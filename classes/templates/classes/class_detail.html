@@ -15,7 +15,7 @@
         <div class="col-12 text-center my-4">
             <h2 class="mb-0">{{ class.name }}</h2>
         </div>
-        <a href="{% url 'classes' %}" class="btn btn-outline-black rounded-0 btn-lg text-start">
+        <a href="{% url 'classes' %}" class="btn btn-lg text-start">
             <span class="icon">
                 <i class="fas fa-chevron-left"></i>
             </span>
@@ -58,7 +58,7 @@
 
                 <div class="card-footer bg-white pt-0 border-0 text-center p-4 p-md-5 mt-auto">
                     {% if class.fully_booked %}
-                    <span class="text-danger font-weight-bold d-inline-block mb-3">Fully Booked</span><br>
+                    <span class="text-danger fw-bold d-inline-block mb-3">Fully Booked</span><br>
                     <div class="d-flex flex-wrap gap-2 justify-content-center">
                         <a class="btn btn-ws-primary btn-lg btn-one" href="#">Join Waiting List</a>
                         <a class="btn btn-ws-primary btn-lg btn-two" href="{% url 'classes' %}">Back to Classes</a>
@@ -67,13 +67,13 @@
                     <form class="form" action="{% url 'add_to_bag' class.id %}" method="POST">
                         {% csrf_token %}
                     
-                        <div class="form-row">
+                        <div class="row">
 
                             <div class="col-12 text-start">
                                 <p class="mt-3"><strong>Quantity:</strong></p>
-                                <div class="form-group w-50">
+                                <div class="w-50">
                                     <div class="input-group input-group-{{ class.id}}">
-                                        <div class="input-group-prepend">
+                                        <div>
                                             <button type="button" class="decrement-qty btn btn-outline-secondary decrement-qty_{{ class.id }}" 
                                                 data-item_id="{{ class.id }}">
                                                 <span class="icon">
@@ -85,7 +85,7 @@
                                             name="quantity" value="1" min="1" max="99"   
                                             data-item_id="{{ class.id }}" style="max-width: 40px;">
 
-                                        <div class="input-group-append">
+                                        <div>
                                             <button type="button" class="increment-qty btn btn-outline-secondary increment-qty_{{ class.id }}" 
                                             data-item_id="{{ class.id }}">
                                                 <span class="icon">
@@ -97,7 +97,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 d-flex flex-wrap gap-2 justify-content-left">
+                            <div class="col-12 d-flex flex-wrap gap-2 justify-content-start">
                                 <a href="{% url 'classes' %}" class="btn btn-one mt-5">
                                     <span class="icon">
                                         <i class="fas fa-chevron-left"></i>
