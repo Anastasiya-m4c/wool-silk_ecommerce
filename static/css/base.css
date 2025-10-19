@@ -77,6 +77,10 @@ p {
     color: var(--ws-beige);
 }
 
+.sml-txt:hover {
+    color: var(--ws-cinnamon);
+    
+}
 
 .navbar-nav .nav-link:hover {
     color: var(--ws-cinnamon);
