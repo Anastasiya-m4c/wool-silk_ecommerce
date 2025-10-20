@@ -56,7 +56,7 @@
                     <p class="mb-0">{{ class.description }}</p>
                 </div>
 
-                <div class="card-footer bg-white pt-0 border-0 text-center p-4 p-md-5 mt-auto">
+                <div class="card-footer pt-0 border-0 text-center p-4 p-md-5 mt-auto">
                     {% if class.fully_booked %}
                     <span class="text-danger fw-bold d-inline-block mb-3">Fully Booked</span><br>
                     <div class="d-flex flex-wrap gap-2 justify-content-center">
@@ -81,7 +81,7 @@
                                                 </span>
                                             </button>
                                         </div>
-                                        <input class="form-control qty_input btn-outline-secondary id_qty_{{ class.id }}" 
+                                        <input class="form-control qty_input btn-outline-secondary btn id_qty_{{ class.id }}" 
                                             name="quantity" value="1" min="1" max="99"   
                                             data-item_id="{{ class.id }}" style="max-width: 40px;">
 
