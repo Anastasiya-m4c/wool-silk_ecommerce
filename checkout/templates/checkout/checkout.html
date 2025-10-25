@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-2 mb-1">
                     {% if item.product.image %}
-                    <img class="w-100" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                    <img class="w-100 rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                     {% else %}
                     <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
                     {% endif %}
@@ -104,7 +104,7 @@
                 </fieldset>
 
                 <fieldset class="px-3">
-                    <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
+                    <legend class="fieldset-label small px-2 w-auto">Payment</legend>
                     <!-- Stripe card element -->
                     <div class="mb-3" id="card-element"></div>
                     <!-- Display card errors -->
@@ -113,11 +113,12 @@
 
                 <div class="submit-button text-end mt-5 mb-2">
                     <a href{% spaceless %}="{% url 'view_bag' %}" {% endspaceless %}
-                        class="btn btn-one">
+                        class="btn btn-one mb-2 me-3">
                         <span class="icon"><i class="fas fa-chevron-left"></i></span>
                         <span class="fw-bold">Adjust Bag</span>
                     </a>
-                    <button id="submit-button" class="btn btn-two" type="submit">
+                    
+                    <button id="submit-button" class="btn btn-two mb-3" type="submit">
                         <span class="fw-bold">Complete Order</span>
                         <span class="icon"><i class="fas fa-lock"></i></span>
                     </button>
@@ -131,4 +132,12 @@
 
     </div>
 </div>
+{% endblock %}
+
+{% block postload_js %}
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"stripe-public-key" }}
+    {{ id_client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+
 {% endblock %}
