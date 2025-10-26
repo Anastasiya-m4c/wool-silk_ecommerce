@@ -232,7 +232,6 @@ p {
 }
 
 
-
 /* Equal heights only on lg+ */
 @media (min-width: 992px) {
     .equal-row > [class*="col-"] { display: flex; }                 /* columns become flex containers */
