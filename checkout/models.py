@@ -6,17 +6,19 @@ from classes.models import Class
 
 
 class Order(models.Model):
-    order_number = models.CharField(max_length=20, unique=True, editable=False)
-    full_name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=254)
-    phone_number = models.CharField(max_length=20)
-    country = models.CharField(max_length=40)
-    postcode = models.CharField(max_length=20, blank=True)
-    town_or_city = models.CharField(max_length=40)
-    street_address1 = models.CharField(max_length=80)
-    street_address2 = models.CharField(max_length=80, blank=True)
+    order_number = models.CharField(max_length=32, null=False, editable=False)
+    full_name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(max_length=254, null=False, blank=False)
+    phone_number = models.CharField(max_length=20, null=False, blank=False)
+    country = models.CharField(max_length=40, null=False, blank=False)
+    postcode = models.CharField(max_length=20, null=True, blank=True)
+    town_or_city = models.CharField(max_length=40, null=False, blank=False)
+    street_address1 = models.CharField(max_length=80, null=False, blank=False)
+    street_address2 = models.CharField(max_length=80, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     order_total = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal("0.00"))
+    original_bag = models.TextField(null=False, blank=False, default='')
+    stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
 
     def _generate_order_number(self):
         """Generate a random, unique order number using UUID"""

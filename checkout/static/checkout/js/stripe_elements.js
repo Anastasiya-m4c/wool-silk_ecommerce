@@ -1,15 +1,12 @@
 /*
-    Core logic/payment flow for this comes from here:
-    https://stripe.com/docs/payments/accept-a-payment
-
-    CSS from here: 
-    https://stripe.com/docs/stripe-js
+Core logic/payment flow for Stripe
 */
 
 var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
 var clientSecret = $('#id_client_secret').text().slice(1, -1);
 var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
+
 var style = {
     base: {
         color: '#000',
@@ -25,48 +22,31 @@ var style = {
         iconColor: '#dc3545'
     }
 };
+
 var card = elements.create('card', {
     style: style,
-    hidePostalCode: true
+    hidePostalCode: true  // no ZIP field for UK
 });
 card.mount('#card-element');
 
 // Handle realtime validation errors on the card element
-card.addEventListener('change', function (event) {
+card.addEventListener('change', function(event) {
     var errorDiv = document.getElementById('card-errors');
     if (event.error) {
-        var html = `
-            <span class="icon" role="alert">
-                <i class="fas fa-times"></i>
-            </span>
+        $(errorDiv).html(`
+            <span class="icon" role="alert"><i class="fas fa-times"></i></span>
             <span>${event.error.message}</span>
-        `;
-        $(errorDiv).html(html);
+        `);
     } else {
         errorDiv.textContent = '';
     }
 });
 
-// safe helper to get a field value from the form (avoids undefined.value crashes)
+// Helper to safely get a field value
 function safeFieldValue(form, name) {
     if (!form || !name) return '';
-    // try form.elements[name] first
-    try {
-        var el = form.elements[name];
-        if (el) {
-            // RadioNodeList or single element
-            if (el.length && el[0]) return $.trim(el[0].value || '');
-            return $.trim(el.value || '');
-        }
-    } catch (e) {
-        // ignore and try next
-    }
-    // try Django-style id 'id_<name>'
-    var idEl = document.getElementById('id_' + name);
-    if (idEl && typeof idEl.value !== 'undefined') return $.trim(idEl.value || '');
-    // try plain name selector
-    var qs = document.querySelector('[name="' + name + '"]');
-    if (qs && typeof qs.value !== 'undefined') return $.trim(qs.value || '');
+    var el = form.elements[name] || document.getElementById('id_' + name) || document.querySelector('[name="' + name + '"]');
+    if (el) return $.trim(el.value || '');
     return '';
 }
 
@@ -75,15 +55,15 @@ var form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function(ev) {
     ev.preventDefault();
-    card.update({ 'disabled': true});
+    card.update({ 'disabled': true });
     $('#submit-button').attr('disabled', true);
-    
-    var saveInfo = Boolean($('#id_save_info').attr('checked'));
+
     var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+    var saveInfo = Boolean($('#id_save_info').prop('checked'));
     var postData = {
         'csrfmiddlewaretoken': csrfToken,
         'client_secret': clientSecret,
-        'save_info': saveInfo,
+        'save_info': saveInfo
     };
     var url = '/checkout/cache_checkout_data/';
 
@@ -99,29 +79,23 @@ form.addEventListener('submit', function(ev) {
                         line1: safeFieldValue(form, 'street_address1'),
                         line2: safeFieldValue(form, 'street_address2'),
                         city: safeFieldValue(form, 'town_or_city'),
-                        country: safeFieldValue(form, 'country'),
+                        country: safeFieldValue(form, 'country')
                     }
                 }
-                
-            },
+            }
         }).then(function(result) {
             if (result.error) {
-                var errorDiv = document.getElementById('card-errors');
-                var html = `
-                    <span class="icon" role="alert">
-                    <i class="fas fa-times"></i>
-                    </span>
-                    <span>${result.error.message}</span>`;
-                $(errorDiv).html(html);
-                card.update({ 'disabled': false});
+                $('#card-errors').html(`
+                    <span class="icon" role="alert"><i class="fas fa-times"></i></span>
+                    <span>${result.error.message}</span>
+                `);
+                card.update({ 'disabled': false });
                 $('#submit-button').attr('disabled', false);
-            } else {
-                if (result.paymentIntent.status === 'succeeded') {
-                    form.submit();
-                }
+            } else if (result.paymentIntent.status === 'succeeded') {
+                form.submit();
             }
         });
     }).fail(function () {
         location.reload();
-    })
+    });
 });
