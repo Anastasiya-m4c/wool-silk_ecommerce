@@ -25,7 +25,6 @@ class StripeWH_Handler:
         intent = event.data.object
         pid = intent.id
         bag = intent.metadata.bag
-        save_info = intent.metadata.save_info
 
         # Retrieve the charge and billing details
         stripe_charge = stripe.Charge.retrieve(intent.latest_charge)
