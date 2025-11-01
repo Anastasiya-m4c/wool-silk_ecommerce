@@ -37,6 +37,12 @@
     background-color: rgb(236, 240, 243);
 }
 
+select:invalid, 
+select option[value=""] {
+    color: #aab7c4 !important;
+    background-color: rgb(236, 240, 243) !important;
+}
+
 #loading-overlay {
 	display: none;
 	position: fixed;
