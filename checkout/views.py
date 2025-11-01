@@ -39,7 +39,7 @@ def checkout(request):
 
             for item_id, item_data in bag.items():
                 try:
-                    product = Class.objects.get(id=item_id)
+                    product = Class.objects.get(id=item_id)  # pylint: disable=no-member
                     if isinstance(item_data, int):
                         order_line_item = OrderLineItem(
                             order=order,
@@ -49,7 +49,7 @@ def checkout(request):
                         order_line_item.save()
                     else:
                         pass
-                except Class.DoesNotExist:
+                except Class.DoesNotExist: # pylint: disable=no-member
                     messages.error(
                         request,
                         "One of the classes in your bag wasn't found in our database. "
