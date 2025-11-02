@@ -30,7 +30,7 @@
             {{ form|crispy }}
             {{ redirect_field }}
             <div class="mt-3">
-                <button type="submit" class="btn-one">
+                <button type="submit" class="btn-one btn">
                     {% trans "Sign Up" %}
                 </button>
             </div>
@@ -39,13 +39,10 @@
 
     {% if PASSKEY_SIGNUP_ENABLED %}
         <hr>
-        <a href="{{ signup_by_passkey_url }}" class="btn-two btn btn-outline-primary mt-2">
+        <a href="{{ signup_by_passkey_url }}" class="btn-two btn mt-2">
             {% trans "Sign up using a passkey" %}
         </a>
     {% endif %}
 
-    {% if SOCIALACCOUNT_ENABLED %}
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-    {% endif %}
 {% endblock inner_content %}
 

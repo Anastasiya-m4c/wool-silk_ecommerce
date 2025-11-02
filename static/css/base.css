@@ -231,6 +231,10 @@ p {
     color: var(--ws-font);
 }
 
+form .form-control {
+    border: 1px solid #ced4da;
+    background-color: rgb(236, 240, 243);
+}
 
 /* Equal heights only on lg+ */
 @media (min-width: 992px) {
