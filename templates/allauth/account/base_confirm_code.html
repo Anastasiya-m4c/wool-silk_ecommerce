@@ -1,7 +1,9 @@
 {% extends "account/base_entrance.html" %}
 {% load i18n %}
 {% load allauth account %}
-{% block content %}
+{% load crispy_forms_tags %}
+
+{% block inner_content %}
     {% setvar title_ %}
         {% block title %}{% endblock %}
     {% endsetvar %}
@@ -20,77 +22,80 @@
     {% setvar recipient %}
         {% block recipient %}{% endblock %}
     {% endsetvar %}
-    {% element h1 %}
-        {{ title_ }}
-    {% endelement %}
-    {% element p %}
-        {% blocktranslate %}We've sent a code to {{ recipient }}. The code expires shortly, so please enter it soon.{% endblocktranslate %}
-    {% endelement %}
-    {% element form form=verify_form method="post" action=action_url tags=form_tags %}
-        {% slot body %}
-            {% csrf_token %}
-            {% element fields form=verify_form unlabeled=True %}
-            {% endelement %}
-            {{ redirect_field }}
-        {% endslot %}
-        {% slot actions %}
-            {% element button_group %}
-                {% element button type="submit" tags=submit_button_tags %}
-                    {% translate "Confirm" %}
-                {% endelement %}
-                {% if can_resend %}
-                    {% element button form="resend" tags="outline,resend" %}
-                        {% translate "Request new code" %}
-                    {% endelement %}
-                {% endif %}
-                {% if cancel_url %}
-                    {% element button href=cancel_url tags="outline,cancel" %}
-                        {% translate "Cancel" %}
-                    {% endelement %}
-                {% else %}
-                    {% element button type="submit" form="logout-from-stage" tags="outline,cancel" %}
-                        {% translate "Cancel" %}
-                    {% endelement %}
-                {% endif %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
-    <form id="resend" method="post" action="{{ action_url }}">
+
+    <h2>{{ title_ }}</h2>
+
+    <p>
+        {% blocktranslate %}
+            We've sent a code to {{ recipient }}. The code expires shortly, so please enter it soon.
+        {% endblocktranslate %}
+    </p>
+
+    {# Main verify form (was element form) #}
+    <form method="post" action="{{ action_url }}" class="allauth-verify-form">
+        {% csrf_token %}
+        {{ verify_form|crispy }}
+        {{ redirect_field }}
+
+        <div class="btn-group mt-3">
+            <button type="submit" class="btn-one">
+                {% translate "Confirm" %}
+            </button>
+
+            {% if can_resend %}
+                <button type="submit" form="resend" class="btn-two" name="action" value="resend">
+                    {% translate "Request new code" %}
+                </button>
+            {% endif %}
+
+            {% if cancel_url %}
+                <a href="{{ cancel_url }}" class="btn-two">
+                    {% translate "Cancel" %}
+                </a>
+            {% else %}
+                <button type="submit" form="logout-from-stage" class="btn-two">
+                    {% translate "Cancel" %}
+                </button>
+            {% endif %}
+        </div>
+    </form>
+
+    <form id="resend" method="post" action="{{ action_url }}" style="display:none;">
         <input type="hidden" name="action" value="resend">
         {{ redirect_field }}
         {% csrf_token %}
     </form>
+
     {% if not cancel_url %}
         <form id="logout-from-stage"
               method="post"
-              action="{% url 'account_logout' %}">
+              action="{% url 'account_logout' %}" style="display:none;">
             <input type="hidden" name="next" value="{% url 'account_login' %}">
             {% csrf_token %}
         </form>
     {% endif %}
+
     {% setvar summary_ %}
         {% block change_title %}{% endblock %}
     {% endsetvar %}
+
     {% if can_change %}
-        {% element details open=change_form.errors %}
-            {% slot summary %}
-                {{ summary_ }}
-            {% endslot %}
-            {% slot body %}
-                {% element form form=change_form method="post" action=action_url %}
-                    {% slot body %}
-                        {% csrf_token %}
-                        {% element fields form=change_form unlabeled=True %}
-                        {% endelement %}
-                        {{ redirect_field }}
-                    {% endslot %}
-                    {% slot actions %}
-                        {% element button name="action" value="change" type="submit" %}
-                            Change
-                        {% endelement %}
-                    {% endslot %}
-                {% endelement %}
-            {% endslot %}
-        {% endelement %}
+        <details {% if change_form.errors %}open{% endif %}>
+            <summary>{{ summary_ }}</summary>
+            <div>
+                <form method="post" action="{{ action_url }}" class="allauth-change-form">
+                    {% csrf_token %}
+                    {{ change_form|crispy }}
+                    {{ redirect_field }}
+
+                    <div class="mt-3">
+                        <button name="action" value="change" type="submit" class="btn-one">
+                            {% trans "Change" %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </details>
     {% endif %}
-{% endblock content %}
+{% endblock inner_content %}
+

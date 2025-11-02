@@ -1,29 +1,32 @@
 {% extends "account/base_entrance.html" %}
 {% load allauth %}
 {% load i18n %}
+
 {% block head_title %}
     {% trans "Confirm Access" %}
 {% endblock head_title %}
-{% block content %}
-    {% element h1 %}
-        {% trans "Confirm Access" %}
+
+{% block inner_content %}
+    {% element h2 %}
+        {% translate "Confirm Access" %}
     {% endelement %}
-    {% element p %}
-        {% blocktranslate %}Please reauthenticate to safeguard your account.{% endblocktranslate %}
-    {% endelement %}
+
+    <p>{% blocktranslate %}Please reauthenticate to safeguard your account.{% endblocktranslate %}</p>
+
     {% block reauthenticate_content %}{% endblock %}
+
     {% if reauthentication_alternatives %}
-        {% element hr %}
-        {% endelement %}
-        {% element h2 %}
-            {% translate "Alternative options" %}
-        {% endelement %}
-        {% element button_group %}
+        <hr>
+
+        <h3>{% translate "Alternative options" %}</h3>
+
+        <div class="btn-group mt-3">
             {% for alt in reauthentication_alternatives %}
-                {% element button href=alt.url tags="primary,outline" %}
+                <a href="{{ alt.url }}" class="btn-two me-2">
                     {{ alt.description }}
-                {% endelement %}
+                </a>
             {% endfor %}
-        {% endelement %}
+        </div>
     {% endif %}
-{% endblock content %}
+{% endblock inner_content %}
+

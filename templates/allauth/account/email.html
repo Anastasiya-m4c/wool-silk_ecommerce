@@ -1,78 +1,84 @@
 {% extends "account/base_manage_email.html" %}
 {% load static allauth i18n %}
+{% load crispy_forms_tags %}
+
 {% block head_title %}
     {% trans "Email Addresses" %}
 {% endblock head_title %}
-{% block content %}
-    {% element h1 %}
-        {% trans "Email Addresses" %}
-    {% endelement %}
+
+{% block inner_content %}
+    <h2>{% trans "Email Addresses" %}</h2>
+
     {% if emailaddresses %}
-        {% element p %}
-            {% trans 'The following email addresses are associated with your account:' %}
-        {% endelement %}
+        <p>{% trans 'The following email addresses are associated with your account:' %}</p>
+
         {% url 'account_email' as email_url %}
-        {% element form form=form action=email_url method="post" tags="email,list" %}
-            {% slot body %}
-                {% csrf_token %}
-                {% for radio in emailaddress_radios %}
-                    {% with emailaddress=radio.emailaddress %}
-                        {% element field type="radio" checked=radio.checked name="email" value=emailaddress.email id=radio.id %}
-                            {% slot label %}
-                                {{ emailaddress.email }}
-                                {% if emailaddress.verified %}
-                                    {% element badge tags="success,email,verified" %}
-                                        {% translate "Verified" %}
-                                    {% endelement %}
-                                {% else %}
-                                    {% element badge tags="warning,email,unverified" %}
-                                        {% translate "Unverified" %}
-                                    {% endelement %}
-                                {% endif %}
-                                {% if emailaddress.primary %}
-                                    {% element badge tags="email,primary" %}
-                                        {% translate "Primary" %}
-                                    {% endelement %}
-                                {% endif %}
-                            {% endslot %}
-                        {% endelement %}
-                    {% endwith %}
-                {% endfor %}
-            {% endslot %}
-            {% slot actions %}
-                {% element button type="submit" name="action_primary" %}
+
+        <form method="post" action="{{ email_url }}">
+            {% csrf_token %}
+
+            {% for radio in emailaddress_radios %}
+                {% with emailaddress=radio.emailaddress %}
+                    <div class="form-check mb-2">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            name="email"
+                            id="{{ radio.id }}"
+                            value="{{ emailaddress.email }}"
+                            {% if radio.checked %}checked{% endif %}
+                        />
+                        <label class="form-check-label" for="{{ radio.id }}">
+                            {{ emailaddress.email }}
+                        </label>
+
+                        {% if emailaddress.verified %}
+                            <span class="badge bg-success ms-2"> {% translate "Verified" %} </span>
+                        {% else %}
+                            <span class="badge bg-warning ms-2"> {% translate "Unverified" %} </span>
+                        {% endif %}
+
+                        {% if emailaddress.primary %}
+                            <span class="badge bg-primary ms-2"> {% translate "Primary" %} </span>
+                        {% endif %}
+                    </div>
+                {% endwith %}
+            {% endfor %}
+
+            <div class="mt-3">
+                <button type="submit" name="action_primary" class="btn-one btn btn-primary me-2">
                     {% trans 'Make Primary' %}
-                {% endelement %}
-                {% element button tags="secondary" type="submit" name="action_send" %}
+                </button>
+
+                <button type="submit" name="action_send" class="btn-two btn btn-secondary me-2">
                     {% trans 'Re-send Verification' %}
-                {% endelement %}
-                {% element button tags="danger,delete" type="submit" name="action_remove" %}
+                </button>
+
+                <button type="submit" name="action_remove" class="btn-two btn btn-danger">
                     {% trans 'Remove' %}
-                {% endelement %}
-            {% endslot %}
-        {% endelement %}
+                </button>
+            </div>
+        </form>
     {% else %}
         {% include "account/snippets/warn_no_email.html" %}
     {% endif %}
+
     {% if can_add_email %}
-        {% element h2 %}
-            {% trans "Add Email Address" %}
-        {% endelement %}
+        <h2 class="mt-4">{% trans "Add Email Address" %}</h2>
         {% url 'account_email' as action_url %}
-        {% element form form=form method="post" action=action_url tags="email,add" %}
-            {% slot body %}
-                {% csrf_token %}
-                {% element fields form=form %}
-                {% endelement %}
-            {% endslot %}
-            {% slot actions %}
-                {% element button name="action_add" type="submit" %}
+        <form method="post" action="{{ action_url }}">
+            {% csrf_token %}
+            {{ form|crispy }}
+
+            <div class="mt-3">
+                <button name="action_add" type="submit" class="btn-one btn btn-primary">
                     {% trans "Add Email" %}
-                {% endelement %}
-            {% endslot %}
-        {% endelement %}
+                </button>
+            </div>
+        </form>
     {% endif %}
-{% endblock content %}
+{% endblock inner_content %}
+
 {% block extra_body %}
     <script src="{% static 'account/js/account.js' %}"></script>
     <script src="{% static 'account/js/onload.js' %}"></script>

@@ -1,38 +1,39 @@
 {% extends "account/base_entrance.html" %}
 {% load allauth i18n %}
+{% load crispy_forms_tags %}
+
 {% block head_title %}
     {% trans "Signup" %}
 {% endblock head_title %}
-{% block content %}
-    {% element h1 %}
-        {% trans "Passkey Sign Up" %}
-    {% endelement %}
+
+{% block inner_content %}
+    <h2>{% trans "Passkey Sign Up" %}</h2>
+
     {% setvar link %}
         <a href="{{ login_url }}">
-        {% endsetvar %}
-        {% setvar end_link %}
+    {% endsetvar %}
+    {% setvar end_link %}
         </a>
     {% endsetvar %}
-    {% element p %}
-        {% blocktranslate %}Already have an account? Then please {{ link }}sign in{{ end_link }}.{% endblocktranslate %}
-    {% endelement %}
+    <p>{% blocktranslate %}Already have an account? Then please {{ link }}sign in{{ end_link }}.{% endblocktranslate %}</p>
+
     {% url 'account_signup_by_passkey' as action_url %}
-    {% element form form=form method="post" action=action_url tags="entrance,signup" %}
-        {% slot body %}
-            {% csrf_token %}
-            {% element fields form=form unlabeled=True %}
-            {% endelement %}
-            {{ redirect_field }}
-        {% endslot %}
-        {% slot actions %}
-            {% element button tags="prominent,signup" type="submit" %}
+    <form method="post" action="{{ action_url }}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {{ redirect_field }}
+
+        <div class="mt-3">
+            <button type="submit" class="btn-one">
                 {% trans "Sign Up" %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
-    {% element hr %}
-    {% endelement %}
-    {% element button href=signup_url tags="prominent,signup,outline,primary" %}
+            </button>
+        </div>
+    </form>
+
+    <hr class="my-3">
+
+    <a href="{{ signup_url }}" class="btn-two">
         {% trans "Other options" %}
-    {% endelement %}
-{% endblock content %}
+    </a>
+{% endblock inner_content %}
+

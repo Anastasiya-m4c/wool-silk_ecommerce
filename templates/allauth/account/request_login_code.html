@@ -1,32 +1,30 @@
 {% extends "account/base_entrance.html" %}
 {% load i18n %}
 {% load allauth account %}
+{% load crispy_forms_tags %}
+
 {% block head_title %}
     {% translate "Sign In" %}
 {% endblock head_title %}
-{% block content %}
-    {% element h1 %}
-        {% translate "Send me a sign-in code" %}
-    {% endelement %}
-    {% element p %}
-        {% blocktranslate %}You will receive a special code for a password-free sign-in.{% endblocktranslate %}
-    {% endelement %}
+
+{% block inner_content %}
+    <h2>{% translate "Send me a sign-in code" %}</h2>
+    <p>{% blocktranslate %}You will receive a special code for a password-free sign-in.{% endblocktranslate %}</p>
+
     {% url 'account_request_login_code' as login_url %}
-    {% element form form=form method="post" action=login_url tags="entrance,login" %}
-        {% slot body %}
-            {% csrf_token %}
-            {% element fields form=form unlabeled=True %}
-            {% endelement %}
-            {{ redirect_field }}
-        {% endslot %}
-        {% slot actions %}
-            {% element button type="submit" tags="prominent,login" %}
+    <form method="post" action="{{ login_url }}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {{ redirect_field }}
+
+        <div class="mt-3">
+            <button type="submit" class="btn-one">
                 {% translate "Request Code" %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
-    {% url 'account_login' as login_url %}
-    {% element button href=login_url tags="link" %}
-        {% translate "Other sign-in options" %}
-    {% endelement %}
-{% endblock content %}
+            </button>
+            <a href="{% url 'account_login' %}" class="btn-two ms-2">
+                {% translate "Other sign-in options" %}
+            </a>
+        </div>
+    </form>
+{% endblock inner_content %}
+
