@@ -4,11 +4,7 @@
     height: 40px;
     padding: 10px 12px;
     border: 1px solid transparent;
-    border-radius: 0px;
-    background-color: #f6f9fc;
-    box-shadow: 0 1px 3px 0 #e6ebf1;
-    -webkit-transition: box-shadow 150ms ease;
-    transition: box-shadow 150ms ease;
+    background-color: rgb(236, 240, 243);
 }
 
 .StripeElement--focus,
@@ -39,11 +35,13 @@
 }
 
 select:invalid {
-    color: #aab7 !important;
+    color: #aab7c4 !important;
     background-color: rgb(236, 240, 243) !important;
 }
 
-#loading-overlay {
+
+
+/* #loading-overlay {
 	display: none;
 	position: fixed;
     top: 0;
@@ -60,4 +58,4 @@ select:invalid {
     justify-content: center;
     margin: 0;
     height: 100%;
-}
+} */
