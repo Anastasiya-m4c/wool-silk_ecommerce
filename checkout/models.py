@@ -2,18 +2,19 @@ import uuid
 from decimal import Decimal
 from django.db import models
 from django.db.models import Sum
+from django.db import IntegrityError
 
 from django_countries.fields import CountryField
 
 from classes.models import Class
 from profiles.models import UserProfile
 
-
 class Order(models.Model):
-    order_number = models.CharField(max_length=32, null=False, editable=False)
-    user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
-                                     null=True, blank=True,
-                                     related_name='orders')
+    order_number = models.CharField(max_length=8, null=False, editable=False, unique=True)
+    user_profile = models.ForeignKey(
+        UserProfile, on_delete=models.SET_NULL,
+        null=True, blank=True, related_name='orders'
+    )
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
@@ -27,9 +28,30 @@ class Order(models.Model):
     original_bag = models.TextField(null=False, blank=False, default='')
     stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
 
-    def _generate_order_number(self):
-        """Generate a random, unique order number using UUID"""
-        return uuid.uuid4().hex.upper()
+    def _generate_order_number(self, length: int = 8) -> str:
+        """Return an uppercase truncated uuid hex string of requested length."""
+        return uuid.uuid4().hex.upper()[:length]
+
+    def save(self, *args, **kwargs):
+        """Set a short order number if not already set, avoiding duplicates."""
+        if not self.order_number:
+            max_attempts = 5
+            for _ in range(max_attempts):
+                candidate = self._generate_order_number(length=8)
+                if not Order.objects.filter(order_number=candidate).exists():
+                    self.order_number = candidate
+                    break
+            else:
+                self.order_number = self._generate_order_number(length=8)
+
+        for save_attempt in range(3):
+            try:
+                super().save(*args, **kwargs)
+                return
+            except IntegrityError:
+                if save_attempt == 2:
+                    raise
+                self.order_number = self._generate_order_number(length=8)
 
     def update_total(self):
         """Update order total each time a line item is added/updated"""
@@ -37,15 +59,12 @@ class Order(models.Model):
         self.order_total = total
         self.save(update_fields=['order_total'])
 
-    def save(self, *args, **kwargs):
-        """Set the order number if it hasn't been set already."""
-        if not self.order_number:
-            self.order_number = self._generate_order_number()
-        super().save(*args, **kwargs)
-
     def __str__(self):
         return self.order_number
 
+
+    def __str__(self):
+        return self.order_number
 
 class OrderLineItem(models.Model):
     order = models.ForeignKey(
