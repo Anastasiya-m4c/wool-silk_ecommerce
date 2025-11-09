@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from .models import Order, OrderLineItem
 from classes.models import Class
+from profiles.models import UserProfile
 
 import json
 import stripe
@@ -25,6 +26,7 @@ class StripeWH_Handler:
         intent = event.data.object
         pid = intent.id
         bag = intent.metadata.bag
+        save_info = intent.metadata.save_info
 
         # Retrieve the charge and billing details
         stripe_charge = stripe.Charge.retrieve(intent.latest_charge)
@@ -55,6 +57,15 @@ class StripeWH_Handler:
         b_city = clean(b_city)
         b_line1 = clean(b_line1)
         b_line2 = clean(b_line2)
+
+        # Get user profile if logged in
+        profile = None
+        username = intent.metadata.username
+        if username != 'AnonymousUser':
+            try:
+                profile = UserProfile.objects.get(user__username=username)
+            except UserProfile.DoesNotExist:
+                pass
 
         # Try to find an existing order (retry loop)
         order_exists = False
@@ -91,6 +102,7 @@ class StripeWH_Handler:
         try:
             order = Order.objects.create(
                 full_name=b_name,
+                user_profile=profile,
                 email=b_email,
                 phone_number=b_phone,
                 country=b_country,
@@ -103,7 +115,7 @@ class StripeWH_Handler:
                 stripe_pid=pid,
             )
 
-            # bag is expected to be a JSON string like '{"3": 2, "7": 1}'
+            # Create order line items
             for item_id, quantity in json.loads(bag).items():
                 product = Class.objects.get(id=item_id)
                 qty = quantity if isinstance(quantity, int) else quantity.get('quantity', 1)
@@ -113,6 +125,16 @@ class StripeWH_Handler:
                     quantity=qty,
                 )
                 order_line_item.save()
+
+            # Update profile default info if save_info was checked
+            if profile and save_info == 'true':
+                profile.default_phone_number = b_phone
+                profile.default_country = b_country
+                profile.default_postcode = b_postal_code
+                profile.default_town_or_city = b_city
+                profile.default_street_address1 = b_line1
+                profile.default_street_address2 = b_line2
+                profile.save()
 
         except Exception as e:
             if order:
