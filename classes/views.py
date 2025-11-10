@@ -27,6 +27,9 @@ def class_detail(request, class_id):
 @login_required
 def add_class(request):
     """ A view to add a class to the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
     if request.method == 'POST':
         form = ClassForm(request.POST, request.FILES)
         if form.is_valid():
@@ -48,6 +51,9 @@ def add_class(request):
 @login_required
 def edit_class(request, class_id):
     """ A view to edit a class in the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
     classes = get_object_or_404(Class, pk=class_id)
     if request.method == 'POST':
         form = ClassForm(request.POST, request.FILES, instance=classes)
@@ -72,6 +78,9 @@ def edit_class(request, class_id):
 @login_required
 def delete_class(request, class_id):
     """ A view to delete a class from the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
     classes = get_object_or_404(Class, pk=class_id)
     classes.delete()
     messages.success(request, 'Class deleted!')
