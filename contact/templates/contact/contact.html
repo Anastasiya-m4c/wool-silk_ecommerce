@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <h2 class="logo-font mb-4">Contact From</h2>
+            <h3 class="h5 text-muted">If you have any queries please compete contact form below and we will respond as soon as possible.</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <form method="POST" action="{% url 'contact' %}" class="form mb-2" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <div class="text-right">
+                    <a class="btn btn-one" href="{% url 'home' %}">Return Home</a>
+                    <button class="btn btn-two " type="submit">Submit</button>
+                </div>
+            </form>
+        </div>  
+    </div>
+</div>
+{% endblock %}
