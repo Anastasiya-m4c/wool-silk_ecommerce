@@ -102,14 +102,16 @@
                                     <span class="icon">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
-                                    <span class="text-uppercase">Back to Classes</span>
+                                    <span class="">Back to Classes</span>
                                 </a>
-                                <input type="submit" class="btn btn-two text-uppercase mt-5" value="Add to Bag">
+                                <input type="submit" class="btn btn-two mt-5" value="Add to Bag">
+                                {% if  request.user.is_superuser %}
+                                <a href="{% url 'edit_class' class.id %}" class="btn btn-one mt-5">Edit Class</a>
+                                <a href="{% url 'delete_class' class.id %}" class="btn btn-delete mt-5">Delete Class</a>
+                                {% endif %}
                             </div>
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
                         </div>
-
-
                     </form>
                     {% endif %}
                 </div>

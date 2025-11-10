@@ -1,34 +1,30 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from .models import Class
 from .forms import ClassForm
 from django.contrib import messages
 
-# Create your views here.
 
 def all_classes(request):
     """ A view to show all classes """
-
     classes = Class.objects.all()
     context = {
         'classes': classes,
     }
-
     return render(request, 'classes/classes.html', context)
 
 
 def class_detail(request, class_id):
     """ A view to show individual class details """
-
     classes = get_object_or_404(Class, pk=class_id)
-
     context = {
         'class': classes,
     }
-    
     return render(request, 'classes/class_detail.html', context)
 
 
+@login_required
 def add_class(request):
     """ A view to add a class to the store """
     if request.method == 'POST':
@@ -41,14 +37,15 @@ def add_class(request):
             messages.error(request, 'Failed to add class. Please ensure the form is valid.')
     else:
         form = ClassForm()
-
-    form = ClassForm()
+    
     template = 'classes/add_class.html'
     context = {
         'form': form,
     }
     return render(request, template, context)
 
+
+@login_required
 def edit_class(request, class_id):
     """ A view to edit a class in the store """
     classes = get_object_or_404(Class, pk=class_id)
@@ -63,10 +60,19 @@ def edit_class(request, class_id):
     else:
         form = ClassForm(instance=classes)
         messages.info(request, f'You are editing {classes.name}')
-
+    
     template = 'classes/edit_class.html'
     context = {
         'form': form,
         'class': classes,
     }
     return render(request, template, context)
+
+
+@login_required
+def delete_class(request, class_id):
+    """ A view to delete a class from the store """
+    classes = get_object_or_404(Class, pk=class_id)
+    classes.delete()
+    messages.success(request, 'Class deleted!')
+    return redirect(reverse('classes'))

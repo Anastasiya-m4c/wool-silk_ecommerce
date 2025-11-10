@@ -53,7 +53,10 @@
                 <a href="#" class="btn btn-outline-primary btn-sm btn-one">Join Waiting List</a>
                 {% else %}
                 <a href="{% url 'class_detail' class_id=class.id %}" class="btn btn-sm btn-one">View Details</a>
-                <a href="#" class="btn btn-sm btn-two">Book Now</a>
+                {% endif %}
+                {% if  request.user.is_superuser %}
+                <a href="{% url 'edit_class' class.id %}" class="btn btn-sm btn-two ms-2">Edit Class</a>
+                <a href="{% url 'delete_class' class.id %}" class="btn btn-sm btn-delete ms-2">Delete Class</a>
                 {% endif %}
             </div>
         </div>

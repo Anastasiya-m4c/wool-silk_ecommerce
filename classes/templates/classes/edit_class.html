@@ -29,6 +29,7 @@
                 <div class="text-right">
                     <a class="btn btn-one" href="{% url 'classes' %}">Cancel</a>
                     <button class="btn btn-two " type="submit">Update Class</button>
+                    <a href="{% url 'delete_class' class.id %}" class="btn btn-sm btn-delete ms-2">Delete Class</a>
                 </div>
             </form>
         </div>  
