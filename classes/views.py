@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from .models import Class
 from .forms import ClassForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -15,7 +17,6 @@ def all_classes(request):
     return render(request, 'classes/classes.html', context)
 
 
-
 def class_detail(request, class_id):
     """ A view to show individual class details """
 
@@ -27,8 +28,20 @@ def class_detail(request, class_id):
     
     return render(request, 'classes/class_detail.html', context)
 
+
 def add_class(request):
     """ A view to add a class to the store """
+    if request.method == 'POST':
+        form = ClassForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully added class!')
+            return redirect(reverse('classes'))
+        else:
+            messages.error(request, 'Failed to add class. Please ensure the form is valid.')
+    else:
+        form = ClassForm()
+
     form = ClassForm()
     template = 'classes/add_class.html'
     context = {

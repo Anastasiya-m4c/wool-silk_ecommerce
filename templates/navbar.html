@@ -21,7 +21,7 @@
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-options-sm">
                     {% if request.user.is_authenticated %}
                     {% if request.user.is_superuser %}
-                    <li><a class="dropdown-item" href="#">Product Management</a></li>
+                    <li><a class="dropdown-item" href="{% url 'add_class' %}">Product Management</a></li>
                     {% endif %}
                     <li><a class="dropdown-item" href="#">My Profile</a></li>
                     <li><a class="dropdown-item" href="#">Testimonials</a></li>
@@ -78,7 +78,7 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-options">
                         {% if request.user.is_authenticated %}
                         {% if request.user.is_superuser %}
-                        <li><a class="dropdown-item" href="#">Product Management</a></li>
+                        <li><a class="dropdown-item" href="{% url 'add_class' %}">Product Management</a></li>
                         {% endif %}
                         <li><a class="dropdown-item" href="{% url 'profile' %}">My Profile</a></li>
                         <li><a class="dropdown-item" href="#">Testimonials</a></li>

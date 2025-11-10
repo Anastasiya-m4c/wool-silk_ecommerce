@@ -6,7 +6,7 @@ from .models import Class
 
 class ClassAdmin(admin.ModelAdmin):
     list_display = ('name', 'start_date', 'start_time', 'duration', 'location',
-                    'price', 'deposit', 'image')
+                    'price', 'image')
     list_filter = ('start_date', 'location')
 
 
