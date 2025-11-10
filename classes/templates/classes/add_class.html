@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <h2 class="logo-font mb-4">Product Management</h2>
+            <h3 class="h5 text-muted">Add Product</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <form method="POST" action="{% url 'add_class' %}" class="form mb-2" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <div class="text-right">
+                    <a class="btn btn-one" href="{% url 'classes' %}">Cancel</a>
+                    <button class="btn btn-two " type="submit">Add Class</button>
+                </div>
+            </form>
+        </div>  
+    </div>
+</div>
+{% endblock %}
+

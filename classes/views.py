@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Class
+from .forms import ClassForm
 
 # Create your views here.
 
@@ -25,3 +26,12 @@ def class_detail(request, class_id):
     }
     
     return render(request, 'classes/class_detail.html', context)
+
+def add_class(request):
+    """ A view to add a class to the store """
+    form = ClassForm()
+    template = 'classes/add_class.html'
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
