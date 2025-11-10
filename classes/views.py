@@ -48,3 +48,25 @@ def add_class(request):
         'form': form,
     }
     return render(request, template, context)
+
+def edit_class(request, class_id):
+    """ A view to edit a class in the store """
+    classes = get_object_or_404(Class, pk=class_id)
+    if request.method == 'POST':
+        form = ClassForm(request.POST, request.FILES, instance=classes)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully updated class!')
+            return redirect(reverse('class_detail', args=[classes.id]))
+        else:
+            messages.error(request, 'Failed to update class. Please ensure the form is valid.')
+    else:
+        form = ClassForm(instance=classes)
+        messages.info(request, f'You are editing {classes.name}')
+
+    template = 'classes/edit_class.html'
+    context = {
+        'form': form,
+        'class': classes,
+    }
+    return render(request, template, context)
