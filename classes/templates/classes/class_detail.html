@@ -98,16 +98,16 @@
                             </div>
 
                             <div class="col-12 d-flex flex-wrap gap-2 justify-content-start">
-                                <a href="{% url 'classes' %}" class="btn btn-one mt-5">
+                                <a href="{% url 'classes' %}" class="btn btn-one mt-2">
                                     <span class="icon">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="">Back to Classes</span>
                                 </a>
-                                <input type="submit" class="btn btn-two mt-5" value="Add to Bag">
+                                <input type="submit" class="btn btn-two mt-2" value="Add to Bag">
                                 {% if  request.user.is_superuser %}
-                                <a href="{% url 'edit_class' class.id %}" class="btn btn-one mt-5">Edit Class</a>
-                                <a href="{% url 'delete_class' class.id %}" class="btn btn-delete mt-5">Delete Class</a>
+                                <a href="{% url 'edit_class' class.id %}" class="btn btn-one mt-2">Edit Class</a>
+                                <a href="{% url 'delete_class' class.id %}" class="btn btn-delete mt-2">Delete Class</a>
                                 {% endif %}
                             </div>
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
