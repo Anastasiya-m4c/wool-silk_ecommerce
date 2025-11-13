@@ -1,0 +1,54 @@
+{% load static %}
+
+{% block extra_content %}
+<hr>
+<section class="testimonials-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">What Our Customers Say</h2>
+        
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for testimonial in testimonials %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="text-center px-5">
+                        <div class="mb-3">
+                            {% for i in "12345" %}
+                            {% if forloop.counter <= testimonial.rating %}
+                                <i class="fas fa-star text-warning"></i>
+                            {% else %}
+                                <i class="far fa-star text-muted"></i>
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                        <h4>{{ testimonial.title }}</h4>
+                        <p class="lead">"{{ testimonial.content }}"</p>
+                        <p class="text-muted">- {{ testimonial.user.username|default:"Anonymous" }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="carousel-item active">
+                    <div class="text-center px-5">
+                        <h4>No testimonials yet</h4>
+                        <p class="lead">Be the first to leave a review!</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                <span class="icon chevron">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                <span class="icon chevron">
+                    <i class="fas fa-chevron-right"></i>
+                </span>
+            </button>
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'testimonials' %}" class="btn btn-three">View All Testimonials</a>
+        </div>
+    </div>
+</section>
+<hr>
+{% endblock %}

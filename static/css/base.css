@@ -127,6 +127,15 @@ p {
     border-radius: 0.5rem;
 }
 
+.btn-three {
+    background-color: var(--ws-yellow);
+    color: var(--ws-font);
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    transition: background-color .3s ease;
+    border-radius: 0.5rem;
+}
+
 .btn-delete {
     background-color: var(--ws-cinnamon);
     color: var(--ws-font);
@@ -255,6 +264,24 @@ form .form-control {
     border: 1px solid #ced4da;
     background-color: rgb(236, 240, 243);
 }
+
+/* Carousel */
+
+.carousel-inner {
+    background: var(--ws-beige-light);
+    /* background: transparent !important; */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    color: var(--ws-blue);
+}
+
+.chevron {
+    color: var(--ws-blue);
+    font-size: 2rem;
+}
+
 
 
 /* Image helper */

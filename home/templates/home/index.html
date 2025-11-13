@@ -54,13 +54,16 @@
                 </p>
             </div>
         </div>
-
-        <div class="mt-3 d-flex flex-wrap gap-2 justify-content-center">
+            <div class="mt-3 d-flex flex-wrap gap-2 justify-content-center">
             <a class="btn btn-ws-primary btn-lg btn-one" href="{% url 'classes' %}">View Classes</a>
             <a class="btn btn-ws-primary btn-lg btn-two" href="#tutorials">Explore Tutorials</a>
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_content %}
+{% include "home/testimonials_carousel.html" %}
 {% endblock %}
 
 
