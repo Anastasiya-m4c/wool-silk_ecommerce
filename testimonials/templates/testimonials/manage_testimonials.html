@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4">Manage Testimonials</h2>
+    
+    <h3 class="mt-4">Pending Approval</h3>
+    {% if pending %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Title</th>
+                        <th>Rating</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for testimonial in pending %}
+                    <tr>
+                        <td>{{ testimonial.user.username }}</td>
+                        <td>{{ testimonial.title }}</td>
+                        <td>{{ testimonial.rating }} ⭐</td>
+                        <td>{{ testimonial.created_at|date:"M d, Y" }}</td>
+                        <td>
+                            <a href="{% url 'approve_testimonial' testimonial.id %}" class="btn btn-sm btn-one">
+                                Approve
+                            </a>
+                            <a href="{% url 'delete_testimonial' testimonial.id %}" class="btn btn-sm btn-delete">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-muted">No pending testimonials.</p>
+    {% endif %}
+    
+    <h3 class="mt-5">Approved Testimonials</h3>
+    {% if approved %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Title</th>
+                        <th>Rating</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for testimonial in approved %}
+                    <tr>
+                        <td>{{ testimonial.user.username }}</td>
+                        <td>{{ testimonial.title }}</td>
+                        <td>{{ testimonial.rating }} ⭐</td>
+                        <td>{{ testimonial.created_at|date:"M d, Y" }}</td>
+                        <td>
+                            <a href="{% url 'delete_testimonial' testimonial.id %}" class="btn btn-sm btn-danger">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-muted">No approved testimonials yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

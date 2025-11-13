@@ -39,3 +39,43 @@ def testimonials_list(request):
     context = {'testimonials': testimonials}
     return render(request, 'testimonials/testimonials_list.html', context)
 
+
+@login_required
+def manage_testimonials(request):
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect('home')
+    
+    pending = Testimonial.objects.filter(is_approved=False)
+    approved = Testimonial.objects.filter(is_approved=True)
+    
+    context = {
+        'pending': pending,
+        'approved': approved,
+    }
+    return render(request, 'testimonials/manage_testimonials.html', context)
+
+
+@login_required
+def approve_testimonial(request, testimonial_id):
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect('home')
+    
+    testimonial = Testimonial.objects.get(id=testimonial_id)
+    testimonial.is_approved = True
+    testimonial.save()
+    messages.success(request, 'Testimonial approved!')
+    return redirect('manage_testimonials')
+
+
+@login_required
+def delete_testimonial(request, testimonial_id):
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect('home')
+    
+    testimonial = Testimonial.objects.get(id=testimonial_id)
+    testimonial.delete()
+    messages.success(request, 'Testimonial deleted!')
+    return redirect('manage_testimonials')
