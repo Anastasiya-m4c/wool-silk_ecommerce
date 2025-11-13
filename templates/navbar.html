@@ -12,6 +12,8 @@
         <!-- Mobile controls (right side) -->
         <div class="d-flex align-items-center ms-auto d-lg-none">
 
+            
+
             <!-- Profile dropdown -->
             <div class="dropdown me-2">
                 <a class="nav-link p-2" id="user-options-sm" href="#" role="button" data-bs-toggle="dropdown"
@@ -24,7 +26,7 @@
                     <li><a class="dropdown-item" href="{% url 'add_class' %}">Product Management</a></li>
                     {% endif %}
                     <li><a class="dropdown-item" href="{% url 'profile' %}">My Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Testimonials</a></li>
+                    <li><a class="dropdown-item" href="">Testimonials</a></li>
                     <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                     {% else %}
                     <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
@@ -58,7 +60,6 @@
                 <li class="nav-item"><a class="nav-link px-3" href="{% url 'contact' %}">Contact</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="{% url 'classes' %}">Classes</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="#tutorials">Tutorials</a></li>
-                {# <li class="nav-item"><a class="nav-link px-3" href="#shop">Shop</a></li> #}
             </ul>
 
             <!-- Right actions (lg+) -->
@@ -81,7 +82,7 @@
                         <li><a class="dropdown-item" href="{% url 'add_class' %}">Product Management</a></li>
                         {% endif %}
                         <li><a class="dropdown-item" href="{% url 'profile' %}">My Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Testimonials</a></li>
+                        <li><a class="dropdown-item" href="">Testimonials</a></li>
                         <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                         {% else %}
                         <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
