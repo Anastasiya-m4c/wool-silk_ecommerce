@@ -15,14 +15,14 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-6">
-            <h2 class="logo-font mb-4">Contact From</h2>
-            <h3 class="h5 text-muted">If you have any queries please compete contact form below and we will respond as soon as possible.</h3>
+            <h2 class="logo-font mb-4">Testimonials</h2>
+            <h3 class="h5 text-muted">We’re a small business and your feedback means a lot to us. Please share a few words about your experience to help others discover Wool and Silk and support our studio.</h3>
         </div>
     </div>
 
     <div class="row">
         <div class="col-12 col-md-6">
-            <form method="POST" action="{% url 'contact' %}" class="form mb-2" enctype="multipart/form-data">
+            <form method="POST" class="form mb-2" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | crispy }}
                 <div class="text-right">

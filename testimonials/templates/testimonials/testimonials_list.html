@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="text-center mb-4">
+    <a href="{% url 'submit_testimonial' %}" class="btn btn-two">
+        Submit Your Testimonial
+    </a>
+</div>
+{% endif %}
+
+<div class="row">
+{% for testimonial in testimonials %}
+<div class="col-12 col-md-6 col-lg-4 mb-4">
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">{{ testimonial.title }}</h5>
+            <div class="mb-2">
+                {% for i in "12345" %}
+                    {% if forloop.counter <= testimonial.rating %}
+                        <i class="fas fa-star text-warning"></i>
+                    {% else %}
+                        <i class="far fa-star text-warning"></i>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <p class="card-text">{{ testimonial.content }}</p>
+            <p class="text-muted small">- {{ testimonial.user.username }}</p>
+        </div>
+    </div>
+</div>
+{% empty %}
+<div class="col-12">
+    <p class="text-center text-muted">No testimonials yet. Be the first to share your experience!</p>
+</div>
+{% endfor %}
+</div>
+</div>
+{% endblock %}

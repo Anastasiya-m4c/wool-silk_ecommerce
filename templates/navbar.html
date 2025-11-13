@@ -12,7 +12,7 @@
         <!-- Mobile controls (right side) -->
         <div class="d-flex align-items-center ms-auto d-lg-none">
 
-            
+
 
             <!-- Profile dropdown -->
             <div class="dropdown me-2">
@@ -26,7 +26,7 @@
                     <li><a class="dropdown-item" href="{% url 'add_class' %}">Product Management</a></li>
                     {% endif %}
                     <li><a class="dropdown-item" href="{% url 'profile' %}">My Profile</a></li>
-                    <li><a class="dropdown-item" href="">Testimonials</a></li>
+                    <li><a class="dropdown-item" href="{% url 'testimonials' %}">Testimonials</a></li>
                     <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                     {% else %}
                     <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
@@ -82,7 +82,7 @@
                         <li><a class="dropdown-item" href="{% url 'add_class' %}">Product Management</a></li>
                         {% endif %}
                         <li><a class="dropdown-item" href="{% url 'profile' %}">My Profile</a></li>
-                        <li><a class="dropdown-item" href="">Testimonials</a></li>
+                        <li><a class="dropdown-item" href="{% url 'testimonials' %}">Testimonials</a></li>
                         <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                         {% else %}
                         <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
