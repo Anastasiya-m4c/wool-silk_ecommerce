@@ -500,6 +500,109 @@ Prices showing long floating-point values (e.g., 19.999999)
 
 ## Deployment
 
+The site was deployed to Heroku using the following method:
+
+1. **Create and activate a virtual environment:**
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate  # macOS/Linux
+   ```
+
+2. **Install required Python packages:**
+   ```bash
+   pip install django gunicorn dj-database-url psycopg2-binary
+   pip install django-allauth django-crispy-forms crispy-bootstrap5
+   pip install stripe pillow boto3 django-storages django-countries
+   pip freeze > requirements.txt
+   ```
+
+3. **Create a new Django project:**
+   ```bash
+   django-admin startproject wool_and_silk .
+   ```
+
+4. **Create Django apps:**
+   ```bash
+   python manage.py startapp home
+   python manage.py startapp classes
+   python manage.py startapp bag
+   python manage.py startapp checkout
+   python manage.py startapp profiles
+   python manage.py startapp contact
+   python manage.py startapp testimonials
+   ```
+
+5. **Register apps in `settings.py`:**
+   Add all apps to `INSTALLED_APPS` list.
+
+6. **Make and apply migrations:**
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+7. **Create a Django superuser:**
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+8. **Collect static files:**
+   ```bash
+   python manage.py collectstatic
+   ```
+
+9. **Create a `Procfile` in the project root:**
+   ```
+   web: gunicorn wool_and_silk.wsgi
+   ```
+
+10. **Update `settings.py` for Heroku:**
+    - Configure database with dj_database_url
+    - Set ALLOWED_HOSTS
+    - Configure static and media files for AWS S3
+
+11. **Login to Heroku:**
+    ```bash
+    heroku login
+    ```
+
+12. **Create Heroku app:**
+    ```bash
+    heroku create wool-and-silk
+    ```
+
+13. **Add PostgreSQL database:**
+    ```bash
+    heroku addons:create heroku-postgresql:mini
+    ```
+
+14. **Set Config Vars in Heroku:**
+    - Log into Heroku dashboard
+    - Go to 'Settings' tab
+    - Click 'Reveal Config Vars'
+    - Add all required environment variables:
+      - SECRET_KEY
+      - DATABASE_URL
+      - STRIPE_PUBLIC_KEY
+      - STRIPE_SECRET_KEY
+      - STRIPE_WH_SECRET
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - USE_AWS=True
+
+15. **Connect GitHub repository:**
+    - Log into Heroku dashboard
+    - Go to 'Deploy' tab
+    - Connect to GitHub
+    - Select wool-silk-ecommerce repository
+
+16. **Deploy to Heroku:**
+    - Click 'Deploy Branch'
+    - Wait for deployment to finish
+    - Click 'Open app' at the top of the screen
+
+17. **Done!** Wool & Silk is now live.
+
 ### Creating Repository on GitHub
 
 1. First make sure you are signed into [GitHub](https://github.com/) and go to the Code Institute template, which can be found [here](https://github.com/Code-Institute-Org/gitpod-full-template).
