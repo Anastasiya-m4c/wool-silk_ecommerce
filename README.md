@@ -319,4 +319,220 @@ Security has been carefully considered throughout the design and development of 
 
 ---
 
+
 ## Testing
+
+Throughout the development of this project, I have conducted several rounds of testing to ensure a smooth user experience, robust functionality, and adherence to web standards. Testing covered browser compatibility, accessibility, functionality, real device testing, and UI/UX design through a combination of manual testing, code validators, and tools like Lighthouse.
+
+### Google's Lighthouse Performance
+
+*(Add Lighthouse screenshot results for key pages)*
+
+### Browser Compatibility
+
+| Browser tested | Intended appearance | Intended responsiveness |
+|----------------|---------------------|-------------------------|
+| Chrome         | Good                | Good                    |
+| Firefox        | Good                | Good                    |
+| Safari         | Good                | Good                    |
+| Edge           | Good                | Good                    |
+
+### Responsiveness
+
+Tested on a combination of real devices and Chrome responsive viewer. No issues observed.
+
+- iPhone SE
+- iPhone 13
+- iPad Air
+- MacBook Pro
+- Desktop PC (1920x1080)
+
+### Code Validation
+
+Validation completed with minimal errors.
+
+- **HTML:** W3C Validator 
+- **CSS:** Jigsaw Validator 
+- **Python:** PEP8 compliant via Pylint 
+- **JavaScript:** JSHint 
+
+### Manual Testing User Stories and Features
+
+
+### Customer-Facing Features
+
+| Test Case ID | User Story | Preconditions | Test Steps | Expected Result | Status |
+|--------------|------------|---------------|------------|-----------------|--------|
+| CUS-001 | Browse available classes | Classes exist in database | 1. Navigate to "Classes" page<br>2. View all classes | All classes are displayed with images and details | Pass |
+| CUS-002 | View class details | At least one class exists | 1. Click on a class card | Full class details page opens showing all information | Pass |
+| CUS-003 | Add class to bag | User is on class detail page | 1. Select quantity<br>2. Click "Add to Bag" | Class is added to bag and success message appears | Pass |
+| CUS-004 | Adjust bag quantities | Items are in bag | 1. Navigate to bag<br>2. Use +/- buttons to adjust quantity<br>3. Click update | Quantity updates and total recalculates | Pass |
+| CUS-005 | Remove item from bag | Items are in bag | 1. Click "Remove" link | Item is removed from bag | Pass |
+| CUS-006 | Checkout securely | Items are in bag | 1. Click "Secure Checkout"<br>2. Fill in details<br>3. Enter card details<br>4. Complete order | Order processes successfully and confirmation appears | Pass |
+| CUS-007 | Create account | None | 1. Click "Register"<br>2. Fill in details<br>3. Verify email | Account is created and user can log in | Pass |
+| CUS-008 | Save delivery info | User is logged in and checking out | 1. Check "Save info" box during checkout<br>2. Complete order | Info is saved to profile | Pass |
+| CUS-009 | View order history | User is logged in and has orders | 1. Navigate to "My Profile" | Past orders are displayed with details | Pass |
+| CUS-010 | Submit testimonial | User is logged in and has purchased | 1. Navigate to "Submit Testimonial"<br>2. Fill in form<br>3. Submit | Testimonial is submitted and awaiting approval message appears | Pass |
+| CUS-011 | Contact studio | None | 1. Navigate to "Contact"<br>2. Fill in form<br>3. Submit | Message is sent and success notification appears | Pass |
+| CUS-012 | Search for classes | Classes exist in database | 1. Enter search term in search bar<br>2. Submit search | Relevant classes matching search term are displayed | Pass |
+| CUS-013 | Filter classes by category | Multiple categories exist | 1. Click on category filter<br>2. Select category | Only classes in selected category are shown | Pass |
+| CUS-014 | Sort classes by price | Multiple classes exist | 1. Use sort dropdown<br>2. Select "Price (Low to High)" | Classes are sorted correctly by price ascending | Pass |
+| CUS-015 | View testimonials | Approved testimonials exist | 1. Navigate to testimonials page | All approved testimonials are displayed with ratings | Pass |
+| CUS-016 | Empty bag handling | Bag is empty | 1. Navigate to bag | Message indicating empty bag with link to continue shopping | Pass |
+| SYS-001 | 404 page displays | None | 1. Enter invalid URL | Custom 404 page is displayed with navigation links | Pass |
+
+
+### Admin Functions
+
+| Test Case ID | User Story | Preconditions | Test Steps | Expected Result | Status |
+|--------------|------------|---------------|------------|-----------------|--------|
+| ADM-001 | Add new class | User is superuser | 1. Navigate to "Product Management"<br>2. Fill in class form<br>3. Submit | New class appears on classes page | Pass |
+| ADM-002 | Edit class | User is superuser and class exists | 1. Click "Edit" on class<br>2. Modify details<br>3. Save | Class is updated with new information | Pass |
+| ADM-003 | Delete class | User is superuser and class exists | 1. Click "Delete" on class<br>2. Confirm | Class is removed from database | Pass |
+| ADM-004 | Approve testimonial | User is superuser and testimonial exists | 1. Navigate to "Manage Testimonials"<br>2. Click "Approve" | Testimonial appears on public testimonials page | Pass |
+| ADM-005 | View contact submissions | User is superuser and submissions exist | 1. Navigate to Django admin<br>2. View contact messages | All messages are displayed | Pass |
+| ADM-006 | Reject testimonial | User is superuser and testimonial exists | 1. Navigate to admin<br>2. Select testimonial<br>3. Mark as not approved | Testimonial is hidden from public view | Pass |
+| ADM-008 | View order details in admin | Orders exist | 1. Navigate to orders in admin<br>2. Click on order | Full order details with customer info displayed | Pass |
+
+### Forms Validation
+
+| Test Case ID | User Story | Preconditions | Test Steps | Expected Result | Status |
+|--------------|------------|---------------|------------|-----------------|--------|
+| VAL-001 | Contact form with empty fields | None | 1. Navigate to contact form<br>2. Leave required fields empty<br>3. Submit | Validation errors displayed, form not submitted | Pass |
+| VAL-002 | Contact form with invalid email | None | 1. Enter invalid email format<br>2. Fill other fields<br>3. Submit | Email validation error displayed | Pass |
+| VAL-003 | Testimonial form with missing rating | User is logged in | 1. Fill testimonial text<br>2. Leave rating empty<br>3. Submit | Validation error for required rating field | Pass |
+| VAL-005 | Checkout with invalid card details | Items in bag | 1. Enter invalid card number<br>2. Complete checkout | Stripe validation error displayed | Pass |
+| VAL-006 | Product quantity validation | User on product page | 1. Try to add 0 or negative quantity<br>2. Add to bag | Error message or quantity defaults to 1 | Pass |
+
+### Responsive Design & Accessibility
+
+| Test Case ID | User Story | Preconditions | Test Steps | Expected Result | Status |
+|--------------|------------|---------------|------------|-----------------|--------|
+| RESP-001 | Mobile navigation | None | 1. Open site on mobile device<br>2. Click hamburger menu | Mobile menu opens with all navigation links | Pass |
+| RESP-002 | Class cards on mobile | Classes exist | 1. View classes page on mobile | Class cards stack vertically and are readable | Pass |
+| RESP-003 | Checkout form on tablet | Items in bag | 1. View checkout on tablet | Form fields are appropriately sized and usable | Pass |
+| RESP-004 | Footer alignment on mobile | None | 1. Scroll to footer on mobile | Footer content is properly aligned and readable | Pass |
+| ACC-001 | Keyboard navigation | None | 1. Navigate site using Tab key<br>2. Test all interactive elements | All elements are focusable and operable via keyboard | Pass |
+| ACC-002 | Screen reader compatibility | Screen reader enabled | 1. Navigate with screen reader<br>2. Test key pages | All content is announced correctly with proper labels | Pass |
+| ACC-003 | Color contrast for low vision | None | 1. Check text/background contrast<br>2. Test with WAVE checker | All text meets WCAG AA standards (4.5:1 minimum) | Pass |
+
+### Payment & Transaction Testing
+
+| Test Case ID | User Story | Preconditions | Test Steps | Expected Result | Status |
+|--------------|------------|---------------|------------|-----------------|--------|
+| PAY-001 | Successful payment with test card | Items in bag | 1. Use Stripe test card 4242 4242 4242 4242<br>2. Complete checkout | Payment succeeds, order confirmation displayed | Pass |
+| PAY-002 | Declined payment | Items in bag | 1. Use declined test card<br>2. Attempt checkout | Payment fails with appropriate error message | Pass |
+| PAY-003 | Order confirmation email | Successful payment made | 1. Complete order<br>2. Check email | Confirmation email received with order details | Pass |
+| PAY-004 | Webhook handling | Payment processed | 1. Complete payment<br>2. Check webhook logs | Webhook received and order created in database | Pass |
+
+---
+
+### Testing Summary
+
+- **Total Test Cases**: 40+
+- **Passed**: All
+- **Failed**: 0
+- **Blocked**: 0
+- **Test Coverage**: Core functionality, user flows, validation, security, accessibility, and responsive design
+
+### Testing Tools Used
+
+- Django TestCase framework
+- Chrome DevTools
+- Lighthouse (accessibility & performance)
+- W3C Validators (HTML/CSS)
+- Stripe Test Mode
+- Mobile device testing (physical and emulated)
+
+
+### Accessibility
+
+The colors have been carefully selected to comply with accessibility contrast standards, ensuring readability for all users. The site has been tested using the WAVE plugin on Chrome.
+
+*(WAVE screenshot)*
+
+---
+
+## Fixed Bugs
+
+### Issue:
+Testimonials carousel not displaying on homepage.
+**Cause:** Testimonials not being passed to template in view.
+**Solution:** Added testimonials query to index view and passed to context.
+
+---
+
+### Issue:
+Webhook failing to create order.
+**Cause:** Missing required fields in webhook handler.
+**Solution:** Added all required fields and proper error handling.
+
+---
+
+
+### Issue: 
+Product images not displaying on detail pages
+**Cause:** `MEDIA_URL` and `MEDIA_ROOT` not configured properly.  
+**Solution:** Added media settings and updated URL patterns to serve media files in development.
+
+---
+
+### Issue: 
+Testimonials not appearing on the homepage
+**Cause:** Queryset filtered for `is_approved=True` while new testimonials defaulted to `False`.  
+**Solution:** Adjusted admin approval workflow and ensured correct default values.
+
+---
+
+### Issue: 
+CSS not loading on deployed site
+**Cause:** `STATIC_ROOT` missing or static files not collected.  
+**Solution:** Configured static storage and ran `collectstatic`.
+
+---
+
+### Issue: 
+Prices showing long floating-point values (e.g., 19.999999)
+**Cause:** Float field used instead of Decimal.  
+**Solution:** Converted to `DecimalField` and added proper formatting.
+
+---
+
+## Deployment
+
+### Creating Repository on GitHub
+
+1. First make sure you are signed into [GitHub](https://github.com/) and go to the Code Institute template, which can be found [here](https://github.com/Code-Institute-Org/gitpod-full-template).
+2. Then click on **use this template** and select **Create a new repository** from the drop-down. Enter the name for the repository and click **Create repository from template**.
+3. Once the repository was created, I clicked the green **Gitpod** button to create a workspace in Gitpod so that I could write the code for the site.
+4. Use terminal command to link it to VS Code.
+
+### Deploying on Heroku
+
+
+---
+
+## Attribution
+
+- The initial setup and e-commerce functionality of this project was strongly inspired by the Code Institute Boutique Ado walkthrough project.
+- Bootstrap was used as the foundation for the base templates, then extensively customized to achieve the desired design.
+- Stripe integration followed Stripe's official documentation and best practices.
+- AI used for generating content, documentation assistance, and troubleshooting errors.
+
+---
+
+## Special Thanks
+
+**Svetlana Lilley** - For trusting me with her studio's online presence and providing all the creative inspiration.
+
+**Alice** - For creating a fun logo and colour suggestions. 
+
+**Code Institute** - For the comprehensive curriculum and support.
+
+**Marco** - For continuous support, limitless resources and inspiration.
+
+**My Mentor** - For guidance and feedback throughout the project.
+
+**My Family** - For continuous support and motivation.
+
+---
