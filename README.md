@@ -1,1 +1,193 @@
-# wool-silk_ecommerce
+# Wool & Silk Art Studio
+
+![Wool & Silk Brand Identity](#)
+
+View live website [HERE](#)
+
+## About
+
+**Wool & Silk Art Studio** Wool & Silk Art Studio is an e-commerce platform I built for my mum, Svetlana Lilley, and her wet felting art studio in Briton Ferry, Neath, South Wales. The site allows her students to browse, book, and pay for felting classes while discovering the beautiful art of working with wool and silk.  
+
+The inspiration for Wool & Silk came from watching my mum pour her heart into her craft and wanting to give her a professional online home that truly represents her work. As a master felting artist specializing in nuno felting and working with locally sourced Welsh wool, she needed more than just a website—she needed a platform that captured the warmth and creativity of her studio while making it easy for students to join her classes. This project became my way of supporting her passion and helping her small business thrive.  
+
+Built with **Django** and designed to be fully responsive and mobile-friendly, Wool & Silk offers a seamless experience for both my mum and her students, no matter what device they're using.  
+
+---
+
+## Table Of Contents:
+
+1. [Design & Planning](#design--planning)
+   - [User Stories](#user-stories)
+   - [Wireframes](#wireframes)
+   - [Typography](#typography)
+   - [Colour Scheme](#colour-scheme)
+2. [Features](#features)
+   - [User Features](#user-features)
+   - [Security Features](#security-features)
+3. [Data Schema](#data-schema)
+4. [Technologies](#technologies)
+   - [Languages Used](#languages-used)
+   - [Frameworks, Libraries and Programmes Used](#frameworks-libraries-and-programmes-used)
+5. [Testing](#testing)
+6. [Bugs](#bugs)
+7. [Deployment](#deployment)
+8. [Credits](#credits)
+
+---
+
+## Overview
+
+Wool & Silk Art Studio is a full-stack e-commerce application built with Django. The platform showcases wet felting classes taught by master felting artist Svetlana Lilley, who specializes in nuno felting and working with locally sourced Welsh wool.
+
+### Project Goals
+
+- Provide an intuitive booking system for felting classes
+
+---
+
+## User Experience (UX)
+
+### Target Audience
+
+- **Craft enthusiasts** looking to learn felting techniques
+- **Beginners** interested in textile arts
+- **Experienced artists** wanting to master nuno felting
+- **Local residents** in South Wales seeking creative workshops
+- **Gift buyers** looking for unique experience gifts
+
+### User Stories
+
+# Wool & Silk User Stories
+
+## Accounts & Authentication
+- As a visitor, I want to create an account so that I can book classes and access tutorials.
+- As a registered user, I want to log in/out securely so that I can access my purchases.
+- As a user, I want to manage my profile (name, email, preferences) so I can keep my account up to date.
+
+## In-Person Classes
+- As a visitor, I want to view a list of upcoming in-person classes so I can decide what to attend.
+- As a user, I want to view details of a class (date, time, location and price) so I can choose the right one for me.
+- As a user, I want to book and pay a deposit for a class so I can secure my spot.
+- As a user, I want to see my booked classes in my profile so I don't forget.
+
+## Video Tutorials
+- As a visitor, I want to browse tutorials selection so I can decide what to purchase.
+- As a user, I want to purchase a video tutorial so I can watch it anytime.
+- As a user, I want my purchased/subscribed tutorials available in my account so I can rewatch them later.
+
+## Payments & Subscription
+- As a user, I want to pay securely online (Stripe) so I feel confident using the site.
+- As an admin, I want to manage prices and products so I can update offers quickly.
+
+## Testimonials
+- As a visitor, I want to read testimonials from other customers so I feel reassured about the quality of classes.
+- As a user, I want to submit a testimonial after taking a class/tutorial so I can share my experience.
+- As an admin, I want to moderate testimonials so I can control what gets published.
+
+## Enquiries / Contact
+- As a visitor, I want to fill in a contact/enquiry form so I can ask about classes or tutorials.
+- As a user, I want to receive a confirmation email after submitting an enquiry so I know it went through.
+- As an admin, I want to receive enquiries in my dashboard or by email so I can respond.
+
+## Content & Navigation
+- As a visitor, I want to see an attractive homepage with Wool & Silk's brand and offerings so I understand what's available.
+- As a visitor, I want to view list and individual product.
+
+## Admin & Management
+- As an admin, I want to create, edit, and delete in-person classes so I can keep the schedule updated.
+- As an admin, I want to upload/manage video tutorials so I can grow the library.
+- As an admin, I want to view bookings and enquiries so I can manage operations smoothly.
+
+---
+
+## Future Developments
+
+- **Tutorials Section:** Video content for learning felting techniques at home. 
+- **Waiting List:** Allow customers to join a waiting list for fully booked classes
+- **Class Capacity Management:** Automatic booking limits to prevent overbooking
+- **Multiple Images per Class:** Gallery view for each class showing examples
+- **Blog:** Tips, techniques, and studio news
+- **Newsletter Signup:** Email marketing integration for updates
+- **Gift Vouchers:** Purchasable class vouchers for gifts
+- **Workshop Calendar:** Interactive booking calendar view
+- **Social Media Integration:** Direct sharing to Instagram and Facebook
+
+---
+
+## Wireframes
+
+This site is designed to be clean, welcoming, and easy to navigate, reflecting the creative and approachable nature of the studio.
+
+[WEB](#)
+[Deployed on Heroku](#)
+
+Final MVP version:
+
+[Finall website images](#)
+
+---
+
+## Typography
+
+For the Wool & Silk website, the fonts chosen are **Bodoni Moda** and **Merriweather**, both elegant serif fonts that convey artistry and craftsmanship. Bodoni Moda is used for headings, providing a sophisticated and timeless feel, while Merriweather ensures excellent readability for body text across all devices.
+
+This typography choice balances professionalism with warmth, reflecting the artistic nature of felting while maintaining a welcoming and trustworthy experience for users.
+
+---
+
+## Colour Scheme & Logo
+
+The color scheme for Wool & Silk has been carefully selected to reflect the creative, warm, and playful nature of the studio. As my mum is partially sighted, good contrast and visibility are very important considerations in the design. The palette features vibrant blues, corals, yellows, and turquoise, inspired by the colorful nature of felted wool and the cheerful sheep mascot that represents the studio.
+
+**Color Palette:**
+- **Primary Blue (#002b68):** Trust and creativity
+- **Light Blue (#3EA8C2):** Calm and trust
+- **Orange (#FF8120):** Energy and inspiration
+- **Cinnamon (#FF5B3C):** Warmth and approachability
+- **Yellow (#rgb(255, 191, 40)):** Joy and optimism
+
+The colors ensure strong contrast while creating a cohesive, vibrant brand identity. This thoughtfully curated palette supports an intuitive user experience, keeping focus on the classes and studio offerings.
+
+---
+
+## Features
+
+### User Features
+
+- User registration and authentication with email verification via Django Allauth
+- Full CRUD functionality for classes (admin only)
+- Browse classes with images, descriptions, dates, and pricing
+- Add classes to shopping bag with quantity selection
+- Secure checkout with Stripe payment integration
+- Save delivery information for faster checkout
+- View order history in user profile
+- Submit testimonials with star ratings (purchase required)
+- Admin approval system for testimonials before public display
+- Contact form with email notifications to studio owner
+- Testimonials carousel on homepage
+- Pagination for browsing classes
+- Responsive design ensuring usability across all devices
+- Toast notifications for user feedback on actions
+- Custom 404 error page
+- Shopping bag preview in toast messages
+- Order confirmation emails
+
+### Security Features
+
+Security has been carefully considered throughout the design and development of this e-commerce platform to protect both users and sensitive data. Key security measures include:
+
+- **User Authentication and Authorization:** The application uses Django's built-in authentication system, enhanced with `django-allauth` for secure user registration, login, and email verification. Certain actions such as adding, editing, or deleting classes are restricted to superuser accounts only.
+
+- **Ownership Verification:** Users can only edit their own profile information and view their own order history. Testimonials are linked to user accounts and can only be submitted by customers who have made a purchase.
+
+- **Secure Payment Processing:** All payment data is handled by Stripe and never stored on the server. The application uses Stripe's secure payment intent API with webhook verification.
+
+- **Secure Secret Management:** Sensitive data such as secret keys, database URLs, Stripe keys, and AWS credentials are managed through environment variables and not hard-coded.
+
+- **CSRF Protection:** Django's built-in CSRF protection is enabled on all forms.
+
+- **Webhook Signature Verification:** Stripe webhooks are verified using signature authentication to ensure they originate from Stripe.
+
+- **Admin Approval for Testimonials:** Testimonials require admin approval before being published, ensuring content quality and preventing inappropriate submissions.
+
+---
