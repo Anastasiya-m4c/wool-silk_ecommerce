@@ -191,3 +191,132 @@ Security has been carefully considered throughout the design and development of 
 - **Admin Approval for Testimonials:** Testimonials require admin approval before being published, ensuring content quality and preventing inappropriate submissions.
 
 ---
+
+## Data Schema
+
+### Entities and Attributes
+
+- **User** (Django built-in)
+  - id (Primary Key)
+  - username
+  - email
+  - password
+
+- **Class**
+  - id (Primary Key)
+  - name
+  - description
+  - price (DecimalField)
+  - image (ImageField)
+  - start_date (DateField)
+  - start_time (TimeField)
+  - duration (IntegerField - hours)
+  - location (CharField)
+
+- **Order**
+  - id (Primary Key)
+  - order_number (CharField - 8 chars, UUID-based)
+  - user_profile (ForeignKey to UserProfile)
+  - full_name (CharField)
+  - email (EmailField)
+  - phone_number (CharField)
+  - country (CountryField)
+  - postcode (CharField)
+  - town_or_city (CharField)
+  - street_address1 (CharField)
+  - street_address2 (CharField)
+  - date (DateTimeField)
+  - order_total (DecimalField)
+  - original_bag (TextField - JSON)
+  - stripe_pid (CharField)
+
+- **OrderLineItem**
+  - id (Primary Key)
+  - order (ForeignKey to Order)
+  - product (ForeignKey to Class)
+  - quantity (PositiveIntegerField)
+  - lineitem_total (DecimalField - calculated)
+
+- **UserProfile**
+  - id (Primary Key)
+  - user (OneToOneField to User)
+  - default_full_name (CharField)
+  - default_email (EmailField)
+  - default_phone_number (CharField)
+  - default_street_address1 (CharField)
+  - default_street_address2 (CharField)
+  - default_postcode (CharField)
+  - default_town_or_city (CharField)
+  - default_country (CountryField)
+
+- **ContactMessage**
+  - id (Primary Key)
+  - name (CharField)
+  - email (EmailField)
+  - phone (CharField)
+  - subject (CharField)
+  - message (TextField)
+  - created_at (DateTimeField)
+
+- **Testimonial**
+  - id (Primary Key)
+  - user (ForeignKey to User)
+  - title (CharField)
+  - content (TextField)
+  - rating (IntegerField - choices 1-5)
+  - is_approved (BooleanField)
+  - created_at (DateTimeField)
+
+### Relationships
+
+- A **User** can have one **UserProfile** (One-to-One)
+- A **User** can create multiple **Orders** (One-to-Many)
+- A **User** can create one **Testimonial** (One-to-Many with business rule)
+- An **Order** can have multiple **OrderLineItems** (One-to-Many)
+- A **Class** can appear in multiple **OrderLineItems** (One-to-Many)
+
+---
+
+## Technologies
+
+### Languages Used
+
+- **HTML5** - To create site structure
+- **CSS** - To create custom styles
+- **JavaScript** - For interactivity and Stripe integration
+- **Python** - Backend logic and Django framework
+- **Markdown** - To create README file
+
+### Frameworks, Libraries and Programmes Used
+
+- **Django 5.2.6** - The web framework used to develop the full-stack application
+- **Bootstrap 5.0.2** - CSS framework for responsive design
+- **jQuery 3.5.1** - JavaScript library for DOM manipulation
+- **Font Awesome** - For icons throughout the site
+- **Google Fonts** - For custom typography (Bodoni Moda, Merriweather)
+- **Stripe** - Payment processing integration
+- **AWS S3** - Cloud storage for static and media files
+- **Heroku** - Cloud platform for hosting and deployment
+- **GitPod/VS Code** - To develop the project and organize version control
+- **Git/GitHub** - Version control and code repository
+- **Chrome DevTools** - For debugging and testing
+- **Lighthouse** - For performance testing
+- **Favicon.io** - To create favicon
+- **ChatGPT** - For generating content, documentation assistance & troubleshooting.
+
+### Installed Django Apps & Libraries
+
+- `django-allauth` - User authentication and social login
+- `crispy-forms` and `crispy-bootstrap5` - Improved form styling
+- `django-countries` - Country field for addresses
+- `django-storages` - S3 integration for file storage
+- `boto3` - AWS SDK for Python
+- `Pillow` - Image processing
+- `Stripe` - Payment processing
+- `Gunicorn` - WSGI HTTP server for production
+- `Psycopg2` - PostgreSQL database adapter
+- `Whitenoise` - Static file serving (development)
+
+---
+
+## Testing
