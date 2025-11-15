@@ -55,6 +55,7 @@
                 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
                 crossorigin="anonymous"></script>
         <script src="https://js.stripe.com/v3/"></script>
+        <script src="{% static 'js/script.js' %}"></script>
     {% endblock %}
     
 
@@ -122,22 +123,5 @@
 
     {% endblock %}
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const nav = document.querySelector('nav');
-            const toasts = document.querySelectorAll('.toast');
-            
-            if (nav && toasts.length > 0) {
-                nav.addEventListener('click', function() {
-                    toasts.forEach(function(toast) {
-                        const bsToast = bootstrap.Toast.getInstance(toast);
-                        if (bsToast) {
-                            bsToast.hide();
-                        }
-                    });
-                });
-            }
-        });
-        </script>
 </body>
 </html>
