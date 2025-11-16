@@ -456,6 +456,13 @@ The colors have been carefully selected to comply with accessibility contrast st
 ## Fixed Bugs
 
 ### Issue:
+All the pages broke after deleting a class that was still in the session bag data resulting with 404 on every single page. 
+**Cause:** A context processor that runs on every single page load, and it's calling get_object_or_404(Product, pk=item_id) for items in the bag session.
+**Solution:** Make changes to the context processor to handle missing items gracefully. 
+
+---
+
+### Issue:
 Testimonials carousel not displaying on homepage.
 **Cause:** Testimonials not being passed to template in view.
 **Solution:** Added testimonials query to index view and passed to context.
@@ -505,7 +512,7 @@ The site was deployed to Heroku using the following method:
 1. **Create and activate a virtual environment:**
    ```bash
    python3 -m venv .venv
-   source .venv/bin/activate  # macOS/Linux
+   source .venv/bin/activate 
    ```
 
 2. **Install required Python packages:**
@@ -621,6 +628,7 @@ The site was deployed to Heroku using the following method:
 - Bootstrap was used as the foundation for the base templates, then extensively customized to achieve the desired design.
 - Stripe integration followed Stripe's official documentation and best practices.
 - AI used for generating content, documentation assistance, and troubleshooting errors.
+- AI used for implementing comlex logic for locking transaction durring checkout & updating webhook handler to adheer to new logic.  
 
 ---
 

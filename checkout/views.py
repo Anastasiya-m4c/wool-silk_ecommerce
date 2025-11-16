@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
-
+from django.db import transaction
 from .forms import OrderForm
 from .models import Order, OrderLineItem
 from classes.models import Class
@@ -38,6 +38,46 @@ def checkout(request):
     if request.method == 'POST':
         bag = request.session.get('bag', {})
 
+        for item_id, quantity in list(bag.items()):
+            try:
+                class_obj = Class.objects.get(id=item_id)
+                
+                if class_obj.manually_fully_booked:
+                    messages.error(
+                        request,
+                        f'Sorry, {class_obj.name} is now fully booked and has been removed from your bag.'
+                    )
+                    bag.pop(item_id)
+                    request.session['bag'] = bag
+                    return redirect(reverse('view_bag'))
+                
+                spots_available = class_obj.get_spots_remaining()
+                
+                if quantity > spots_available:
+                    if spots_available > 0:
+                        bag[item_id] = spots_available
+                        request.session['bag'] = bag
+                        messages.warning(
+                            request,
+                            f'{class_obj.name} only has {spots_available} spot(s) available. '
+                            f'Quantity adjusted in your bag.'
+                        )
+                        return redirect(reverse('view_bag'))
+                    else:
+                        bag.pop(item_id)
+                        request.session['bag'] = bag
+                        messages.error(
+                            request,
+                            f'{class_obj.name} is now fully booked and has been removed from your bag.'
+                        )
+                        return redirect(reverse('view_bag'))
+                        
+            except Class.DoesNotExist:
+                messages.error(request, 'A class in your bag no longer exists.')
+                bag.pop(item_id)
+                request.session['bag'] = bag
+                return redirect(reverse('view_bag'))
+
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
@@ -50,28 +90,47 @@ def checkout(request):
         }
         order_form = OrderForm(form_data)
         if order_form.is_valid():
-            order = order_form.save(commit=False)
-            pid = request.POST.get('client_secret').split('_secret')[0]
-            order.stripe_pid = pid
-            order.original_bag = json.dumps(bag)
-            order.save()
-            for item_id, item_data in bag.items():
-                try:
-                    product = Class.objects.get(id=item_id)
-                    if isinstance(item_data, int):
-                        order_line_item = OrderLineItem(
-                            order=order,
-                            product=product,
-                            quantity=item_data,
-                        )
-                        order_line_item.save()
-                except Class.DoesNotExist:
-                    messages.error(request, (
-                        "One of the products in your bag wasn't found in our database. "
-                        "Please call us for assistance!")
-                    )
-                    order.delete()
-                    return redirect(reverse('view_bag'))
+            # AI generated code- Wrap order creation in transaction with locking
+            try:
+                with transaction.atomic():
+                    order = order_form.save(commit=False)
+                    pid = request.POST.get('client_secret').split('_secret')[0]
+                    order.stripe_pid = pid
+                    order.original_bag = json.dumps(bag)
+                    order.save()
+                    
+                    for item_id, item_data in bag.items():
+                        #AI generated code - Lock the class row to prevent race conditions
+                        product = Class.objects.select_for_update().get(id=item_id)
+                        
+                        #AI generated code - Final availability check under lock
+                        if product.manually_fully_booked:
+                            raise ValueError(f'{product.name} is now fully booked')
+                        
+                        if isinstance(item_data, int):
+                            if not product.has_available_spots(item_data):
+                                raise ValueError(f'{product.name} does not have enough spots available')
+                            
+                            order_line_item = OrderLineItem(
+                                order=order,
+                                product=product,
+                                quantity=item_data,
+                            )
+                            order_line_item.save()
+                            
+            except Class.DoesNotExist:
+                messages.error(request, (
+                    "One of the classes in your bag wasn't found in our database. "
+                    "Please call us for assistance!")
+                )
+                return redirect(reverse('view_bag'))
+            except ValueError as e:
+                # AI generated code - Availability changed during checkout
+                messages.error(request, f'Sorry, {str(e)}. Please check your bag and try again.')
+                return redirect(reverse('view_bag'))
+            except Exception as e:
+                messages.error(request, 'An error occurred while processing your order. Please try again.')
+                return redirect(reverse('view_bag'))
 
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
@@ -82,7 +141,45 @@ def checkout(request):
         bag = request.session.get('bag', {})
         if not bag:
             messages.error(request, "There's nothing in your bag at the moment")
-            return redirect(reverse('products'))
+            return redirect(reverse('classes'))
+
+        for item_id, quantity in list(bag.items()):
+            try:
+                class_obj = Class.objects.get(id=item_id)
+                
+                if class_obj.manually_fully_booked:
+                    messages.error(
+                        request,
+                        f'{class_obj.name} is now fully booked and has been removed from your bag.'
+                    )
+                    bag.pop(item_id)
+                    request.session['bag'] = bag
+                    return redirect(reverse('view_bag'))
+                
+                spots_available = class_obj.get_spots_remaining()
+                if quantity > spots_available:
+                    if spots_available > 0:
+                        bag[item_id] = spots_available
+                        request.session['bag'] = bag
+                        messages.warning(
+                            request,
+                            f'{class_obj.name} only has {spots_available} spot(s) available. '
+                            f'Quantity adjusted.'
+                        )
+                    else:
+                        bag.pop(item_id)
+                        request.session['bag'] = bag
+                        messages.error(
+                            request,
+                            f'{class_obj.name} is fully booked and has been removed.'
+                        )
+                    return redirect(reverse('view_bag'))
+                    
+            except Class.DoesNotExist:
+                messages.error(request, 'A class in your bag no longer exists.')
+                bag.pop(item_id)
+                request.session['bag'] = bag
+                return redirect(reverse('view_bag'))
 
         current_bag = bag_contents(request)
         total = current_bag['total']
@@ -132,11 +229,9 @@ def checkout_success(request, order_number):
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
-        # Attach the user's profile to the order
         order.user_profile = profile
         order.save()
 
-        # Save the user's info
         if save_info:
             profile_data = {
                 'default_full_name': order.full_name,
@@ -164,3 +259,4 @@ def checkout_success(request, order_number):
     }
 
     return render(request, template, context)
+

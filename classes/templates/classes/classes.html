@@ -48,9 +48,12 @@
                 <p class="mb-2"><strong>Price:</strong> £{{ class.price }}</p>
                 <p class="mb-3"><strong>Location:</strong> {{ class.location }}</p>
                 
-                {% if class.fully_booked %}
+                {% if class.is_fully_booked %}
                 <span class="text-danger fw-bold d-block mt-2">Fully Booked</span>
-                <a href="#" class="btn btn-outline-primary btn-sm btn-one mt-2">Join Waiting List</a>
+                <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-sm btn-one mt-2">Join Waiting List</a>
+                {% elif class.get_spots_remaining <= 3 %}
+                <span class="text-warning fw-bold d-block mt-2">Only {{ class.get_spots_remaining }} spot(s) left!</span>
+                <a href="{% url 'class_detail' class_id=class.id %}" class="btn btn-sm btn-one mt-2">View Details</a>
                 {% else %}
                 <a href="{% url 'class_detail' class_id=class.id %}" class="btn btn-sm btn-one mt-2">View Details</a>
                 {% endif %}

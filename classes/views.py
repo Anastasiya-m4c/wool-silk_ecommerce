@@ -18,9 +18,13 @@ def all_classes(request):
 def class_detail(request, class_id):
     """ A view to show individual class details """
     classes = get_object_or_404(Class, pk=class_id)
+    
     context = {
         'class': classes,
+        'is_fully_booked': classes.is_fully_booked(),
+        'spots_remaining': classes.get_spots_remaining(),
     }
+    
     return render(request, 'classes/class_detail.html', context)
 
 

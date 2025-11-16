@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
+from django.db import transaction  
 from .models import Order, OrderLineItem
 from classes.models import Class
 from profiles.models import UserProfile
@@ -48,6 +49,7 @@ class StripeWH_Handler:
         bag = intent.metadata.bag
         save_info = intent.metadata.save_info
 
+
         # Retrieve the charge and billing details
         stripe_charge = stripe.Charge.retrieve(intent.latest_charge)
         billing_details = stripe_charge.billing_details
@@ -77,6 +79,40 @@ class StripeWH_Handler:
         b_city = clean(b_city)
         b_line1 = clean(b_line1)
         b_line2 = clean(b_line2)
+
+        #AI written code - Validate availability before creating order
+        try:
+            bag_dict = json.loads(bag)
+            for item_id, quantity in bag_dict.items():
+                try:
+                    class_obj = Class.objects.get(id=item_id)
+                    qty = quantity if isinstance(quantity, int) else quantity.get('quantity', 1)
+                    
+                    # Check if manually fully booked
+                    if class_obj.manually_fully_booked:
+                        return HttpResponse(
+                            content=f'Webhook received: {event["type"]} | Class {class_obj.name} is fully booked',
+                            status=200
+                        )
+                    
+                    # Check availability
+                    if not class_obj.has_available_spots(qty):
+                        spots = class_obj.get_spots_remaining()
+                        return HttpResponse(
+                            content=f'Webhook received: {event["type"]} | Class {class_obj.name} only has {spots} spots available',
+                            status=200
+                        )
+                        
+                except Class.DoesNotExist:
+                    return HttpResponse(
+                        content=f'Webhook received: {event["type"]} | Class {item_id} not found',
+                        status=200
+                    )
+        except Exception as e:
+            return HttpResponse(
+                content=f'Webhook received: {event["type"]} | Bag validation error: {e}',
+                status=200
+            )
 
         # Get user profile if logged in
         profile = None
@@ -118,45 +154,61 @@ class StripeWH_Handler:
                 status=200
             )
 
-        # Create the order if it doesn't exist
         order = None
         try:
-            order = Order.objects.create(
-                full_name=b_name,
-                user_profile=profile,
-                email=b_email,
-                phone_number=b_phone,
-                country=b_country,
-                postcode=b_postal_code,
-                town_or_city=b_city,
-                street_address1=b_line1,
-                street_address2=b_line2,
-                order_total=order_total,
-                original_bag=bag,
-                stripe_pid=pid,
-            )
-
-            # Create order line items
-            for item_id, quantity in json.loads(bag).items():
-                product = Class.objects.get(id=item_id)
-                qty = quantity if isinstance(quantity, int) else quantity.get('quantity', 1)
-                order_line_item = OrderLineItem(
-                    order=order,
-                    product=product,
-                    quantity=qty,
+            # Ai Written code - Wrap in transaction with locking
+            with transaction.atomic():
+                order = Order.objects.create(
+                    full_name=b_name,
+                    user_profile=profile,
+                    email=b_email,
+                    phone_number=b_phone,
+                    country=b_country,
+                    postcode=b_postal_code,
+                    town_or_city=b_city,
+                    street_address1=b_line1,
+                    street_address2=b_line2,
+                    order_total=order_total,
+                    original_bag=bag,
+                    stripe_pid=pid,
                 )
-                order_line_item.save()
 
-            # Update profile default info if save_info was checked
-            if profile and save_info == 'true':
-                profile.default_phone_number = b_phone
-                profile.default_country = b_country
-                profile.default_postcode = b_postal_code
-                profile.default_town_or_city = b_city
-                profile.default_street_address1 = b_line1
-                profile.default_street_address2 = b_line2
-                profile.save()
 
+                # AI written code - Create order line items with locking
+                for item_id, quantity in json.loads(bag).items():
+                    product = Class.objects.select_for_update().get(id=item_id)
+                    qty = quantity if isinstance(quantity, int) else quantity.get('quantity', 1)
+                    
+                    if product.manually_fully_booked:
+                        raise ValueError(f'{product.name} is fully booked')
+                    
+                    if not product.has_available_spots(qty):
+                        raise ValueError(f'{product.name} has insufficient spots available')
+                    
+                    order_line_item = OrderLineItem(
+                        order=order,
+                        product=product,
+                        quantity=qty,
+                    )
+                    order_line_item.save()
+
+                if profile and save_info == 'true':
+                    profile.default_phone_number = b_phone
+                    profile.default_country = b_country
+                    profile.default_postcode = b_postal_code
+                    profile.default_town_or_city = b_city
+                    profile.default_street_address1 = b_line1
+                    profile.default_street_address2 = b_line2
+                    profile.save()
+
+        except ValueError as e:
+            # AI written code - Availability validation failed
+            if order:
+                order.delete()
+            return HttpResponse(
+                content=f'Webhook received: {event["type"]} | Availability issue: {e}',
+                status=200
+            )
         except Exception as e:
             if order:
                 order.delete()
@@ -164,6 +216,7 @@ class StripeWH_Handler:
                 content=f'Webhook received: {event["type"]} | ERROR: {e}',
                 status=500
             )
+
         self._send_confirmation_email(order)
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | SUCCESS: Created order in webhook',
@@ -176,4 +229,3 @@ class StripeWH_Handler:
             content=f'Webhook received: {event["type"]}',
             status=200
         )
-
