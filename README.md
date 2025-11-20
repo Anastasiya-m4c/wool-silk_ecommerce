@@ -70,11 +70,6 @@ Wool & Silk Art Studio is a full-stack e-commerce application built with Django.
 - As a user, I want to book and pay a deposit for a class so I can secure my spot.
 - As a user, I want to see my booked classes in my profile so I don't forget.
 
-## Video Tutorials
-- As a visitor, I want to browse tutorials selection so I can decide what to purchase.
-- As a user, I want to purchase a video tutorial so I can watch it anytime.
-- As a user, I want my purchased/subscribed tutorials available in my account so I can rewatch them later.
-
 ## Payments & Subscription
 - As a user, I want to pay securely online (Stripe) so I feel confident using the site.
 - As an admin, I want to manage prices and products so I can update offers quickly.
@@ -96,13 +91,13 @@ Wool & Silk Art Studio is a full-stack e-commerce application built with Django.
 ## Admin & Management
 - As an admin, I want to create, edit, and delete in-person classes so I can keep the schedule updated.
 - As an admin, I want to upload/manage video tutorials so I can grow the library.
-- As an admin, I want to view bookings and enquiries so I can manage operations smoothly.
+- As an admin, I want to view enquiries so I can manage operations smoothly.
 
 ---
 
 ## Future Developments
 
-- **Tutorials Section:** Video content for learning felting techniques at home. 
+- **Tutorials Section:** Video content for learning felting techniques at home. The tutorial app has bee creating with coming soon messaging to promote this to existing user base. 
 - **Waiting List:** Allow customers to join a waiting list for fully booked classes
 - **Class Capacity Management:** Automatic booking limits to prevent overbooking
 - **Multiple Images per Class:** Gallery view for each class showing examples
@@ -159,7 +154,7 @@ The colors ensure strong contrast while creating a cohesive, vibrant brand ident
 - Browse classes with images, descriptions, dates, and pricing
 - Add classes to shopping bag with quantity selection
 - Secure checkout with Stripe payment integration
-- Save delivery information for faster checkout
+- Save profile information for faster checkout
 - View order history in user profile
 - Submit testimonials with star ratings (purchase required)
 - Admin approval system for testimonials before public display
@@ -370,15 +365,13 @@ Validation completed with minimal errors.
 | CUS-005 | Remove item from bag | Items are in bag | 1. Click "Remove" link | Item is removed from bag | Pass |
 | CUS-006 | Checkout securely | Items are in bag | 1. Click "Secure Checkout"<br>2. Fill in details<br>3. Enter card details<br>4. Complete order | Order processes successfully and confirmation appears | Pass |
 | CUS-007 | Create account | None | 1. Click "Register"<br>2. Fill in details<br>3. Verify email | Account is created and user can log in | Pass |
-| CUS-008 | Save delivery info | User is logged in and checking out | 1. Check "Save info" box during checkout<br>2. Complete order | Info is saved to profile | Pass |
+| CUS-008 | Save profile info | User is logged in and checking out | 1. Check "Save info" box during checkout<br>2. Complete order | Info is saved to profile | Pass |
 | CUS-009 | View order history | User is logged in and has orders | 1. Navigate to "My Profile" | Past orders are displayed with details | Pass |
 | CUS-010 | Submit testimonial | User is logged in and has purchased | 1. Navigate to "Submit Testimonial"<br>2. Fill in form<br>3. Submit | Testimonial is submitted and awaiting approval message appears | Pass |
 | CUS-011 | Contact studio | None | 1. Navigate to "Contact"<br>2. Fill in form<br>3. Submit | Message is sent and success notification appears | Pass |
-| CUS-012 | Search for classes | Classes exist in database | 1. Enter search term in search bar<br>2. Submit search | Relevant classes matching search term are displayed | Pass |
-| CUS-013 | Filter classes by category | Multiple categories exist | 1. Click on category filter<br>2. Select category | Only classes in selected category are shown | Pass |
-| CUS-014 | Sort classes by price | Multiple classes exist | 1. Use sort dropdown<br>2. Select "Price (Low to High)" | Classes are sorted correctly by price ascending | Pass |
-| CUS-015 | View testimonials | Approved testimonials exist | 1. Navigate to testimonials page | All approved testimonials are displayed with ratings | Pass |
-| CUS-016 | Empty bag handling | Bag is empty | 1. Navigate to bag | Message indicating empty bag with link to continue shopping | Pass |
+| CUS-012 | View classes | Classes exist in database | 1. Navigate to classes page | All classes are displayed | Pass |
+| CUS-013 | View testimonials | Approved testimonials exist | 1. Navigate to testimonials page | All approved testimonials are displayed with ratings | Pass |
+| CUS-014 | Empty bag handling | Bag is empty | 1. Navigate to bag | Message indicating empty bag with link to continue shopping | Pass |
 | SYS-001 | 404 page displays | None | 1. Enter invalid URL | Custom 404 page is displayed with navigation links | Pass |
 
 
