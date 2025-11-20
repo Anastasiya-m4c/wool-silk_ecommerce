@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 if os.path.isfile('env.py'):
-    import env 
+    import env # noqa
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-cgm@rt515sydf56z=kn8w(#(+7mq@&irx1l!un*7k+**d*a5yd'
+SECRET_KEY = (
+    'django-insecure-cgm@rt515sydf56z=kn8w(#(+7mq@&irx1l!un*7k+**d*a5yd'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    # Optional -- requires install using `django-allauth[socialaccount]`.
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
@@ -77,9 +78,6 @@ MIDDLEWARE = [
 # Provider specific settings
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
         'APP': {
             'client_id': '123',
             'secret': '456',
@@ -128,7 +126,12 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 
 ACCOUNT_LOGIN_METHODS = {'email'}
-ACCOUNT_SIGNUP_FIELDS = ['email*', 'email2*', 'password1*', 'password2*']
+ACCOUNT_SIGNUP_FIELDS = [
+    'email*',
+    'email2*',
+    'password1*',
+    'password2*'
+]
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 LOGIN_URL = '/accounts/login/'
 LOGOUT_REDIRECT_URL = '/'
@@ -158,16 +161,28 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'UserAttributeSimilarityValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'MinimumLengthValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'CommonPasswordValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'NumericPasswordValidator'
+        ),
     },
 ]
 
@@ -194,6 +209,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# AWS S3 Configuration (commented out for development)
 # if 'USE_AWS' in os.environ:
 #     AWS_S3_OBJECT_PARAMETERS = {
 #         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
@@ -203,17 +219,23 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #     AWS_S3_REGION_NAME = 'us-east-1'
 #     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 #     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-#     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    
+#     AWS_S3_CUSTOM_DOMAIN = (
+#         f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+#     )
+#
 #     # Static and Media settings
 #     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
 #     STATICFILES_LOCATION = 'static'
 #     DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 #     MEDIAFILES_LOCATION = 'media'
-
+#
 #     # Update static and media URLs in production to use S3 domain
-#     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
-#     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+#     STATIC_URL = (
+#         f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+#     )
+#     MEDIA_URL = (
+#         f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+#     )
 
 STRIPE_CURRENCY = 'gbp'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
@@ -222,7 +244,6 @@ STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
