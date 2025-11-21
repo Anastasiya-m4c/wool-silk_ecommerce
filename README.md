@@ -4,6 +4,8 @@
 
 View live website [HERE](#)
 
+Project Dashboard [HERE](https://github.com/users/Anastasiya-m4c/projects/5/views/1)
+
 ## About
 
 **Wool & Silk Art Studio** Wool & Silk Art Studio is an e-commerce platform I built for my mum, Svetlana Lilley, and her wet felting art studio in Briton Ferry, Neath, South Wales. The site allows her students to browse, book, and pay for felting classes while discovering the beautiful art of working with wool and silk.  

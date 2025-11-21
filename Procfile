@@ -1,0 +1,1 @@
+web: gunicorn wool_and_silk.wsgi:application
