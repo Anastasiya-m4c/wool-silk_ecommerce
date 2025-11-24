@@ -22,7 +22,7 @@
                         </div>
                         <h4>{{ testimonial.title }}</h4>
                         <p class="lead">"{{ testimonial.content }}"</p>
-                        <p class="text-muted">- {{ testimonial.user.username|default:"Anonymous" }}</p>
+                        <p class="text-muted">- {{ testimonial.get_display_name }}</p>
                     </div>
                 </div>
                 {% empty %}
