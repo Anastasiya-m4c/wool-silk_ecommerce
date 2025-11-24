@@ -36,7 +36,7 @@
                 {% endfor %}
             </div>
             <p class="card-text">{{ testimonial.content }}</p>
-            <p class="text-muted small">- {{ testimonial.user.username }}</p>
+            <p class="text-muted small">- {{ testimonial.get_display_name }}</p>
         </div>
     </div>
 </div>
