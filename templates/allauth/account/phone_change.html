@@ -20,7 +20,7 @@
                 <input type="tel" id="current_phone" value="{{ phone }}" class="form-control" disabled>
                 {% if not phone_verified %}
                     <div class="mt-2">
-                        <button type="submit" form="verify-phone" class="btn-two">
+                        <button type="submit" form="verify-phone" class="btn-two btn">
                             {% trans 'Re-send Verification' %}
                         </button>
                     </div>
@@ -31,7 +31,7 @@
         {{ form|crispy }}
 
         <div class="mt-3">
-            <button type="submit" name="action_add" class="btn-one">
+            <button type="submit" name="action_add" class="btn-one btn">
                 {% translate "Change Phone" context "action" %}
             </button>
         </div>

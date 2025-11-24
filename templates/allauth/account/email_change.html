@@ -44,11 +44,11 @@
                 </div>
 
                 <div class="mt-2">
-                    <button type="submit" form="pending-email" name="action_send" class="btn-two me-2">
+                    <button type="submit" form="pending-email" name="action_send" class="btn-two btn me-2">
                         {% trans 'Re-send Verification' %}
                     </button>
                     {% if current_emailaddress %}
-                        <button type="submit" form="pending-email" name="action_remove" class="btn-two">
+                        <button type="submit" form="pending-email" name="action_remove" class="btn-two btn">
                             {% trans 'Cancel Change' %}
                         </button>
                     {% endif %}
