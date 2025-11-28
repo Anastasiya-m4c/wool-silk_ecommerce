@@ -41,7 +41,8 @@ def add_class(request):
             messages.success(request, 'Successfully added class!')
             return redirect(reverse('classes'))
         else:
-            messages.error(request, 'Failed to add class. Please ensure the form is valid.')
+            messages.error(request, 
+                           'Failed to add class. Please ensure the form is valid.')
     else:
         form = ClassForm()
     

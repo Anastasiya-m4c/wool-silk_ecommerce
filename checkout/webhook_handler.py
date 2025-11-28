@@ -2,7 +2,8 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
-from django.db import transaction  
+from django.db import transaction
+
 from .models import Order, OrderLineItem
 from classes.models import Class
 from profiles.models import UserProfile
@@ -22,50 +23,90 @@ class StripeWH_Handler:
         """Send the user a confirmation email"""
         cust_email = order.email
         subject = render_to_string(
-            'checkout/confirmation_emails/confirmation_email_subject.txt',
-            {'order': order})
+            'checkout/confirmation_emails/'
+            'confirmation_email_subject.txt',
+            {'order': order}
+        )
         body = render_to_string(
-            'checkout/confirmation_emails/confirmation_email_body.txt',
-            {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
-        
+            'checkout/confirmation_emails/'
+            'confirmation_email_body.txt',
+            {
+                'order': order,
+                'contact_email': settings.DEFAULT_FROM_EMAIL
+            }
+        )
+
         send_mail(
             subject,
             body,
             settings.DEFAULT_FROM_EMAIL,
             [cust_email]
-        )      
+        )
 
     def handle_event(self, event):
-        """Handle a generic/unknown/unexpected webhook event"""
+        """Handle generic/unknown webhook event"""
         return HttpResponse(
             content=f'Unhandled webhook received: {event["type"]}',
             status=200
         )
 
     def handle_payment_intent_succeeded(self, event):
-        """Handle the payment_intent.succeeded webhook from Stripe"""
+        """Handle payment_intent.succeeded webhook"""
         intent = event.data.object
         pid = intent.id
         bag = intent.metadata.bag
         save_info = intent.metadata.save_info
 
-
-        # Retrieve the charge and billing details
-        stripe_charge = stripe.Charge.retrieve(intent.latest_charge)
+        # Retrieve charge and billing details
+        stripe_charge = stripe.Charge.retrieve(
+            intent.latest_charge
+        )
         billing_details = stripe_charge.billing_details
         order_total = round(stripe_charge.amount / 100, 2)
 
-        # Extract billing fields safely (may be None)
-        b_name = billing_details.name if getattr(billing_details, 'name', None) else None
-        b_email = billing_details.email if getattr(billing_details, 'email', None) else None
-        b_phone = billing_details.phone if getattr(billing_details, 'phone', None) else None
+        # Extract billing fields safely
+        b_name = (
+            billing_details.name
+            if getattr(billing_details, 'name', None)
+            else None
+        )
+        b_email = (
+            billing_details.email
+            if getattr(billing_details, 'email', None)
+            else None
+        )
+        b_phone = (
+            billing_details.phone
+            if getattr(billing_details, 'phone', None)
+            else None
+        )
 
         b_address = getattr(billing_details, 'address', {}) or {}
-        b_country = b_address.get('country') if isinstance(b_address, dict) else None
-        b_postal_code = b_address.get('postal_code') if isinstance(b_address, dict) else None
-        b_city = b_address.get('city') if isinstance(b_address, dict) else None
-        b_line1 = b_address.get('line1') if isinstance(b_address, dict) else None
-        b_line2 = b_address.get('line2') if isinstance(b_address, dict) else None
+        b_country = (
+            b_address.get('country')
+            if isinstance(b_address, dict)
+            else None
+        )
+        b_postal_code = (
+            b_address.get('postal_code')
+            if isinstance(b_address, dict)
+            else None
+        )
+        b_city = (
+            b_address.get('city')
+            if isinstance(b_address, dict)
+            else None
+        )
+        b_line1 = (
+            b_address.get('line1')
+            if isinstance(b_address, dict)
+            else None
+        )
+        b_line2 = (
+            b_address.get('line2')
+            if isinstance(b_address, dict)
+            else None
+        )
 
         # Normalize blank strings to None
         def clean(val):
@@ -80,37 +121,61 @@ class StripeWH_Handler:
         b_line1 = clean(b_line1)
         b_line2 = clean(b_line2)
 
-        #AI written code - Validate availability before creating order
+        # Validate availability before creating order
         try:
             bag_dict = json.loads(bag)
             for item_id, quantity in bag_dict.items():
                 try:
                     class_obj = Class.objects.get(id=item_id)
-                    qty = quantity if isinstance(quantity, int) else quantity.get('quantity', 1)
-                    
+                    qty = (
+                        quantity
+                        if isinstance(quantity, int)
+                        else quantity.get('quantity', 1)
+                    )
+
                     # Check if manually fully booked
                     if class_obj.manually_fully_booked:
                         return HttpResponse(
-                            content=f'Webhook received: {event["type"]} | Class {class_obj.name} is fully booked',
+                            content=(
+                                f'Webhook received: '
+                                f'{event["type"]} | '
+                                f'Class {class_obj.name} is '
+                                f'fully booked'
+                            ),
                             status=200
                         )
-                    
+
                     # Check availability
                     if not class_obj.has_available_spots(qty):
-                        spots = class_obj.get_spots_remaining()
+                        spots = (
+                            class_obj.get_spots_remaining()
+                        )
                         return HttpResponse(
-                            content=f'Webhook received: {event["type"]} | Class {class_obj.name} only has {spots} spots available',
+                            content=(
+                                f'Webhook received: '
+                                f'{event["type"]} | '
+                                f'Class {class_obj.name} '
+                                f'only has {spots} spots '
+                                f'available'
+                            ),
                             status=200
                         )
-                        
+
                 except Class.DoesNotExist:
                     return HttpResponse(
-                        content=f'Webhook received: {event["type"]} | Class {item_id} not found',
+                        content=(
+                            f'Webhook received: '
+                            f'{event["type"]} | '
+                            f'Class {item_id} not found'
+                        ),
                         status=200
                     )
         except Exception as e:
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} | Bag validation error: {e}',
+                content=(
+                    f'Webhook received: {event["type"]} | '
+                    f'Bag validation error: {e}'
+                ),
                 status=200
             )
 
@@ -119,11 +184,13 @@ class StripeWH_Handler:
         username = intent.metadata.username
         if username != 'AnonymousUser':
             try:
-                profile = UserProfile.objects.get(user__username=username)
+                profile = UserProfile.objects.get(
+                    user__username=username
+                )
             except UserProfile.DoesNotExist:
                 pass
 
-        # Try to find an existing order (retry loop)
+        # Try to find existing order (retry loop)
         order_exists = False
         attempt = 1
         while attempt <= 5:
@@ -150,13 +217,17 @@ class StripeWH_Handler:
         if order_exists:
             self._send_confirmation_email(order)
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database',
+                content=(
+                    f'Webhook received: {event["type"]} | '
+                    f'SUCCESS: Verified order already in '
+                    f'database'
+                ),
                 status=200
             )
 
         order = None
         try:
-            # Ai Written code - Wrap in transaction with locking
+            # Wrap in transaction with locking
             with transaction.atomic():
                 order = Order.objects.create(
                     full_name=b_name,
@@ -173,18 +244,32 @@ class StripeWH_Handler:
                     stripe_pid=pid,
                 )
 
+                # Create order line items with locking
+                for item_id, quantity in json.loads(
+                    bag
+                ).items():
+                    product = (
+                        Class.objects
+                        .select_for_update()
+                        .get(id=item_id)
+                    )
+                    qty = (
+                        quantity
+                        if isinstance(quantity, int)
+                        else quantity.get('quantity', 1)
+                    )
 
-                # AI written code - Create order line items with locking
-                for item_id, quantity in json.loads(bag).items():
-                    product = Class.objects.select_for_update().get(id=item_id)
-                    qty = quantity if isinstance(quantity, int) else quantity.get('quantity', 1)
-                    
                     if product.manually_fully_booked:
-                        raise ValueError(f'{product.name} is fully booked')
-                    
+                        raise ValueError(
+                            f'{product.name} is fully booked'
+                        )
+
                     if not product.has_available_spots(qty):
-                        raise ValueError(f'{product.name} has insufficient spots available')
-                    
+                        raise ValueError(
+                            f'{product.name} has insufficient '
+                            f'spots available'
+                        )
+
                     order_line_item = OrderLineItem(
                         order=order,
                         product=product,
@@ -202,29 +287,38 @@ class StripeWH_Handler:
                     profile.save()
 
         except ValueError as e:
-            # AI written code - Availability validation failed
+            # Availability validation failed
             if order:
                 order.delete()
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} | Availability issue: {e}',
+                content=(
+                    f'Webhook received: {event["type"]} | '
+                    f'Availability issue: {e}'
+                ),
                 status=200
             )
         except Exception as e:
             if order:
                 order.delete()
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} | ERROR: {e}',
+                content=(
+                    f'Webhook received: {event["type"]} | '
+                    f'ERROR: {e}'
+                ),
                 status=500
             )
 
         self._send_confirmation_email(order)
         return HttpResponse(
-            content=f'Webhook received: {event["type"]} | SUCCESS: Created order in webhook',
+            content=(
+                f'Webhook received: {event["type"]} | '
+                f'SUCCESS: Created order in webhook'
+            ),
             status=200
         )
 
     def handle_payment_intent_payment_failed(self, event):
-        """Handle the payment_intent.payment_failed webhook from Stripe"""
+        """Handle payment_intent.payment_failed webhook"""
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
             status=200
