@@ -12,12 +12,12 @@ class ClassAdmin(admin.ModelAdmin):
     )
     list_filter = ('start_date', 'location', 'manually_fully_booked')
     list_editable = ('manually_fully_booked',)
-    
+
     def get_total_bookings_display(self, obj):
         """Display total bookings"""
         return obj.get_total_bookings()
     get_total_bookings_display.short_description = 'Booked'
-    
+
     def get_spots_remaining_display(self, obj):
         """Display spots remaining with color coding"""
         spots = obj.get_spots_remaining()
@@ -33,7 +33,7 @@ class ClassAdmin(admin.ModelAdmin):
         else:
             color = 'green'
             text = str(spots)
-        
+
         return format_html(
             '<span style="color: {}; font-weight: bold;">{}</span>',
             color, text
