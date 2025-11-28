@@ -1,9 +1,9 @@
-from decimal import Decimal
-from django.conf import settings
-from classes.models import Class as Product
 from django.shortcuts import get_object_or_404
+from classes.models import Class as Product
+
 
 def bag_contents(request):
+    """Calculate and return bag contents context"""
     bag_items = []
     total = 0
     product_count = 0
@@ -19,7 +19,7 @@ def bag_contents(request):
                 'quantity': quantity,
                 'product': product,
             })
-        except:
+        except Exception:
             # Remove deleted items from bag
             continue
 
