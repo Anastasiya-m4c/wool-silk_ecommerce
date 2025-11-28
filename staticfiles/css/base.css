@@ -282,6 +282,13 @@ form .form-control {
     font-size: 2rem;
 }
 
+#testimonialCarousel .carousel-control-prev {
+    left: -80px;
+}
+
+#testimonialCarousel .carousel-control-next {
+    right: -80px;
+}
 
 
 /* Image helper */
