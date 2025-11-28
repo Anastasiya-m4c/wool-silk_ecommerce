@@ -14,7 +14,7 @@ def contact_view(request):
             try:
                 send_mail(
                     subject=f'New Contact Form Submission: {contact.subject}',
-                    message=f'Name: {contact.name}\nEmail: {contact.email}\n\nMessage:\n{contact.message}',
+                    message=f'Name: {contact.name}\nEmail: {contact.email}\nPhone: {contact.phone}\n\nMessage:\n{contact.message}',
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     recipient_list=[settings.ADMIN_EMAIL],
                     fail_silently=False,
