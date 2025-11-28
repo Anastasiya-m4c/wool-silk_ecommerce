@@ -13,8 +13,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import dj_database_url
 from pathlib import Path
+
 if os.path.isfile('env.py'):
-    import env # noqa
+    import env  # noqa
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -36,9 +37,7 @@ ALLOWED_HOSTS = [
     'wool-and-silk-2e22b8061ad1.herokuapp.com',
 ]
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -117,7 +116,9 @@ TEMPLATES = [
     },
 ]
 
-MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+MESSAGE_STORAGE = (
+    'django.contrib.messages.storage.session.SessionStorage'
+)
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -138,10 +139,8 @@ LOGIN_URL = '/accounts/login/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 
-
 # Use console backend for email during development
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 
 WSGI_APPLICATION = 'wool_and_silk.wsgi.application'
 
@@ -151,9 +150,11 @@ WSGI_APPLICATION = 'wool_and_silk.wsgi.application'
 
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+        'default': dj_database_url.parse(
+            os.environ.get('DATABASE_URL')
+        )
     }
-else: 
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -163,7 +164,8 @@ else:
 
 
 # Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/4.2/ref/settings/
+# #auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -215,7 +217,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# AWS S3 Configuration (commented out for development)
+# AWS S3 Configuration
 if 'USE_AWS' in os.environ:
     AWS_S3_OBJECT_PARAMETERS = {
         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
@@ -224,7 +226,9 @@ if 'USE_AWS' in os.environ:
     AWS_STORAGE_BUCKET_NAME = 'wool-and-silk-eccomerce'
     AWS_S3_REGION_NAME = 'us-east-1'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_SECRET_ACCESS_KEY = os.environ.get(
+        'AWS_SECRET_ACCESS_KEY'
+    )
     AWS_S3_CUSTOM_DOMAIN = (
         f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     )
@@ -235,12 +239,14 @@ if 'USE_AWS' in os.environ:
     DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
     MEDIAFILES_LOCATION = 'media'
 
-    # Update static and media URLs in production to use S3 domain
+    # Update static and media URLs to use S3 domain
     STATIC_URL = (
-        f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+        f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+        f'{STATICFILES_LOCATION}/'
     )
     MEDIA_URL = (
-        f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+        f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+        f'{MEDIAFILES_LOCATION}/'
     )
 
 STRIPE_CURRENCY = 'gbp'
@@ -249,10 +255,13 @@ STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Email configuration
 if 'DEVELOPMENT' in os.environ:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_BACKEND = (
+        'django.core.mail.backends.console.EmailBackend'
+    )
     DEFAULT_FROM_EMAIL = 'mcavoy.ana@gmail.com'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -262,4 +271,7 @@ else:
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
-    ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'mcavoy.ana@gmail.com')
+    ADMIN_EMAIL = os.environ.get(
+        'ADMIN_EMAIL',
+        'mcavoy.ana@gmail.com'
+    )

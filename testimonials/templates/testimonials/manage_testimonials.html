@@ -22,7 +22,7 @@
                     <tr>
                         <td>{{ testimonial.user.username }}</td>
                         <td>{{ testimonial.title }}</td>
-                        <td>{{ testimonial.rating }} ⭐</td>
+                        <td>{{ testimonial.rating }} <i class="fa-jelly-fill fa-regular fa-star" style="color: rgb(255, 191, 40);"></i></td>
                         <td>{{ testimonial.created_at|date:"M d, Y" }}</td>
                         <td>
                             <a href="{% url 'approve_testimonial' testimonial.id %}" class="btn btn-sm btn-one">
@@ -59,7 +59,7 @@
                     <tr>
                         <td>{{ testimonial.user.username }}</td>
                         <td>{{ testimonial.title }}</td>
-                        <td>{{ testimonial.rating }} ⭐</td>
+                        <td>{{ testimonial.rating }} <i class="fa-jelly-fill fa-regular fa-star" style="color: rgb(255, 191, 40);"></i></td>
                         <td>{{ testimonial.created_at|date:"M d, Y" }}</td>
                         <td>
                             <a href="{% url 'delete_testimonial' testimonial.id %}" class="btn btn-sm btn-danger">

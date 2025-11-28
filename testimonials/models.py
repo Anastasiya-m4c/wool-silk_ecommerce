@@ -15,14 +15,13 @@ class Testimonial(models.Model):
     rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
     is_approved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+
     class Meta:
         ordering = ['-created_at']
-    
+
     def __str__(self):
         return f"{self.get_display_name()} - {self.title}"
-    
+
     def get_display_name(self):
         """Return name if provided, otherwise 'Anonymous'"""
         return self.name if self.name else "Anonymous"
-

@@ -1,5 +1,3 @@
-""" Views for the tutorials app """
-
 from django.shortcuts import render
 
 
