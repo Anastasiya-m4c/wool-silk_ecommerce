@@ -10,5 +10,10 @@ def index(request):
     }
     return render(request, 'home/index.html', context)
 
+
 def handler404(request, exception):
     return render(request, '404.html', status=404)
+
+
+def privacy_policy(request):
+    return render(request, 'home/privacy_policy.html')
