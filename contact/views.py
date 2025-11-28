@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+
 from .forms import ContactForm
 
 
 def contact_view(request):
+    """Handle contact form submissions"""
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -14,20 +16,34 @@ def contact_view(request):
             # Send email notification to admin
             try:
                 send_mail(
-                    subject=f'New Contact Form Submission: {contact.subject}',
-                    message=f'Name: {contact.name}\nEmail: {contact.email}\nPhone: {contact.phone}\n\nMessage:\n{contact.message}',
+                    subject=(
+                        f'New Contact Form Submission: '
+                        f'{contact.subject}'
+                    ),
+                    message=(
+                        f'Name: {contact.name}\n'
+                        f'Email: {contact.email}\n'
+                        f'Phone: {contact.phone}\n\n'
+                        f'Message:\n{contact.message}'
+                    ),
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     recipient_list=[settings.ADMIN_EMAIL],
                     fail_silently=False,
                 )
             except Exception as e:
-                # Log error but don't break the form submission
+                # Log error but don't break form submission
                 print(f"Email error: {e}")
 
-            messages.success(request, 'Thank you! Your message has been sent.')
+            messages.success(
+                request,
+                'Thank you! Your message has been sent.'
+            )
             return redirect('contact')
         else:
-            messages.error(request, 'Please correct the errors below.')
+            messages.error(
+                request,
+                'Please correct the errors below.'
+            )
     else:
         form = ContactForm()
 
