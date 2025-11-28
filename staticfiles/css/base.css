@@ -283,11 +283,11 @@ form .form-control {
 }
 
 #testimonialCarousel .carousel-control-prev {
-    left: -80px;
+    left: -100px;
 }
 
 #testimonialCarousel .carousel-control-next {
-    right: -80px;
+    right: -100px;
 }
 
 
