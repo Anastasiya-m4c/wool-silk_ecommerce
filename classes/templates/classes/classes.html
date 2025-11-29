@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block page_header %}
 <div class="container header-container">
     <div class="row">
@@ -8,6 +9,7 @@
     </div>
 </div>
 {% endblock %}
+
 
 {% block content %}
 <section>
@@ -17,52 +19,54 @@
         </div>
         <a href="{% url 'home' %}" class="btn rounded-0 btn-lg text-start">
             <span class="icon">
-                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
             </span>
             <span class="text-uppercase">Back</span>
         </a>
     </div>
 
-<div class="row g-4">
-    {% for class in classes %}
-    <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
-        <div class="card h-100 border-0 shadow-sm p-2 p-md-3 d-flex flex-column">
 
-            <a href="{% url 'class_detail' class.id %}" class="text-decoration-none">
-                <div class="ratio ratio-4x3">
-                    {% if class.image %}
-                    <img src="{{ class.image.url }}" class="w-100 h-100 img-cover rounded" alt="{{ class.name }}">
+    <div class="row g-4">
+        {% for class in classes %}
+        <div class="col-12 col-sm-6 col-lg-6 col-xl-4">
+            <div class="card h-100 border-0 shadow-sm p-2 p-md-3 d-flex flex-column">
+
+
+                <a href="{% url 'class_detail' class.id %}" class="text-decoration-none">
+                    <div class="ratio ratio-4x3">
+                        {% if class.image %}
+                        <img src="{{ class.image.url }}" class="w-100 h-100 img-cover rounded" alt="{{ class.name }}">
+                        {% else %}
+                        <img src="{{ MEDIA_URL }}noimage.png" class="w-100 h-100 img-cover rounded" alt="{{ class.name }}">
+                        {% endif %}
+                    </div>
+                </a>
+                <div class="card-body">
+                    <p class="mb-2 h4 fw-bold text-decoration">{{ class.name }}</p>
+                </div>
+                <div class="card-footer pt-0 border-0 text-left mt-auto ">
+                    <p class="mb-1"><strong>Date:</strong> {{ class.start_date }}</p>
+                    <p class="mb-1"><strong>Time:</strong> {{ class.start_time }}</p>
+                    <p class="mb-2"><strong>Price:</strong> £{{ class.price }}</p>
+                    <p class="mb-3"><strong>Location:</strong> {{ class.location }}</p>
+                    
+                    {% if class.is_fully_booked %}
+                    <span class="text-danger fw-bold d-block mt-2">Fully Booked</span>
+                    <a href="{% url 'contact' %}" class="btn btn-sm btn-one mt-2">Join Waiting List</a>
+                    {% elif class.get_spots_remaining <= 3 %}
+                    <span class="text-warning fw-bold d-block mt-2">Only {{ class.get_spots_remaining }} spot(s) left!</span>
+                    <a href="{% url 'class_detail' class_id=class.id %}" class="btn btn-sm btn-one mt-2">View Details</a>
                     {% else %}
-                    <img src="{{ MEDIA_URL }}noimage.png" class="w-100 h-100 img-cover rounded" alt="{{ class.name }}">
+                    <a href="{% url 'class_detail' class_id=class.id %}" class="btn btn-sm btn-one mt-2">View Details</a>
+                    {% endif %}
+                    {% if  request.user.is_superuser %}
+                    <a href="{% url 'edit_class' class.id %}" class="btn btn-sm btn-two mt-2">Edit Class</a>
+                    <a href="{% url 'delete_class' class.id %}" class="btn btn-sm btn-delete mt-2">Delete Class</a>
                     {% endif %}
                 </div>
-            </a>
-            <div class="card-body">
-                <p class="mb-2 h4 fw-bold text-decoration">{{ class.name }}</p>
-            </div>
-            <div class="card-footer pt-0 border-0 text-left mt-auto ">
-                <p class="mb-1"><strong>Date:</strong> {{ class.start_date }}</p>
-                <p class="mb-1"><strong>Time:</strong> {{ class.start_time }}</p>
-                <p class="mb-2"><strong>Price:</strong> £{{ class.price }}</p>
-                <p class="mb-3"><strong>Location:</strong> {{ class.location }}</p>
-                
-                {% if class.is_fully_booked %}
-                <span class="text-danger fw-bold d-block mt-2">Fully Booked</span>
-                <a href="{% url 'contact' %}" class="btn btn-sm btn-one mt-2">Join Waiting List</a>
-                {% elif class.get_spots_remaining <= 3 %}
-                <span class="text-warning fw-bold d-block mt-2">Only {{ class.get_spots_remaining }} spot(s) left!</span>
-                <a href="{% url 'class_detail' class_id=class.id %}" class="btn btn-sm btn-one mt-2">View Details</a>
-                {% else %}
-                <a href="{% url 'class_detail' class_id=class.id %}" class="btn btn-sm btn-one mt-2">View Details</a>
-                {% endif %}
-                {% if  request.user.is_superuser %}
-                <a href="{% url 'edit_class' class.id %}" class="btn btn-sm btn-two mt-2">Edit Class</a>
-                <a href="{% url 'delete_class' class.id %}" class="btn btn-sm btn-delete mt-2">Delete Class</a>
-                {% endif %}
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
-
+</section>
 {% endblock %}

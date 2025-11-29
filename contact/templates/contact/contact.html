@@ -2,6 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
+
 {% block page_header %}
 <div class="container header-container">
     <div class="row">
@@ -10,7 +11,9 @@
 </div>
 {% endblock %}
 
+
 {% block content %}
+
 
 <div class="container">
     <div class="row">
@@ -20,9 +23,10 @@
         </div>
     </div>
 
+
     <div class="row">
         <div class="col-12 col-md-6">
-            <form method="POST" action="" class="form mb-2">
+            <form method="POST" class="form mb-2">
                 {% csrf_token %}
                 {{ form | crispy }}
                 <div class="text-right">
