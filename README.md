@@ -537,6 +537,14 @@ Prices showing long floating-point values (e.g., 19.999999)
 
 ---
 
+## Known issues:  
+
+### Issue:  
+Error when attempting to use autofill payment details.  
+**Status:** Won't Fix.  
+**Justification:** Stripe functionality needs to be rebuilt as they have released more secure payment methods. This will be addressed as part of the next release when integrating Stripe's Payment Element widget for improved security and user experience.  
+
+
 ## Deployment
 
 The site was deployed to Heroku using the following method:
