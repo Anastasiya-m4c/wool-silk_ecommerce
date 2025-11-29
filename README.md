@@ -2,7 +2,7 @@
 
 ![Wool & Silk Brand Identity](#)
 
-View live website [HERE](#)
+View live website [HERE](https://wool-and-silk-2e22b8061ad1.herokuapp.com)
 
 Project Dashboard [HERE](https://github.com/users/Anastasiya-m4c/projects/5/views/1)
 
@@ -358,6 +358,12 @@ Validation completed with minimal errors.
 
 ### Customer-Facing Features
 
+# Test Cases - Wool & Silk Art Studio
+
+# Test Cases - Wool & Silk Art Studio
+
+## Customer User Stories
+
 | Test Case ID | User Story | Preconditions | Test Steps | Expected Result | Status |
 |--------------|------------|---------------|------------|-----------------|--------|
 | CUS-001 | Browse available classes | Classes exist in database | 1. Navigate to "Classes" page<br>2. View all classes | All classes are displayed with images and details | Pass |
@@ -374,8 +380,38 @@ Validation completed with minimal errors.
 | CUS-012 | View classes | Classes exist in database | 1. Navigate to classes page | All classes are displayed | Pass |
 | CUS-013 | View testimonials | Approved testimonials exist | 1. Navigate to testimonials page | All approved testimonials are displayed with ratings | Pass |
 | CUS-014 | Empty bag handling | Bag is empty | 1. Navigate to bag | Message indicating empty bag with link to continue shopping | Pass |
+
+## System Tests
+
+| Test Case ID | User Story | Preconditions | Test Steps | Expected Result | Status |
+|--------------|------------|---------------|------------|-----------------|--------|
 | SYS-001 | 404 page displays | None | 1. Enter invalid URL | Custom 404 page is displayed with navigation links | Pass |
 
+## Authentication & Account Management
+
+| Test Case ID | User Story | Preconditions | Test Steps | Expected Result | Status |
+|--------------|------------|---------------|------------|-----------------|--------|
+| AUTH-001 | User registration | None | 1. Navigate to "Register"<br>2. Fill in email, confirm email, password, confirm password<br>3. Submit form | Account created, verification email sent message appears | |
+| AUTH-002 | Email verification after registration | User registered, email verification pending | 1. Check email inbox<br>2. Click verification link in email<br>3. Verify landing page | Email confirmed, user redirected to login | |
+| AUTH-003 | Login with verified account | User account exists and is verified | 1. Navigate to "Login"<br>2. Enter email and password<br>3. Click "Sign In" | User logs in successfully and redirected to home | |
+| AUTH-004 | Login with unverified account | User account exists but email not verified | 1. Navigate to "Login"<br>2. Enter email and password<br>3. Click "Sign In" | Error message: "Please verify your email address" | |
+| AUTH-005 | Logout | User is logged in | 1. Click "Logout" link<br>2. Confirm logout | User logged out, session cleared, redirected to home | |
+| AUTH-006 | Forgotten password request | User account exists | 1. Navigate to "Login"<br>2. Click "Forgot Password?"<br>3. Enter email<br>4. Submit | Password reset email sent confirmation message | |
+| AUTH-007 | Password reset via email | Password reset email received | 1. Open password reset email<br>2. Click reset link<br>3. Enter new password twice<br>4. Submit | Password updated, user can log in with new password | |
+| AUTH-008 | Superuser-only access | Non-superuser logged in | 1. Try accessing /testimonials/manage/ | Error: "Only store owners can do that" | |
+
+## Email Functionality
+
+| Test Case ID | User Story | Preconditions | Test Steps | Expected Result | Status |
+|--------------|------------|---------------|------------|-----------------|--------|
+| EMAIL-001 | Registration confirmation email sent | User just registered | 1. Complete registration<br>2. Check admin email logs/inbox | Email sent with verification link to user's email | |
+| EMAIL-002 | Registration email contains correct info | Verification email received | 1. Open verification email | Email contains: studio name, verification link, correct recipient | |
+| EMAIL-003 | Order confirmation email sent | Order successfully placed | 1. Complete checkout<br>2. Check user's email inbox | Order confirmation email received | |
+| EMAIL-004 | Order confirmation email content | Order confirmation email received | 1. Open email<br>2. Verify content | Email contains: order number, items, quantities, total, billing details | |
+| EMAIL-005 | Contact form email to admin | User submits contact form | 1. Fill contact form<br>2. Submit<br>3. Check admin email | Email received at admin email with: name, user email, phone, message | |
+| EMAIL-006 | Contact form email contains phone | User submits contact with phone | 1. Fill form including phone<br>2. Submit<br>3. Check admin email | Phone number included in email body | |
+| EMAIL-007 | Email from address correct | Any email sent | 1. Receive email<br>2. Check sender | From: address is DEFAULT_FROM_EMAIL value | |
+| EMAIL-008 | Password reset email sent | User requests password reset | 1. Submit forgotten password form<br>2. Check email | Password reset email received with reset link | |
 
 ### Admin Functions
 
@@ -385,8 +421,9 @@ Validation completed with minimal errors.
 | ADM-002 | Edit class | User is superuser and class exists | 1. Click "Edit" on class<br>2. Modify details<br>3. Save | Class is updated with new information | Pass |
 | ADM-003 | Delete class | User is superuser and class exists | 1. Click "Delete" on class<br>2. Confirm | Class is removed from database | Pass |
 | ADM-004 | Approve testimonial | User is superuser and testimonial exists | 1. Navigate to "Manage Testimonials"<br>2. Click "Approve" | Testimonial appears on public testimonials page | Pass |
-| ADM-005 | View contact submissions | User is superuser and submissions exist | 1. Navigate to Django admin<br>2. View contact messages | All messages are displayed | Pass |
-| ADM-006 | Reject testimonial | User is superuser and testimonial exists | 1. Navigate to admin<br>2. Select testimonial<br>3. Mark as not approved | Testimonial is hidden from public view | Pass |
+| ADM-005 | Delete testimonial | User is superuser and testimonial exists | 1. Navigate to "Manage Testimonials"<br>2. Click "Delete" | Testimonial is removed from public testimonials page | Pass |
+| ADM-006 | View contact submissions | User is superuser and submissions exist | 1. Navigate to Django admin<br>2. View contact messages | All messages are displayed | Pass |
+| ADM-007 | Reject testimonial | User is superuser and testimonial exists | 1. Navigate to admin<br>2. Select testimonial<br>3. Mark as not approved | Testimonial is hidden from public view | Pass |
 | ADM-008 | View order details in admin | Orders exist | 1. Navigate to orders in admin<br>2. Click on order | Full order details with customer info displayed | Pass |
 
 ### Forms Validation
@@ -424,7 +461,7 @@ Validation completed with minimal errors.
 
 ### Testing Summary
 
-- **Total Test Cases**: 40+
+- **Total Test Cases**: 50+
 - **Passed**: All
 - **Failed**: 0
 - **Blocked**: 0
