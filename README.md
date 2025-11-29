@@ -1,6 +1,6 @@
 # Wool & Silk Art Studio
 
-![Wool & Silk Brand Identity](#)
+![Am I Responsive](#)
 
 View live website [HERE](https://wool-and-silk-2e22b8061ad1.herokuapp.com)
 
@@ -95,19 +95,28 @@ Wool & Silk Art Studio is a full-stack e-commerce application built with Django.
 - As an admin, I want to upload/manage video tutorials so I can grow the library.
 - As an admin, I want to view enquiries so I can manage operations smoothly.
 
+### Space Allocation & Overbooking Prevention
+- As an admin, I want to set a maximum capacity for each class so the system prevents overbooking automatically.
+- As an admin, I want to see real-time availability counts so I can monitor bookings and prevent overselling.
+- As an admin, I want the system to block new bookings when capacity is reached so customers cannot purchase unavailable spots.
+- As an admin, I want to adjust class capacity after creation so I can respond to venue or resource changes.
+
+### Waiting List
+- As a customer, I want to join a waiting list when a class is full so I have a chance to attend if spots open up.
+
 ---
 
 ## Future Developments
 
-- **Tutorials Section:** Video content for learning felting techniques at home. The tutorial app has bee creating with coming soon messaging to promote this to existing user base. 
-- **Waiting List:** Allow customers to join a waiting list for fully booked classes
-- **Class Capacity Management:** Automatic booking limits to prevent overbooking
+- **Tutorials Section:** Video content for learning felting techniques at home. The tutorial app has bee creating with coming soon messaging to promote this to existing user base.  
 - **Multiple Images per Class:** Gallery view for each class showing examples
 - **Blog:** Tips, techniques, and studio news
 - **Newsletter Signup:** Email marketing integration for updates
 - **Gift Vouchers:** Purchasable class vouchers for gifts
 - **Workshop Calendar:** Interactive booking calendar view
 - **Social Media Integration:** Direct sharing to Instagram and Facebook
+- **Admin Dashboard:** So that admin cal easliy see upcoming classes and a number of bookings and attendees for each.  
+
 
 ---
 
@@ -166,8 +175,13 @@ The colors ensure strong contrast while creating a cohesive, vibrant brand ident
 - Responsive design ensuring usability across all devices
 - Toast notifications for user feedback on actions
 - Custom 404 error page
+- Privacy Policy
 - Shopping bag preview in toast messages
 - Order confirmation emails
+- Class capacity management - set and edit max attendees per class
+- Waiting Lists
+
+
 
 ### Security Features
 
@@ -209,6 +223,7 @@ Security has been carefully considered throughout the design and development of 
   - start_time (TimeField)
   - duration (IntegerField - hours)
   - location (CharField)
+  - number of available spaces
 
 - **Order**
   - id (Primary Key)
@@ -352,6 +367,7 @@ Validation completed with minimal errors.
 - **CSS:** Jigsaw Validator 
 - **Python:** PEP8 compliant via Pylint 
 - **JavaScript:** JSHint 
+- **axeDevtools** - Aceccibility compliance & rating
 
 ### Manual Testing User Stories and Features
 
@@ -479,9 +495,9 @@ Validation completed with minimal errors.
 
 ### Accessibility
 
-The colors have been carefully selected to comply with accessibility contrast standards, ensuring readability for all users. The site has been tested using the WAVE plugin on Chrome.
+The colors have been carefully selected to comply with accessibility contrast standards, ensuring readability for all users. The site has been tested using axeDevTools and acheived WCAG 2.1 Level A compliance. 
 
-*(WAVE screenshot)*
+*( screenshot)*
 
 ---
 
@@ -507,7 +523,6 @@ Webhook failing to create order.
 **Solution:** Added all required fields and proper error handling.
 
 ---
-
 
 ### Issue: 
 Product images not displaying on detail pages
@@ -543,6 +558,11 @@ Prices showing long floating-point values (e.g., 19.999999)
 Error when attempting to use autofill payment details.  
 **Status:** Won't Fix.  
 **Justification:** Stripe functionality needs to be rebuilt as they have released more secure payment methods. This will be addressed as part of the next release when integrating Stripe's Payment Element widget for improved security and user experience.  
+
+### Issue:  
+2 serious error received when testing in axeDevTools. 
+**Status:** Won't Fix.  
+**Justification:** Both of the errors are relates to STRIPE. This will be addressed as part of the next release when integrating Stripe's Payment Element widget for improved security and user experience. 
 
 
 ## Deployment
