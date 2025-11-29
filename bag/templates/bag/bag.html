@@ -17,16 +17,52 @@
                 <h2 class="logo-font mb-4 text-center">Shopping Bag</h2>
             </div>
         </div>
-
         <div class="row">
             <div class="col">
                 {% if bag_items %}
-                    <div class="table-responsive rounded">
+                <div class="d-block d-md-none">
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-muted mb-5">A summary of your bag contents is below</p>
+                        </div>
+                    </div>
+                    {% for item in bag_items %}
+                        <div class="row">
+                            <div class="col-12 col-sm-6 mb-2">
+                                {% include "bag/product-image.html" %}
+                            </div>
+                            <div class="col-12 col-sm-6 mb-2">
+                                {% include "bag/product-info.html" %}
+                            </div>
+                            <div class="col-12 col-sm-6 mb-2">
+                                <p class="my-0">Price: £{{ item.product.price }}</p>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                {% include "bag/quantity-form.html" %}
+                                
+                            </div>
+                            <div>
+                                <hr>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <h6 class="fs-4"><strong>Bag Total: £{{ total|floatformat:2 }}</strong></h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    {% include "bag/checkout-buttons.html" %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                    <div class="table-responsive rounded d-none d-md-block">
                         <table class="table table-sm table-borderless">
                             <thead class="fs-4">
                                 <tr>
                                     <th scope="col">Product Info</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">Name</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Qty</th>
                                     <th scope="col">Subtotal</th>
@@ -35,41 +71,19 @@
                             {% for item in bag_items %}
                                 <tr class="border-top">
                                     <td class="py-3 w-25 ratio ratio-4x3">
-                                        {% if item.product.image %}
-                                        <img class="img-fluid p-3 rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                                        {% else %}
-                                        <img class="img-fluid p-3 rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
-                                        {% endif %}
+                                        {% include "bag/product-image.html" %}
                                     </td>
                                     <td class="py-3">
-                                        <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                                        <p class="my-0 small text-muted">SKU: {{ item.product.sku|upper }}</p>
+                                        {% include "bag/product-info.html" %}
                                     </td>
                                     <td class="py-3">
                                         <p class="my-0">£{{ item.product.price }}</p>
                                     </td>
                                     <td class="py-3 w-25">
-                                        <form class="form update-form" method="POST" action="{% url 'adjust_bag' item.product.id %}">
-                                            {% csrf_token %}
-                                            <div class="input-group input-group-sm input-group-{{ item.product.id }}">
-                                                <button class="btn btn-sm btn-outline decrement-qty decrement-qty_{{ item.product.id }}" 
-                                                    type="button" data-item_id="{{ item.product.id }}">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
-                                                <input name="quantity" min="1" max="99" value="{{ item.quantity }}" 
-                                                    class="form-control text-center btn-outline btn qty_input id_qty_{{ item.product.id }}" 
-                                                    data-item_id="{{ item.product.id }}" style="max-width: 60px;">
-                                                <button class="btn btn-outline increment-qty increment-qty_{{ item.product.id }}" 
-                                                    type="button" data-item_id="{{ item.product.id }}">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                            </div>
-                                            <a class="update-link me-2" href=""><small>Update</small></a>
-                                            <a class="remove-link text-danger float-right" id="remove_{{ item.item_id}}" href=""><small>Remove</small></a>
-                                        </form>
+                                        {% include "bag/quantity-form.html" %}                                       
                                     </td>
                                     <td class="py-3">
-                                        <p class="my-0">£{{ item.product.price }}</p>
+                                        <p class="my-0">£{{ total|floatformat:2 }}</p>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -80,18 +94,7 @@
                             </tr>
                             <tr>
                                 <td colspan="5" class="pt-3 text-end">
-                                    <a href="{% url 'classes' %}" class="btn btn-one btn-lg me-3 mb-3">
-                                        <span class="icon">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </span>
-                                        <span class="">Keep Shopping</span>
-                                    </a>
-                                    <a href="{% url 'checkout' %}" class="btn btn-two btn-lg mb-3">
-                                        <span class="">Secure Checkout</span>
-                                        <span class="icon">
-                                            <i class="fas fa-lock"></i>
-                                        </span>
-                                    </a>
+                                    {% include "bag/checkout-buttons.html" %}
                                 </td>
                             </tr>
                         </table>
@@ -102,7 +105,7 @@
                         <span class="icon">
                             <i class="fas fa-chevron-left"></i>
                         </span>
-                        <span class="">Keep Shopping</span>
+                        <span>Keep Shopping</span>
                     </a>
                 {% endif %}
             </div>
