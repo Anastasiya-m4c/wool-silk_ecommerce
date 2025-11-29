@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block page_header %}
     <div class="container header-container">
         <div class="row">
@@ -8,6 +9,7 @@
         </div>
     </div>
 {% endblock %}
+
 
 {% block content %}
     <div></div>
@@ -68,6 +70,7 @@
                                     <th scope="col">Subtotal</th>
                                 </tr>
                             </thead>
+                            <tbody>
                             {% for item in bag_items %}
                                 <tr class="border-top">
                                     <td class="py-3 w-25 ratio ratio-4x3">
@@ -87,6 +90,8 @@
                                     </td>
                                 </tr>
                             {% endfor %}
+                            </tbody>
+                            <tfoot>
                             <tr>
                                 <td colspan="5" class="text-end border-top pt-3">
                                     <h6 class="text-end fs-4"><strong>Bag Total: £{{ total|floatformat:2 }}</strong></h6>
@@ -97,13 +102,14 @@
                                     {% include "bag/checkout-buttons.html" %}
                                 </td>
                             </tr>
+                            </tfoot>
                         </table>
                     </div>
                 {% else %}
                     <p class="lead mb-5">Your bag is empty.</p>
                     <a href="{% url 'classes' %}" class="btn btn-one btn-lg">
                         <span class="icon">
-                            <i class="fas fa-chevron-left"></i>
+                            <i class="fas fa-chevron-left" aria-hidden="true"></i>
                         </span>
                         <span>Keep Shopping</span>
                     </a>
@@ -113,9 +119,11 @@
     </div>
 {% endblock %}
 
+
 {% block postloadjs %}
 {{ block.super }}
 {% include "classes/includes/quantity_input_script.html" %}
+
 
 <script type="text/javascript">
     (function () {
@@ -125,17 +133,21 @@
         }
         const csrftoken = getCookie('csrftoken');
 
+
         $('.update-link').click(function (e) {
             e.preventDefault();
             var form = $(this).closest('form.update-form');
             if (form.length) form.trigger('submit');
         });
 
+
         $('.remove-link').click(function (e) {
             e.preventDefault();
 
+
             var itemId = ($(this).attr('id') || '').split('remove_')[1];
             var url = `/bag/remove/${itemId}/`; 
+
 
             fetch(url, {
                 method: 'POST',
@@ -158,6 +170,5 @@
         });
     })();
 </script>
-
 
 {% endblock %}

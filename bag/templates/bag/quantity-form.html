@@ -2,15 +2,15 @@
     {% csrf_token %}
     <div class="input-group input-group-sm input-group-{{ item.product.id }}">
         <button class="btn btn-sm btn-outline decrement-qty decrement-qty_{{ item.product.id }}" 
-            type="button" data-item_id="{{ item.product.id }}">
-            <i class="fas fa-minus"></i>
+            type="button" data-item_id="{{ item.product.id }}" aria-label="Decrease quantity">
+            <i class="fas fa-minus" aria-hidden="true"></i>
         </button>
         <input name="quantity" min="1" max="99" value="{{ item.quantity }}" 
             class="form-control text-center btn-outline btn qty_input id_qty_{{ item.product.id }}" 
-            data-item_id="{{ item.product.id }}" style="max-width: 60px;">
+            data-item_id="{{ item.product.id }}" style="max-width: 60px;" aria-label="Quantity">
         <button class="btn btn-outline increment-qty increment-qty_{{ item.product.id }}" 
-            type="button" data-item_id="{{ item.product.id }}">
-            <i class="fas fa-plus"></i>
+            type="button" data-item_id="{{ item.product.id }}" aria-label="Increase quantity">
+            <i class="fas fa-plus" aria-hidden="true"></i>
         </button>
     </div>
     <a class="update-link me-2" href="javascript:void(0);"><small>Update</small></a>
