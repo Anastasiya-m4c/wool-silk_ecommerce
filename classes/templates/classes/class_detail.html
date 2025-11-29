@@ -91,25 +91,26 @@
                                     <div class="input-group input-group-{{ class.id}}">
                                         <div>
                                             <button type="button" class="decrement-qty btn btn-outline-secondary decrement-qty_{{ class.id }}" 
-                                                data-item_id="{{ class.id }}">
+                                                data-item_id="{{ class.id }}" aria-label="Decrease quantity">
                                                 <span class="icon">
-                                                    <i class="fas fa-minus"></i>
+                                                    <i class="fas fa-minus" aria-hidden="true"></i>
                                                 </span>
                                             </button>
                                         </div>
                                         <input class="form-control qty_input btn-outline-secondary btn id_qty_{{ class.id }}" 
                                             name="quantity" value="1" min="1" max="{{ spots_remaining }}"   
-                                            data-item_id="{{ class.id }}" style="max-width: 40px;">
-
+                                            data-item_id="{{ class.id }}" style="max-width: 40px;" aria-label="Quantity">
+                                    
                                         <div>
                                             <button type="button" class="increment-qty btn btn-outline-secondary increment-qty_{{ class.id }}" 
-                                            data-item_id="{{ class.id }}">
+                                                data-item_id="{{ class.id }}" aria-label="Increase quantity">
                                                 <span class="icon">
-                                                    <i class="fas fa-plus"></i>
+                                                    <i class="fas fa-plus" aria-hidden="true"></i>
                                                 </span>
-                                        </button>
+                                            </button>
+                                        </div>
                                     </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
 
