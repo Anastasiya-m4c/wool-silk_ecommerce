@@ -109,10 +109,10 @@
                         <input class="form-check-input ms-2 me-0" type="checkbox" id="id-save-info" name="save-info"
                             checked>
                         {% else %}
-                        <label class="form-check-label" for="id-save-info">
+                        <p class="form-check-label">
                             <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
                             <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-                        </label>
+                        </p>
                         {% endif %}
                     </div>
                 </fieldset>
@@ -157,3 +157,4 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}
+
