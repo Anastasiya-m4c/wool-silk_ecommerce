@@ -10,10 +10,12 @@
     --ws-white: #FFFFFF;
     --ws-font: #0C1D43; 
 }
+
 /* Base */
 html {
     height: 100%;
 }
+
 body {
     min-height: 100%;
     position: relative; 
@@ -58,9 +60,6 @@ p {
     background-color: var(--ws-blue);
     box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
     padding-block: 0.5rem;
-    /* border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px; */
-
 }
 
 /* Links */
@@ -189,15 +188,6 @@ p {
     color: var(--ws-cinnamon);
 }
 
-/* .navbar-logo {
-    max-height: 75px;
-    height: auto;
-    width: auto;
-    object-fit: contain;
-} */
-
-
-
 /* Class cards */
 .card {
     background-color: var(--ws-beige-light) ;
@@ -269,7 +259,6 @@ form .form-control {
 
 .carousel-inner {
     background: var(--ws-beige-light);
-    /* background: transparent !important; */
 }
 
 .carousel-control-prev-icon,
@@ -296,14 +285,9 @@ form .form-control {
 
 
 /* Media queries */
-
 @media (min-width: 1200px) {
     .container-fluid { max-width: 90%; }
     .container { max-width: 90%; }
-}
-
-@media (min-width: 992px) {
-
 }
 
 @media (max-width: 991.98px) {
