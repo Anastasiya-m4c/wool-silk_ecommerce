@@ -128,27 +128,27 @@ This project achieved excellent results in the key areas: Accessibility, Best Pr
 
 | Test Case ID | User Story | Preconditions | Test Steps | Expected Result | Status |
 |--------------|------------|---------------|------------|-----------------|--------|
-| AUTH-001 | User registration | None | 1. Navigate to "Register"<br>2. Fill in email, confirm email, password, confirm password<br>3. Submit form | Account created, verification email sent message appears | |
-| AUTH-002 | Email verification after registration | User registered, email verification pending | 1. Check email inbox<br>2. Click verification link in email<br>3. Verify landing page | Email confirmed, user redirected to login | |
-| AUTH-003 | Login with verified account | User account exists and is verified | 1. Navigate to "Login"<br>2. Enter email and password<br>3. Click "Sign In" | User logs in successfully and redirected to home | |
-| AUTH-004 | Login with unverified account | User account exists but email not verified | 1. Navigate to "Login"<br>2. Enter email and password<br>3. Click "Sign In" | Error message: "Please verify your email address" | |
-| AUTH-005 | Logout | User is logged in | 1. Click "Logout" link<br>2. Confirm logout | User logged out, session cleared, redirected to home | |
-| AUTH-006 | Forgotten password request | User account exists | 1. Navigate to "Login"<br>2. Click "Forgot Password?"<br>3. Enter email<br>4. Submit | Password reset email sent confirmation message | |
-| AUTH-007 | Password reset via email | Password reset email received | 1. Open password reset email<br>2. Click reset link<br>3. Enter new password twice<br>4. Submit | Password updated, user can log in with new password | |
-| AUTH-008 | Superuser-only access | Non-superuser logged in | 1. Try accessing /testimonials/manage/ | Error: "Only store owners can do that" | |
+| AUTH-001 | User registration | None | 1. Navigate to "Register"<br>2. Fill in email, confirm email, password, confirm password<br>3. Submit form | Account created, verification email sent message appears | Pass |
+| AUTH-002 | Email verification after registration | User registered, email verification pending | 1. Check email inbox<br>2. Click verification link in email<br>3. Verify landing page | Email confirmed, user redirected to login | Pass |
+| AUTH-003 | Login with verified account | User account exists and is verified | 1. Navigate to "Login"<br>2. Enter email and password<br>3. Click "Sign In" | User logs in successfully and redirected to home | Pass |
+| AUTH-004 | Login with unverified account | User account exists but email not verified | 1. Navigate to "Login"<br>2. Enter email and password<br>3. Click "Sign In" | Error message: "Please verify your email address" | Pass |
+| AUTH-005 | Logout | User is logged in | 1. Click "Logout" link<br>2. Confirm logout | User logged out, session cleared, redirected to home | Pass |
+| AUTH-006 | Forgotten password request | User account exists | 1. Navigate to "Login"<br>2. Click "Forgot Password?"<br>3. Enter email<br>4. Submit | Password reset email sent confirmation message | Pass |
+| AUTH-007 | Password reset via email | Password reset email received | 1. Open password reset email<br>2. Click reset link<br>3. Enter new password twice<br>4. Submit | Password updated, user can log in with new password | Pass |
+| AUTH-008 | Superuser-only access | Non-superuser logged in | 1. Try accessing /testimonials/manage/ | Error: "Only store owners can do that" | Pass |
 
 ## Email Functionality
 
 | Test Case ID | User Story | Preconditions | Test Steps | Expected Result | Status |
 |--------------|------------|---------------|------------|-----------------|--------|
-| EMAIL-001 | Registration confirmation email sent | User just registered | 1. Complete registration<br>2. Check admin email logs/inbox | Email sent with verification link to user's email | |
-| EMAIL-002 | Registration email contains correct info | Verification email received | 1. Open verification email | Email contains: studio name, verification link, correct recipient | |
-| EMAIL-003 | Order confirmation email sent | Order successfully placed | 1. Complete checkout<br>2. Check user's email inbox | Order confirmation email received | |
-| EMAIL-004 | Order confirmation email content | Order confirmation email received | 1. Open email<br>2. Verify content | Email contains: order number, items, quantities, total, billing details | |
-| EMAIL-005 | Contact form email to admin | User submits contact form | 1. Fill contact form<br>2. Submit<br>3. Check admin email | Email received at admin email with: name, user email, phone, message | |
-| EMAIL-006 | Contact form email contains phone | User submits contact with phone | 1. Fill form including phone<br>2. Submit<br>3. Check admin email | Phone number included in email body | |
-| EMAIL-007 | Email from address correct | Any email sent | 1. Receive email<br>2. Check sender | From: address is DEFAULT_FROM_EMAIL value | |
-| EMAIL-008 | Password reset email sent | User requests password reset | 1. Submit forgotten password form<br>2. Check email | Password reset email received with reset link | |
+| EMAIL-001 | Registration confirmation email sent | User just registered | 1. Complete registration<br>2. Check admin email logs/inbox | Email sent with verification link to user's email | Pass |
+| EMAIL-002 | Registration email contains correct info | Verification email received | 1. Open verification email | Email contains: studio name, verification link, correct recipient | Pass |
+| EMAIL-003 | Order confirmation email sent | Order successfully placed | 1. Complete checkout<br>2. Check user's email inbox | Order confirmation email received | Pass |
+| EMAIL-004 | Order confirmation email content | Order confirmation email received | 1. Open email<br>2. Verify content | Email contains: order number, items, quantities, total, billing details | Pass |
+| EMAIL-005 | Contact form email to admin | User submits contact form | 1. Fill contact form<br>2. Submit<br>3. Check admin email | Email received at admin email with: name, user email, phone, message | Pass |
+| EMAIL-006 | Contact form email contains phone | User submits contact with phone | 1. Fill form including phone<br>2. Submit<br>3. Check admin email | Phone number included in email body | Pass |
+| EMAIL-007 | Email from address correct | Any email sent | 1. Receive email<br>2. Check sender | From: address is DEFAULT_FROM_EMAIL value | Pass |
+| EMAIL-008 | Password reset email sent | User requests password reset | 1. Submit forgotten password form<br>2. Check email | Password reset email received with reset link | Pass |
 
 ### Admin Functions
 

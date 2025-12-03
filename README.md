@@ -127,29 +127,29 @@ This site is designed to be clean, welcoming, and easy to navigate, reflecting t
 Wireframe images
 ![Home Page](staticfiles/images/readme_images/wf_home.png)
 ![Checkout](staticfiles/images/readme_images/wf_checkout.png)
-![Classes](staticfiles/images/readme_images/wf_classes.png)
+![Classes](staticfiles/images/readme_images/wf-classes.png)
 
 [Deployed on Heroku](https://wool-and-silk-2e22b8061ad1.herokuapp.com)
 
 ## Final MVP Version
 
-![Home Page](staticfiles/images/readme_images/home.png)
-![Testimonials Carousel](staticfiles/images/readme_images/testimonials_carousel.png)
-![Testimonials](staticfiles/images/readme_images/testimonials.png)
-![Testimonials Admin](staticfiles/images/readme_images/testimonials_admin.png)
-![Shopping Bag](staticfiles/images/readme_images/shopping_bag.png)
-![Shopping Bag 2](staticfiles/images/readme_images/shopping_bag_2.png)
-![Profile](staticfiles/images/readme_images/profile.png)
-![Classes](staticfiles/images/readme_images/classes.png)
-![Edit Class](staticfiles/images/readme_images/edit_class.png)
-![Availability](staticfiles/images/readme_images/availibility.png)
-![Fully Booked](staticfiles/images/readme_images/fully_booked.png)
-![Tutorials](staticfiles/images/readme_images/tutorials.png)
-![Checkout](staticfiles/images/readme_images/checkout.png)
-![Privacy Policy](staticfiles/images/readme_images/privacy_policy.png)
-![Mobile Navigation](staticfiles/images/readme_images/mobile_nav.png)
-![Footer](staticfiles/images/readme_images/footer.png)
-![404 Page](staticfiles/images/readme_images/404.png)
+![Home Page](staticfiles/images/readme_images/home.png)  
+![Testimonials Carousel](staticfiles/images/readme_images/testimonials_carousel.png)  
+![Testimonials](staticfiles/images/readme_images/testimonials.png)  
+![Testimonials Admin](staticfiles/images/readme_images/testimonials_admin.png)  
+![Shopping Bag](staticfiles/images/readme_images/shopping_bag.png)  
+![Shopping Bag 2](staticfiles/images/readme_images/shopping_bag_2.png)  
+![Profile](staticfiles/images/readme_images/profile.png)  
+![Classes](staticfiles/images/readme_images/classes.png)  
+![Edit Class](staticfiles/images/readme_images/edit_class.png)  
+![Availability](staticfiles/images/readme_images/availibility.png)  
+![Fully Booked](staticfiles/images/readme_images/fully_booked.png)  
+![Tutorials](staticfiles/images/readme_images/tutorials.png)  
+![Checkout](staticfiles/images/readme_images/checkout.png)  
+![Privacy Policy](staticfiles/images/readme_images/privacy_policy.png)  
+![Mobile Navigation](staticfiles/images/readme_images/mobile_nav.png)  
+![Footer](staticfiles/images/readme_images/footer.png)  
+![404 Page](staticfiles/images/readme_images/404.png)  
 
 
 ---
