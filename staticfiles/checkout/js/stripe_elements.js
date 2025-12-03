@@ -25,7 +25,7 @@ var style = {
 
 var card = elements.create('card', {
     style: style,
-    hidePostalCode: true  // no ZIP field for UK
+    hidePostalCode: true 
 });
 card.mount('#card-element');
 

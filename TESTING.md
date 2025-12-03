@@ -1,18 +1,5 @@
 ## Testing
 
-Throughout the development of this project, I have conducted several rounds of testing to ensure a smooth user experience, robust functionality, and adherence to web standards. Testing covered browser compatibility, accessibility, functionality, real device testing, and UI/UX design through a combination of manual testing, code validators, and tools like Lighthouse.
-
-### Google's Lighthouse Performance
-
-
-**About Mobile Performance Scores**
-
-This project achieved excellent results in the key areas: Accessibility, Best Practices, and SEO & web performace. Mobile performance scores are lower but can vary depending on things like internet speed, device, and testing conditions, and improving performance is planned for a future phase rather than this initial release.
-
-
-
-*(Add Lighthouse screenshot results for key pages)*
-
 ### Browser Compatibility
 
 | Browser tested | Intended appearance | Intended responsiveness |
@@ -50,6 +37,8 @@ Validation completed with no errors and minimal warnings.
 - **JavaScript:** JSHint 
 - **axeDevTools** - Accessibility compliance & rating
 
+**W3C Validation**
+
 ![W3C Validation](staticfiles/images/readme_images/ws3_2.png)
 ![W3C Validation](staticfiles/images/readme_images/ws3_5.png)
 ![W3C Validation](staticfiles/images/readme_images/ws3_6.png)
@@ -71,16 +60,9 @@ Validation completed with no errors and minimal warnings.
 ![W3C Approve Testimonial](staticfiles/images/readme_images/w3_aprove_testimonial.png)
 ![W3C 404](staticfiles/images/readme_images/w3_404.png)
 
-![Tutorials DevTools](staticfiles/images/readme_images/tutorials_devtools.png)
-![Testimonials DevTools](staticfiles/images/readme_images/testimonials_devtools.png)
-![Profile DevTools](staticfiles/images/readme_images/profile_devtools.png)
-![My Account DevTools](staticfiles/images/readme_images/myaccount_devtools.png)
-![Homepage DevTools](staticfiles/images/readme_images/homepage_devtools.png)
-![Classes DevTools](staticfiles/images/readme_images/classes_devtools.png)
-![Class Detail DevTools](staticfiles/images/readme_images/class_detail_devtools.png)
-![Checkout DevTools](staticfiles/images/readme_images/checkout_devtools.png)
-![Bag DevTools](staticfiles/images/readme_images/bag_devtools.png)
-![Add Class DevTools](staticfiles/images/readme_images/add_class_devtools.png)
+**About Mobile Performance Scores**
+
+This project achieved excellent results in the key areas: Accessibility, Best Practices, and SEO & web performace. Mobile performance scores are lower but can vary depending on things like internet speed, device, and testing conditions, and improving performance is planned for a future phase rather than this initial release.  
 
 ![Lighthouse 1](staticfiles/images/readme_images/lh_1.png)
 ![Lighthouse 2](staticfiles/images/readme_images/lh_2.png)
@@ -103,7 +85,10 @@ Validation completed with no errors and minimal warnings.
 ![Lighthouse 19](staticfiles/images/readme_images/lh_19.png)
 ![Lighthouse 20](staticfiles/images/readme_images/lh_20.png)
 
+
+**Pep 8 Validation**
 ![Pep8](staticfiles/images/readme_images/pep8.png)
+
 
 ### Manual Testing User Stories and Features
 
@@ -233,7 +218,16 @@ Validation completed with no errors and minimal warnings.
 
 The colors have been carefully selected to comply with accessibility contrast standards, ensuring readability for all users. The site has been tested using axeDevTools and acheived WCAG 2.1 Level A compliance. 
 
-*( screenshot)*
+![Tutorials DevTools](staticfiles/images/readme_images/tutorials_devtools.png)
+![Testimonials DevTools](staticfiles/images/readme_images/testimonials_devtools.png)
+![Profile DevTools](staticfiles/images/readme_images/profile_devtools.png)
+![My Account DevTools](staticfiles/images/readme_images/myaccount_devtools.png)
+![Homepage DevTools](staticfiles/images/readme_images/homepage_devtools.png)
+![Classes DevTools](staticfiles/images/readme_images/classes_devtools.png)
+![Class Detail DevTools](staticfiles/images/readme_images/class_detail_devtools.png)
+![Checkout DevTools](staticfiles/images/readme_images/checkout_devtools.png)
+![Bag DevTools](staticfiles/images/readme_images/bag_devtools.png)
+![Add Class DevTools](staticfiles/images/readme_images/add_class_devtools.png)
 
 ---
 

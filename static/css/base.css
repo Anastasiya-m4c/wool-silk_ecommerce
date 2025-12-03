@@ -10,10 +10,12 @@
     --ws-white: #FFFFFF;
     --ws-font: #0C1D43; 
 }
+
 /* Base */
 html {
     height: 100%;
 }
+
 body {
     min-height: 100%;
     position: relative; 
@@ -39,7 +41,6 @@ body::before {
     background-size: 70px;
     z-index: -1; 
 }
-
 
 h1 {
     font-size: 2.5rem;
@@ -112,7 +113,6 @@ p {
     background-color: var(--ws-cinnamon);
     color: var(--ws-font);
     transform: translateY(-2px);
-
 }
 
 .btn-two {
@@ -205,6 +205,7 @@ p {
     color: var(--ws-blue);
     font-weight: 600;
 }
+
 .remove-link {
     color: var(--ws-cinnamon);
     font-weight: 600;
@@ -220,6 +221,7 @@ p {
     right: 20px;
     z-index: 99999999999;
 }
+
 .qty_input {
     background: transparent !important;
     border: 0.5px solid !important;
@@ -254,7 +256,6 @@ form .form-control {
 }
 
 /* Carousel */
-
 .carousel-inner {
     background: var(--ws-beige-light);
 }
@@ -275,11 +276,6 @@ form .form-control {
     .container { max-width: 90%; }
 }
 
-@media (min-width: 992px) {
-}
-
 @media (max-width: 991.98px) {
     .navbar-nav.ms-auto { margin-left: 0 !important; justify-content: center; } 
 }
-
-

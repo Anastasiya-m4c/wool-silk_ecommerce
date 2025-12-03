@@ -256,7 +256,6 @@ form .form-control {
 }
 
 /* Carousel */
-
 .carousel-inner {
     background: var(--ws-beige-light);
 }
@@ -279,10 +278,8 @@ form .form-control {
     right: -100px;
 }
 
-
 /* Image helper */
 .img-cover { width: 100%; height: 100%; object-fit: cover; }
-
 
 /* Media queries */
 @media (min-width: 1200px) {

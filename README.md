@@ -352,7 +352,6 @@ Security has been carefully considered throughout the design and development of 
 
 ---
 
-
 ## Testing
 
 Throughout the development of this project, I have conducted several rounds of testing to ensure a smooth user experience, robust functionality, and adherence to web standards. Testing covered browser compatibility, accessibility, functionality, real device testing, and UI/UX design through a combination of manual testing, code validators, and tools like Lighthouse.
