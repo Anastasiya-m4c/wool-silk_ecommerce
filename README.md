@@ -128,26 +128,25 @@ Wireframe images ()
 
 [Deployed on Heroku](https://wool-and-silk-2e22b8061ad1.herokuapp.com)
 
-Final MVP version:
+## Final MVP Version
 
-[Finall website images]
-(staticfiles/images/readme_images/home.png)
-(staticfiles/images/readme_images/testimonials_carousel.png)
-(staticfiles/images/readme_images/testimonials.png)
-(staticfiles/images/readme_images/testimonials_admin.png)
-(staticfiles/images/readme_images/shopping_bag.png)
-(staticfiles/images/readme_images/shopping_bag_2.png)
-(staticfiles/images/readme_images/profile.png)
-(staticfiles/images/readme_images/classes.png)
-(staticfiles/images/readme_images/edit_class.png)
-(staticfiles/images/readme_images/availibility.png)
-(staticfiles/images/readme_images/fully_booked.png)
-(staticfiles/images/readme_images/tutorials.png)
-(staticfiles/images/readme_images/checkout.png)
-(staticfiles/images/readme_images/privacy_policy.png)
-(staticfiles/images/readme_images/mobile_nav.png)
-(staticfiles/images/readme_images/footer.png)
-(staticfiles/images/readme_images/404.png)
+![Home Page](staticfiles/images/readme_images/home.png)
+![Testimonials Carousel](staticfiles/images/readme_images/testimonials_carousel.png)
+![Testimonials](staticfiles/images/readme_images/testimonials.png)
+![Testimonials Admin](staticfiles/images/readme_images/testimonials_admin.png)
+![Shopping Bag](staticfiles/images/readme_images/shopping_bag.png)
+![Shopping Bag 2](staticfiles/images/readme_images/shopping_bag_2.png)
+![Profile](staticfiles/images/readme_images/profile.png)
+![Classes](staticfiles/images/readme_images/classes.png)
+![Edit Class](staticfiles/images/readme_images/edit_class.png)
+![Availability](staticfiles/images/readme_images/availibility.png)
+![Fully Booked](staticfiles/images/readme_images/fully_booked.png)
+![Tutorials](staticfiles/images/readme_images/tutorials.png)
+![Checkout](staticfiles/images/readme_images/checkout.png)
+![Privacy Policy](staticfiles/images/readme_images/privacy_policy.png)
+![Mobile Navigation](staticfiles/images/readme_images/mobile_nav.png)
+![Footer](staticfiles/images/readme_images/footer.png)
+![404 Page](staticfiles/images/readme_images/404.png)
 
 
 ---
