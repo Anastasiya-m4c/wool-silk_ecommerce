@@ -124,7 +124,10 @@ Wool & Silk Art Studio is a full-stack e-commerce application built with Django.
 
 This site is designed to be clean, welcoming, and easy to navigate, reflecting the creative and approachable nature of the studio.
 
-Wireframe images ()
+Wireframe images
+![Home Page](staticfiles/images/readme_images/wf_home.png)
+![Checkout](staticfiles/images/readme_images/wf_checkout.png)
+![Classes](staticfiles/images/readme_images/wf_classes.png)
 
 [Deployed on Heroku](https://wool-and-silk-2e22b8061ad1.herokuapp.com)
 
